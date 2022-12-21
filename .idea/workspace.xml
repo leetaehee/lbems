@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d0f33bf3-e484-4255-8f06-5a91608fb8ca" name="Changes" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CommittedChangesCache">
+    <option name="refreshEnabled" value="true" />
+    <option name="refreshInterval" value="1" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GDVNHFY6wnaZd1q7Ye2UWAaE7y" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder0&quot;: &quot;0&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder1&quot;: &quot;1&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2&quot;: &quot;2&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3&quot;: &quot;3&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4&quot;: &quot;4&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder5&quot;: &quot;5&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth4&quot;: &quot;269&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth5&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0&quot;: &quot;0&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder1&quot;: &quot;1&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2&quot;: &quot;2&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3&quot;: &quot;3&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder4&quot;: &quot;4&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder5&quot;: &quot;5&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth0&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth3&quot;: &quot;268&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4&quot;: &quot;269&quot;,
+    &quot;FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth5&quot;: &quot;268&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/developerleetaehee/bems/dev/lbems_www&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d0f33bf3-e484-4255-8f06-5a91608fb8ca" name="Changes" comment="" />
+      <created>1665923100869</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1665923100869</updated>
+      <workItem from="1665923103686" duration="1896000" />
+      <workItem from="1666004866225" duration="96000" />
+      <workItem from="1666005018744" duration="163000" />
+      <workItem from="1666005404200" duration="241000" />
+      <workItem from="1666014373608" duration="367000" />
+      <workItem from="1666090072524" duration="753000" />
+      <workItem from="1666095371416" duration="97000" />
+      <workItem from="1666177651618" duration="149000" />
+      <workItem from="1666178291812" duration="460000" />
+      <workItem from="1666265308597" duration="68000" />
+      <workItem from="1666358675989" duration="130000" />
+      <workItem from="1666358902361" duration="107000" />
+      <workItem from="1666400038113" duration="86000" />
+      <workItem from="1666443743083" duration="54000" />
+      <workItem from="1666447509414" duration="203000" />
+      <workItem from="1666482784849" duration="56000" />
+      <workItem from="1666504103306" duration="113000" />
+      <workItem from="1666504829736" duration="33000" />
+      <workItem from="1666517002953" duration="59000" />
+      <workItem from="1666608278736" duration="99000" />
+      <workItem from="1666611701464" duration="81000" />
+      <workItem from="1666611861032" duration="170000" />
+      <workItem from="1666612706301" duration="32000" />
+      <workItem from="1666650948411" duration="121000" />
+      <workItem from="1666651548716" duration="343000" />
+      <workItem from="1666703029572" duration="244000" />
+      <workItem from="1666706319129" duration="49000" />
+      <workItem from="1666786812605" duration="308000" />
+      <workItem from="1666869950716" duration="1576000" />
+      <workItem from="1666879210112" duration="117000" />
+      <workItem from="1666964415460" duration="106000" />
+      <workItem from="1666986970368" duration="86000" />
+      <workItem from="1667036392746" duration="29000" />
+      <workItem from="1667046888833" duration="28000" />
+      <workItem from="1667051314086" duration="18000" />
+      <workItem from="1667100744591" duration="30000" />
+      <workItem from="1667126021140" duration="109000" />
+      <workItem from="1667133764018" duration="19000" />
+      <workItem from="1667217394956" duration="104000" />
+      <workItem from="1667222070827" duration="54000" />
+      <workItem from="1667300294551" duration="104000" />
+      <workItem from="1667311361847" duration="146000" />
+      <workItem from="1667387163239" duration="97000" />
+      <workItem from="1667473987960" duration="960000" />
+      <workItem from="1667565054909" duration="560000" />
+      <workItem from="1667565689889" duration="44000" />
+      <workItem from="1667622996847" duration="219000" />
+      <workItem from="1667725339201" duration="45000" />
+      <workItem from="1667741679437" duration="59000" />
+      <workItem from="1667825599595" duration="118000" />
+      <workItem from="1667907497078" duration="91000" />
+      <workItem from="1667912210623" duration="133000" />
+      <workItem from="1667991982933" duration="732000" />
+      <workItem from="1668077337583" duration="88000" />
+      <workItem from="1668129010369" duration="80000" />
+      <workItem from="1668211754180" duration="7000" />
+      <workItem from="1668330165810" duration="106000" />
+      <workItem from="1668429048085" duration="222000" />
+      <workItem from="1668431667261" duration="579000" />
+      <workItem from="1668512374221" duration="146000" />
+      <workItem from="1668515026354" duration="29000" />
+      <workItem from="1668518005685" duration="93000" />
+      <workItem from="1668548840729" duration="285000" />
+      <workItem from="1668598286406" duration="78000" />
+      <workItem from="1668604237540" duration="9000" />
+      <workItem from="1668605219588" duration="66000" />
+      <workItem from="1668608367204" duration="101000" />
+      <workItem from="1668638664527" duration="104000" />
+      <workItem from="1668687573359" duration="179000" />
+      <workItem from="1668776701592" duration="67000" />
+      <workItem from="1668776772445" duration="40000" />
+      <workItem from="1668826217798" duration="27000" />
+      <workItem from="1668908991187" duration="80000" />
+      <workItem from="1668911018342" duration="258000" />
+      <workItem from="1669029081907" duration="2003000" />
+      <workItem from="1669034081892" duration="5000" />
+      <workItem from="1669115840983" duration="181000" />
+      <workItem from="1669116144906" duration="498000" />
+      <workItem from="1669125239126" duration="21000" />
+      <workItem from="1669183349379" duration="2462000" />
+      <workItem from="1669210825470" duration="140000" />
+      <workItem from="1669383756794" duration="92000" />
+      <workItem from="1669383853188" duration="10000" />
+      <workItem from="1669426557548" duration="211000" />
+      <workItem from="1669447646452" duration="128000" />
+      <workItem from="1669448759591" duration="63000" />
+      <workItem from="1669465538339" duration="120000" />
+      <workItem from="1669466438459" duration="67000" />
+      <workItem from="1669466738518" duration="638000" />
+      <workItem from="1669529328389" duration="148000" />
+      <workItem from="1669539214198" duration="48000" />
+      <workItem from="1669552177591" duration="206000" />
+      <workItem from="1669556214133" duration="32000" />
+      <workItem from="1669636027397" duration="215000" />
+      <workItem from="1669639977018" duration="620000" />
+      <workItem from="1669645028343" duration="327000" />
+      <workItem from="1669720268310" duration="107000" />
+      <workItem from="1669812492596" duration="155000" />
+      <workItem from="1669902703003" duration="72000" />
+      <workItem from="1669981346260" duration="92000" />
+      <workItem from="1670038354279" duration="473000" />
+      <workItem from="1670053136680" duration="24000" />
+      <workItem from="1670053165290" duration="47000" />
+      <workItem from="1670079654128" duration="57000" />
+      <workItem from="1670153544738" duration="31000" />
+      <workItem from="1670235836979" duration="79000" />
+      <workItem from="1670248207568" duration="82000" />
+      <workItem from="1670331855060" duration="194000" />
+      <workItem from="1670366424253" duration="86000" />
+      <workItem from="1670419509687" duration="100000" />
+      <workItem from="1670496994107" duration="95000" />
+      <workItem from="1670502690194" duration="145000" />
+      <workItem from="1670562396522" duration="110000" />
+      <workItem from="1670567524802" duration="100000" />
+      <workItem from="1670568342482" duration="143000" />
+      <workItem from="1670570025017" duration="64000" />
+      <workItem from="1670759027306" duration="691000" />
+      <workItem from="1670848581087" duration="138000" />
+      <workItem from="1670935977214" duration="196000" />
+      <workItem from="1670970742431" duration="565000" />
+      <workItem from="1671016585437" duration="112000" />
+      <workItem from="1671024515642" duration="103000" />
+      <workItem from="1671058758863" duration="196000" />
+      <workItem from="1671145494614" duration="60000" />
+      <workItem from="1671266616463" duration="652000" />
+      <workItem from="1671268276514" duration="573000" />
+      <workItem from="1671274765028" duration="206000" />
+      <workItem from="1671274974421" duration="19000" />
+      <workItem from="1671280951283" duration="503000" />
+      <workItem from="1671281530498" duration="33000" />
+      <workItem from="1671330729440" duration="16309000" />
+      <workItem from="1671366421700" duration="309000" />
+      <workItem from="1671366831670" duration="10949000" />
+      <workItem from="1671377814580" duration="1180000" />
+      <workItem from="1671403108324" duration="1486000" />
+      <workItem from="1671406151342" duration="3306000" />
+      <workItem from="1671412529597" duration="268000" />
+      <workItem from="1671413784531" duration="20000" />
+      <workItem from="1671421021855" duration="649000" />
+      <workItem from="1671446283946" duration="70000" />
+      <workItem from="1671447784647" duration="162000" />
+      <workItem from="1671458402466" duration="170000" />
+      <workItem from="1671458589442" duration="1528000" />
+      <workItem from="1671460268045" duration="1867000" />
+      <workItem from="1671487165702" duration="3701000" />
+      <workItem from="1671494192916" duration="95000" />
+      <workItem from="1671498065588" duration="105000" />
+      <workItem from="1671498616826" duration="247000" />
+      <workItem from="1671502042914" duration="5238000" />
+      <workItem from="1671507674162" duration="619000" />
+      <workItem from="1671508304473" duration="21000" />
+      <workItem from="1671513358265" duration="185000" />
+      <workItem from="1671513572601" duration="44000" />
+      <workItem from="1671515545952" duration="85000" />
+      <workItem from="1671522346065" duration="153000" />
+      <workItem from="1671522502321" duration="156000" />
+      <workItem from="1671527712084" duration="107000" />
+      <workItem from="1671527857305" duration="96000" />
+      <workItem from="1671528659446" duration="11467000" />
+      <workItem from="1671542273080" duration="1411000" />
+      <workItem from="1671543859976" duration="64000" />
+      <workItem from="1671544525060" duration="2393000" />
+      <workItem from="1671546926260" duration="74000" />
+      <workItem from="1671547107484" duration="223000" />
+      <workItem from="1671548060827" duration="413000" />
+      <workItem from="1671548603984" duration="662000" />
+      <workItem from="1671549295910" duration="23000" />
+      <workItem from="1671573759219" duration="477000" />
+      <workItem from="1671577683971" duration="3663000" />
+      <workItem from="1671593679411" duration="57000" />
+      <workItem from="1671611855933" duration="175000" />
+      <workItem from="1671616804050" duration="152000" />
+      <workItem from="1671617171050" duration="59000" />
+      <workItem from="1671620038185" duration="39000" />
+      <workItem from="1671661799674" duration="23000" />
+      <workItem from="1671661827414" duration="54000" />
+      <workItem from="1671664505707" duration="46000" />
+      <workItem from="1671664847493" duration="84000" />
+    </task>
+    <task id="LOCAL-00001" summary="create-table 문 정리">
+      <created>1668911201028</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668911201028</updated>
+    </task>
+    <task id="LOCAL-00002" summary="SVN 마지막 업로드">
+      <created>1671547200028</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1671547200028</updated>
+    </task>
+    <task id="LOCAL-00003" summary="SVN 마지막 업로드 &#10;- CommonQuery.php 복구">
+      <created>1671547284024</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1671547284024</updated>
+    </task>
+    <task id="LOCAL-00004" summary="SVN 마지막 업로드 &#10;- 최종">
+      <created>1671548451027</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671548451027</updated>
+    </task>
+    <task id="LOCAL-00005" summary="SVN 마지막 업로드">
+      <created>1671549223031</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1671549223031</updated>
+    </task>
+    <task id="LOCAL-00006" summary="날씨에 따른 baseinfo를 string-&gt;array 변경">
+      <created>1671580865032</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1671580865032</updated>
+    </task>
+    <task id="LOCAL-00007" summary="getBaseDate 변수 추가">
+      <created>1671581378024</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1671581378024</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="create-table 문 정리" />
+    <MESSAGE value="SVN 마지막 업로드 &#10;- CommonQuery.php 복구" />
+    <MESSAGE value="SVN 마지막 업로드 &#10;- 최종" />
+    <MESSAGE value="SVN 마지막 업로드" />
+    <MESSAGE value="날씨에 따른 baseinfo를 string-&gt;array 변경" />
+    <MESSAGE value="getBaseDate 변수 추가" />
+    <option name="LAST_COMMIT_MESSAGE" value="getBaseDate 변수 추가" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

@@ -1,0 +1,230 @@
+<div style="height:30px;"></div>
+<div class="card">
+    <h2 class="tt">에너지자립률<span>(연간)</span></h2>
+    <img src="./res/image/zero_mark.png" class="ml10" style="width:50px">
+    <div class="floatBox">
+        <div class="fl poRe" style="width:65%; height:200px;">
+            <canvas id="canvas_independence"></canvas>
+            <div class="center50 ac">
+                <p class="fcOren fs22">
+                    <span id="label_independence_grade" class="fcOren fs22">-</span>
+                </p>
+                <p class="fc999 fs17 mt15">
+                    <span id="label_independence_percent" class="fc999 fs17">0</span>%
+                </p>
+            </div>
+        </div>
+        <div class="fr" style="width:30%; height:200px;">
+            <!--
+                해당 등급에 클래스를 부여
+                <span class="fcOren b">
+                <b class="fc39 b">
+            -->
+            <ul class="circle_legend2">
+                <li id="li_grade_section_1" class="li_grade">
+                    <span style="border:solid 1px #ffbe4e">1</span>
+                    <b>100%~</b>
+                </li>
+                <li id="li_grade_section_2" class="li_grade">
+                    <span style="border:solid 1px #feb078">2</span>
+                    <b>80~99%</b>
+                </li>
+                <li id="li_grade_section_3" class="li_grade">
+                    <span style="border:solid 1px #ff8659">3</span>
+                    <b>60~79%</b>
+                </li>
+                <li id="li_grade_section_4" class="li_grade">
+                    <span style="border:solid 1px #f05419">4</span>
+                    <b>40~59%</b>
+                </li>
+                <li id="li_grade_section_5" class="li_grade">
+                    <span style="border:solid 1px #d53a00">5</span>
+                    <b>20~39%</b>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div><!---//card-->
+<div class="card mt10">
+    <h2 class="tt">에너지 사용현황</h2>
+    <ul>
+        <li>
+            <p class="fs17 ac mt40">금월 전기 사용현황 <span class="">(vs 전월)</span></p>
+            <p class="ac mt05">목표 <span id="label_electric_target">0</span> kWh</p>
+            <div class="tbMain mt20 mb20 conc">
+                <table>
+                    <colgroup>
+                        <col style="width:50%">
+                        <col style="width:50%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p>금월사용량</p>
+                            <p><span id="label_now_month_electric_used">0</span> <span class="label_unit">kWh</span></p>
+                        </td>
+                        <td>
+                            <p>전월사용량</p>
+                            <p><span id="label_last_month_electric_used">0</span> <span class="label_unit">kWh</span></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table class="mt20">
+                    <colgroup>
+                        <col style=" width:50%">
+                        <col style="width:50%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <p>금월사용요금</p>
+                            <p><span id="label_now_month_electric_price">0</span> <span>원</span></p>
+                        </td>
+                        <td>
+                            <p>전월사용요금</p>
+                            <p><span id="label_last_month_electric_price">0</span> <span>원</span></p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div><!--//tbMain-->
+        </li>
+    </ul>
+</div><!---//card-->
+<div class="card mt10">
+    <h2 class="tt">용도별 에너지 사용현황<span> (금일)</span></h2>
+    <div class="floatBox">
+        <div class="fl poRe" style="width:45%; height:180px;">
+            <canvas id="canvas_distribution"></canvas>
+            <div class="center50">
+                <!--<p>판매</p>-->
+            </div>
+        </div>
+        <div class="fr ar mt03" style="width:55%; height:200px;">
+            <ul class="circle_legend" id="li_usage">
+                <!-- 자바스크립트로 동적 생성 -->
+            </ul>
+        </div>
+    </div>
+</div><!---//card-->
+<!--
+<div class="card mt10 mb10">
+    <h2 class="tt">설비별 에너지 사용현황<span> (금일)</span></h2>
+    <dl class="dtdd mt30">
+        <dt>전기온수기</dt>
+        <dd>
+            <p><span style="background:#00c192"></span>
+                총 전기에너지 사용량 <b><span class="label_facility_electric_used">0</span></b> kWh
+            </p>
+            <p class="mt05"><span style="background: #393939"></span>
+                총 전기온수기 사용량 <b><span id="label_electric_water_heater_used">0</span></b> kWh
+            </p>
+        </dd>
+    </dl>
+    <div class="horizonG2">
+        <span id="progress_graph_electric_water_heater_used"></span>
+    </div>
+
+    <dl class="dtdd mt50 mb30">
+        <dt class="p00">급수펌프</dt>
+        <dd>
+            <p><span style="background:#00c192"></span>
+                총 전기에너지 사용량 <b><span class="label_facility_electric_used">0</span></b> kWh
+            </p>
+            <p class="mt05"><span style="background: #393939"></span>
+                총 급수펌프 사용량 <b><span id="label_feed_pump_used">0</span></b> kWh
+            </p>
+        </dd>
+    </dl>
+    <div class="horizonG2 mb30">
+        <span id="progress_graph_feed_pump_used"></span>
+    </div>
+
+    <dl class="dtdd mt50 mb30">
+        <dt class="p00">배수펌프</dt>
+        <dd>
+            <p><span style="background:#00c192"></span>
+                총 전기에너지 사용량 <b><span class="label_facility_electric_used">0</span></b> kWh
+            </p>
+            <p class="mt05"><span style="background: #393939"></span>
+                총 배수펌프 사용량 <b><span id="label_sump_pump_used">0</span></b> kWh
+            </p>
+        </dd>
+    </dl>
+    <div class="horizonG2 mb30">
+        <span id="progress_graph_sump_pump_used"></span>
+    </div>
+
+    <dl class="dtdd mt50 mb30">
+        <dt class="p00">순환펌프</dt>
+        <dd>
+            <p><span style="background:#00c192"></span>
+                총 전기에너지 사용량 <b><span class="label_facility_electric_used">0</span></b> kWh
+            </p>
+            <p class="mt05"><span style="background: #393939"></span>
+                총 순환펌프 사용량 <b><span id="label_circulating_pump_used">0</span></b> kWh
+            </p>
+        </dd>
+    </dl>
+    <div class="horizonG2 mb30">
+        <span id="progress_graph_circulating_pump_used"></span>
+    </div>
+</div>
+-->
+<!---//card-->
+<div class="card mt10">
+    <h2 class="tt">에너지 소비량 대비 생산현황</h2>
+    <div class="w97 mt20 conc">
+        <dl class="dtdd">
+            <dt>전일</dt>
+            <dd>
+                <p><span style="background:#ff5819"></span>
+                    소비량 <b><span id="label_preday_consumption_used">0</span></b> kWh
+                </p>
+                <p class="mt05"><span style="background: #f5f6fa"></span>
+                    생산량 <b><span id="label_preday_production_used">0</span></b> kWh
+                </p>
+            </dd>
+        </dl>
+        <div class="horizonG">
+            <span id="progress_graph_preday_production"></span>
+        </div>
+        <dl class="dtdd mt40">
+            <dt>전월</dt>
+            <dd>
+                <p><span style="background:#ff5819"></span>
+                    소비량 <b><span id="label_month_consumption_used">0</span></b> kWh
+                </p>
+                <p class="mt05"><span style="background: #f5f6fa"></span>
+                    생산량 <b><span id="label_month_production_used">0</span></b> kWh
+                </p>
+            </dd>
+        </dl>
+        <div class="horizonG">
+            <span id="progress_graph_month_production"></span>
+        </div>
+        <dl class="dtdd mt40">
+            <dt>금년</dt>
+            <dd>
+                <p><span style="background:#ff5819"></span>
+                    소비량 <b><span id="label_year_consumption_used">0</span></b> kWh
+                </p>
+                <p class="mt05"><span style="background: #f5f6fa"></span>
+                    생산량 <b><span id="label_year_production_used">0</span></b> kWh
+                </p>
+            </dd>
+        </dl>
+        <div class="horizonG mb30">
+            <span id="progress_graph_year_production"></span>
+        </div>
+    </div>
+</div><!---//card-->
+
+<!-- chart -->
+<script src="./home/js/home.chart.indication_pie.js"></script>
+<script src="./home/js/home.chart.distribution_pie.js"></script>
+
+<!-- home.js -->
+<script src="./home/js/home.define.js"></script>
+<script src="./home/js/home.control.js"></script>

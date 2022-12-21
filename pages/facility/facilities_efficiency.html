@@ -1,0 +1,104 @@
+<h2>
+    <img src="../res/images/icon/icon_facility.png" class="mr08">
+    설비 <span>설비</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            설비
+            <span>설비 정보를 확인합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>설비</li>
+            <li>설비</li>
+        </ul>
+    </section>
+    <section class="tabList01 floatBox" id="energy_btn_group">
+        <!-- 동적으로 추가 작업이 발생함. -->
+    </section>
+    <section>
+        <div class="articleBox mt10">
+            <ul>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <input type="text" class="dateStyle w130px ml10 mr10" id="date_select" readonly></li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기간 선택</label>
+                    <label class="mr10 ml10">
+                        <input type="radio" class="period_type" name="radio_date" value="2" checked> 일
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" class="period_type" name="radio_date" value="1"> 월
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" class="period_type" name="radio_date" value="0" > 년
+                    </label>
+                </li>
+                <li>
+                    <button id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section>
+        <div class="analysis_box floatBox">
+            <div class="fl diIb floatBox" style="width: 45%;">
+                <p class="blt01 diIb">설비 현황</p>
+                <div class="tbType04 tdType04-1 mt10">
+                    <table class="w100">
+                        <colgroup>
+                            <col style="width:25%">
+                            <col style="width:10%">
+                            <col style="width:15%">
+                            <col style="width:15%">
+                            <col style="width:10%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>센서번호</th>
+                            <th>작동상태</th>
+                            <th>사용량<br>(kWh)</th>
+                            <th>역률<br>(%)</th>
+                            <th>그래프</th>
+                        </tr>
+                        </thead>
+                        <tbody id="tbody_facility">
+                            <!-- 자바스크립트로 동적으로 생성함 -->
+                            <tr>
+                                <td colspan="5">- 설비 정보가 존재하지 않습니다. -</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="page mb20">
+                    <a id="btn_efficiency_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+                    <a id="btn_efficiency_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+                    <ul id="efficiency_paging">
+                        <li class="on"><a href="#a">1</a></li>
+                    </ul>
+                    <a id="btn_efficiency_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+                    <a id="btn_efficiency_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+                </div>
+            </div>
+            <div class="fr ml40" style="width: 50%;">
+                <p class="blt01">역률 그래프</p>
+                <div class="graph_legend">
+                    <p><span style="background-color: #00D8FF;"></span> 역률(%)</p>
+                </div>
+                <div class="facilities_graph" style="height:630px">
+                    <canvas id="canvas_chart_middle"></canvas>
+                </div>
+            </div>
+        </div><!---//floatBox-->
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.makeEnergyButton.js"></script>
+
+<script src="./facility/js/chart._line_one.js"></script>
+
+<script src="./facility/js/facilities_efficiency.define.js"></script>
+<script src="./facility/js/facilities_efficiency.control.js"></script>

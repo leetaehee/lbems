@@ -1,0 +1,929 @@
+<h2><img src="../res/images/icon/icon_control.png" class="mr08">제어 </h2>
+<div class="tabList_dash fr">
+    <button class="on" id="" >전체</button>
+    <button id="">1층</button>
+    <button id="">2층</button>
+    <button id="">3층</button>
+</div>
+<div class="content" style="min-width:1500px;min-height:900px">
+    <section class="mb20">
+        <h3>
+            제어
+            <span>사무소의 에어컨 설정을 제어합니다. {grp} </span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>제어</li>
+        </ul>
+    </section>
+    <section>
+		<div class="floatBox">
+			<div class="fl card planBox f1">
+				<ul class="aircon_spot">
+					<li class="active" alt="로비1"><button>111</button></li> <!-- 클릭 시 li class="active" 추가 -->
+					<li alt="로비2"><button>2</button></li>
+					<li alt="대회의실3"><button>3</button></li>
+					<li alt="대회의실4"><button>4</button></li>
+					<li alt="대회의실5"><button>5</button></li>
+					<li alt="대회의실6"><button>6</button></li>
+					<li alt="상황실7"><button>7</button></li>
+					<li alt="민원실8"><button>8</button></li>
+					<li alt="실사출력실9"><button>9</button></li>
+					<li alt="복도1_10"><button>10</button></li>
+					<li alt="복도2_11"><button>11</button></li>
+					<li alt="해설사실12"><button>12</button></li>
+					<li alt="해설사실13"><button>13</button></li>
+					<li alt="해설사실14"><button>14</button></li>
+					<li alt="영선실15"><button>15</button></li>
+					<li alt="통신실16"><button>16</button></li>
+				</ul>
+				<ul class="spot_name">
+					<li>로 비</li>
+					<li>대회의실</li>
+					<li>상황실 및 안전방재실 </li>
+					<li>민원실</li>
+					<li>실사출력실</li>
+					<li>복도1</li>
+					<li>복도2</li>
+					<li>영선실</li>
+					<li>통신실</li>
+					<li>해설사실</li>
+				</ul>
+			</div>
+			<div class="control fr card detailBox">
+				<p class="detail_tit">
+					<img src="../res/images/icon/icon_airconditioner2.gif">
+					<span>로 비</span>
+					<button class="aircon_state off">OFF</button><!-- 클릭시 off-> on 으로 클래스 변경 -->
+				</p>
+				 <div class="controlBox">
+					<button id="12_00_00_btn_down" name="down" class="control_down mr20"></button>
+					<div class="graph8">
+						<canvas id="canvas_pie_mng_37" class="chartjs-render-monitor"></canvas>
+						<p class="control_temperature">
+							<span>희망온도</span><br>
+							<span id="12_00_00_settemp" class="control_temp_span">0</span><span>℃ </span>
+						</p>
+					</div>
+					<button id="12_00_00_btn_up" name="up" class="control_up ml20"></button>
+				</div>
+				<table class="tbType03 mt50">
+                        <col style="width:1%">
+                        <col style="width:45%">
+                        <col style="width:3%">
+                        <col style="width:50%">
+                        <col style="width:1%">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th><span>풍 량</span></th>
+                                <th></th>
+                                <th><span>MODE</span></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+								<td></td>
+                                <td class="t30">
+                                    <button id="12_00_00_fanspeed_auto" name="auto" class="btn_fan btn_auto btn_auto_off"><span>AUTO</span></button> 
+                                    <button id="12_00_00_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_00_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_00_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <!--auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요 -->
+                                </td>
+								<td></td>
+								<td class="t30">
+									<button name="auto" class="btn_fan btn_auto btn_auto_off"><span>AUTO</span></button> 
+                                    <button name="cool" class="btn_fan btn_cool_on"></button>
+                                    <button name="hot" class="btn_fan btn_hot_off"></button>
+                                    <button name="moisture" class="btn_fan btn_moisture_off"></button>
+                                    <button name="fan2" class="btn_fan btn_fan2_off"></button>
+								<!-- 	기존의 on/off 방식과 같이 기본 'btn_cool_off'로 되어 있다가 클릭하면 'btn_cool_on'로 바뀝니다. -->
+								</td>
+								<td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+			</div>
+		</div>
+         <!-- <ul class="control floatBox" id="aircorns">
+            			</ul> -->
+           <!--  <ul class="control floatBox" style="display:none">
+                <li>
+                    <p class="diIb">
+                        <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                        <span class="fs17 fcBlack">1층</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_00_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_00_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_manage"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_00_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_00_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_00_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_00_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_00_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_00_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_00_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_00_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                        <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                        <span class="fs17 fcBlack">2층</span>
+                        </p>
+                        <label class="switch fr">
+                            <input type="checkbox" id="12_00_01_power">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="controlBox">
+                            <button id="12_00_01_btn_down" name="down" class="control_down mr20"></button>
+                            <div class="graph8">
+                                <canvas id="canvas_pie_1floor"></canvas>
+                                <p class="control_temperature">
+                                    <span>희망온도</span><br>
+                                    <span id="" class="control_temp_span">23.2</span><span>℃ </span>
+                                </p>
+                            </div>
+                            <button id="12_00_01_btn_up" name="up" class="control_up ml20"></button>
+                        </div>
+                        <table class="tbType03 mt50">
+                            <col style="width:29%">
+                            <col style="width:42%">
+                            <col style="width:29%">
+                            <thead>
+                                <tr>
+                                    <th>실내온도</th>
+                                    <th>풍량</th>
+                                    <th>MODE</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><span id="12_00_01_roomtemp">0</span>℃</td>
+                                    <td class="t30">
+                                        <button id="12_00_01_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                        <button id="12_00_01_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                        <button id="12_00_01_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                        <button id="12_00_01_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                        auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                    </td>
+                                    <td>
+                                        <select id="12_00_01_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">3층</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_02_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_02_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_1entry"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_02_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_02_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_02_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_02_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_02_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_02_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_02_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_02_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">0</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+                <li>
+                    <p class="diIb">
+                    <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>
+                    <span class="fs17 fcBlack">옥탑</span>
+                    </p>
+                    <label class="switch fr">
+                        <input type="checkbox" id="12_00_03_power">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="controlBox">
+                        <button id="12_00_03_btn_down" name="down" class="control_down mr20"></button>
+                        <div class="graph8">
+                            <canvas id="canvas_pie_2floor"></canvas>
+                            <p class="control_temperature">
+                                <span>희망온도</span><br>
+                                <span id="12_00_03_settemp" class="control_temp_span">23.2</span><span>℃ </span>
+                            </p>
+                        </div>
+                        <button id="12_00_03_btn_up" name="up" class="control_up ml20"></button>
+                    </div>
+                    <table class="tbType03 mt50">
+                        <col style="width:29%">
+                        <col style="width:42%">
+                        <col style="width:29%">
+                        <thead>
+                            <tr>
+                                <th>실내온도</th>
+                                <th>풍량</th>
+                                <th>MODE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span id="12_00_03_roomtemp">0</span>℃</td>
+                                <td class="t30">
+                                    <button id="12_00_03_fanspeed_1" name="low" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_2" name="mid" class="btn_fan btn_fan_on mr08"></button>
+                                    <button id="12_00_03_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08"></button>
+                                    <button id="12_00_03_fanspeed_auto" name="auto" class="btn_fan btn_auto_off"><span><br>auto</span></button> 
+                                    auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요
+                                </td>
+                                <td>
+                                    <select id="12_00_03_opmode" class="w75px">
+                                        <option value="auto">auto</option>
+                                        <option value="cool">냉방</option>
+                                        <option value="heat">난방</option>
+                                        <option value="dry">제습</option>
+                                        <option value="fan">fan</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ul> -->
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+<script src="../modules/js/module.aptinfo.js"></script>
+<script src="control/js/control.chart.pie.js?v"></script>
+<!-- <script src="control/js/control_1f.define.js?v"></script> -->
+<!-- <script src="control/js/control.control.js"></script> -->
+
+<script>
+	var _aircorns = [
+						{idx:0, seq: 1, grp: '1F', nm: '당직실', hex: '25', id: 37, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 2, grp: '1F', nm: '대회의실(무대옆)', hex: '17', id: 23, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 3, grp: '1F', nm: '대회의실(조정실옆)', hex: '15', id: 21, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 4, grp: '1F', nm: '대회의실(준비실옆)', hex: '16', id: 22, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 5, grp: '1F', nm: '대회의실(출입구옆)', hex: '18', id: 24, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 6, grp: '1F', nm: '로비(대회의실앞)', hex: '19', id: 25, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 7, grp: '1F', nm: '로비(재난상황실옆)', hex: '1A', id: 26, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 8, grp: '1F', nm: '민원실', hex: '1D', id: 29, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 9, grp: '1F', nm: '복도(민원실앞)', hex: '1E', id: 30, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 10, grp: '1F', nm: '실사출력실', hex: '1F', id: 31, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 11, grp: '1F', nm: '영선실', hex: '20', id: 32, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 12, grp: '1F', nm: '재난상황실', hex: '1B', id: 27, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 13, grp: '1F', nm: '중앙출입구', hex: '1C', id: 28, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 14, grp: '1F', nm: '통신실', hex: '21', id: 33, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 15, grp: '1F', nm: '해설사실(안쪽)', hex: '22', id: 34, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 16, grp: '1F', nm: '해설사실(중앙)', hex: '23', id: 35, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 17, grp: '1F', nm: '해설사실(통신실앞)', hex: '24', id: 36, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 1, grp: '2F', nm: '남자탈의실', hex: '0C', id: 12, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 2, grp: '2F', nm: '복도(승강기앞)', hex: '10', id: 16, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 3, grp: '2F', nm: '사무실(11번뒤)', hex: '13', id: 19, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 4, grp: '2F', nm: '사무실(12번뒤)', hex: '14', id: 20, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 5, grp: '2F', nm: '사무실(출입구옆)', hex: '11', id: 17, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 6, grp: '2F', nm: '사무실(탕비실앞)', hex: '12', id: 18, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 7, grp: '2F', nm: '자료실', hex: '0D', id: 13, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 8, grp: '2F', nm: '전실(남자탈의실)', hex: '0E', id: 14, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 9, grp: '2F', nm: '전실(여자탈의실)', hex: '0F', id: 15, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 10, grp: '2F', nm: '체력단련실', hex: '0B', id: 11, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 1, grp: '3F', nm: '문서고', hex: '08', id: 8, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 2, grp: '3F', nm: '복도(소회의실앞)', hex: '07', id: 7, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 3, grp: '3F', nm: '복도(승강기앞)', hex: '04', id: 4, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 4, grp: '3F', nm: '복도(식당앞)', hex: '03', id: 3, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 5, grp: '3F', nm: '소장실', hex: '09', id: 9, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 6, grp: '3F', nm: '소회의실(뒤)', hex: '06', id: 6, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 7, grp: '3F', nm: '소회의실(앞)', hex: '05', id: 5, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 8, grp: '3F', nm: '식당(배식대앞)', hex: '01', id: 1, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 9, grp: '3F', nm: '식당(출입구)', hex: '02', id: 2, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 10, grp: '3F', nm: '영양사실', hex: '00', id: 0, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+						,{idx:0, seq: 11, grp: '3F', nm: '전실(소장실)', hex: '0A', id: 10, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+					];
+
+function addAirCorn(aircorn,arg1) {
+//						{idx:0, seq: 1, grp: '1F', nm: '당직실', hex: '25', id: 37, power: 0, nowtemp: 0, chgtemp: 26, wind: 0, mode: 0, status: 0, error_msg:''}
+	var htm ='';
+		htm += '               <li id="Air_'+aircorn.id+'" data="'+aircorn.id+'">'+String.fromCharCode(10);
+		htm += '                    <p class="diIb">'+String.fromCharCode(10);
+		htm += '                        <img src="../res/images/icon/icon_airconditioner.png" class="mb10"><br>'+String.fromCharCode(10);
+		htm += '                        <span class="fs17 fcBlack">'+aircorn.nm+'('+arg1+')</span>'+String.fromCharCode(10);
+		htm += '                    </p>'+String.fromCharCode(10);
+		htm += '                    <label class="switch fr">'+String.fromCharCode(10);
+		htm += '                        <input type="checkbox" data-id="air_power" >'+String.fromCharCode(10);
+		htm += '                        <span data-id="air_power_btn" class="slider round" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></span>'+String.fromCharCode(10);
+		htm += '                    </label>'+String.fromCharCode(10);
+		htm += '                    <div class="controlBox">'+String.fromCharCode(10);
+		htm += '                        <button data-id="air_temp_down" name="temp_down" class="control_down mr20" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></button>'+String.fromCharCode(10);
+		htm += '                        <div class="graph8">'+String.fromCharCode(10);
+		htm += '                            <canvas id="canvas_pie_mng_'+aircorn.id+'"></canvas>'+String.fromCharCode(10);
+		htm += '                            <p class="control_temperature">'+String.fromCharCode(10);
+		htm += '                                <span>희망온도</span><br>'+String.fromCharCode(10);
+		htm += '                                <span data-id="air_settemp" class="control_temp_span">0</span><span>℃ </span>'+String.fromCharCode(10);
+		htm += '                            </p>'+String.fromCharCode(10);
+		htm += '                        </div>'+String.fromCharCode(10);
+		htm += '                        <button data-id="air_temp_up" name="temp_up" class="control_up ml20" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></button>'+String.fromCharCode(10);
+		htm += '                    </div>'+String.fromCharCode(10);
+		htm += '                    <table class="tbType03 mt50">'+String.fromCharCode(10);
+		htm += '                        <col style="width:29%">'+String.fromCharCode(10);
+		htm += '                        <col style="width:42%">'+String.fromCharCode(10);
+		htm += '                        <col style="width:29%">'+String.fromCharCode(10);
+		htm += '                        <thead>'+String.fromCharCode(10);
+		htm += '                            <tr>'+String.fromCharCode(10);
+		htm += '                                <th>실내온도</th>'+String.fromCharCode(10);
+		htm += '                                <th>풍량</th>'+String.fromCharCode(10);
+		htm += '                                <th>MODE</th>'+String.fromCharCode(10);
+		htm += '                            </tr>'+String.fromCharCode(10);
+		htm += '                        </thead>'+String.fromCharCode(10);
+		htm += '                        <tbody>'+String.fromCharCode(10);
+		htm += '                            <tr>'+String.fromCharCode(10);
+		htm += '                                <td><span data-id="air_roomtemp">0</span>℃</td>'+String.fromCharCode(10);
+		htm += '                                <td class="t30">'+String.fromCharCode(10);
+		htm += '                                    <button data-id="air_fanspeed_1" name="low" class="btn_fan btn_fan_off mr08" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></button>'+String.fromCharCode(10);
+		htm += '                                    <button data-id="air_fanspeed_2" name="mid" class="btn_fan btn_fan_off mr08" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></button>'+String.fromCharCode(10);
+		htm += '                                    <button data-id="air_fanspeed_3" name="high" class="btn_fan btn_fan_off mr08" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"></button>'+String.fromCharCode(10);
+		htm += '                                    <button data-id="air_fanspeed_4" name="auto" class="btn_fan btn_auto_off" data="'+aircorn.id+'" onclick="setAirCornInfo(this)"><span><br>auto</span></button> '+String.fromCharCode(10);
+		htm += '                                    <!--auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요 -->'+String.fromCharCode(10);
+		htm += '                                </td>'+String.fromCharCode(10);
+		htm += '                                <td>'+String.fromCharCode(10);
+		htm += '                                    <select data-id="air_opmode" name="air_opmode" class="w75px" data="'+aircorn.id+'" onchange="setAirCornInfo(this)">'+String.fromCharCode(10);
+		htm += '                                        <option value="1">냉방</option>'+String.fromCharCode(10);
+		htm += '                                        <option value="2">제습</option>'+String.fromCharCode(10);
+		htm += '                                        <option value="3">송풍</option>'+String.fromCharCode(10);
+		htm += '                                        <option value="4">자동</option>'+String.fromCharCode(10);
+		htm += '                                        <option value="5">난방</option>'+String.fromCharCode(10);
+		htm += '                                    </select>'+String.fromCharCode(10);
+		htm += '                                </td>'+String.fromCharCode(10);
+		htm += '                            </tr>'+String.fromCharCode(10);
+		htm += '                        </tbody>'+String.fromCharCode(10);
+		htm += '                    </table>'+String.fromCharCode(10);
+		htm += '                </li>'+String.fromCharCode(10);
+		htm += '';
+
+return htm;
+}
+
+function makeCanvas() {
+	for(var ii=0;ii<_aircorns.length;ii++) {
+		let that = _aircorns[ii];
+		if(_aircorns[ii].grp != '{grp}' || ii>100) continue;
+//		console.log(that.id);
+		const canvasPieManage 		= "canvas_pie_mng_" + that.id;
+		const pieManageColor		= "41,112,184";
+		const labelsManage			= [_aircorns.nm];
+		let chartPieManage			= createPieChart(canvasPieManage, labelsManage, pieManageColor, '','','');
+		chartPieManage.update([100]);
+		setTimeout(function(){
+			getAirCornInfo( that.idx );
+		},100 * ii);
+		
+	}
+}
+
+function getAirCornInfo( idx ){
+		var id = _aircorns[idx].id;
+		console.log(idx+"::"+id+"::"+_aircorns[idx].nm);
+		$.ajax({
+			url : "http://api.dreamsoft.kr/_/mdmtGt.php"
+			, type : "GET"
+			, dataType : "json"
+			, data : { i:id }
+			, async : false
+			, success : function(data) {
+//				console.log('getAirCornInfo:=>>>>>>>>>>>'+id);
+//				console.log(data);
+				if(data.result == true) {
+					_aircorns[idx].status=1;
+					chgPower(id,data.item.pawer);
+					chgSetTemp(id,data.item.setRoomTemp);
+					chgRootTemp(id,data.item.roomTemp);
+					chgFanSpeed(id,data.item.fanSpeed);
+					chgOpMode(id,data.item.opMode);
+				} else {
+					disableObject(id,data.item.pawer);
+					console.log('id: '+id+'______ msg: '+data.msg);
+				}
+			}
+			,error : function(code, msg, error) {
+				var str = code.status + " : " + msg + " : " + error;
+				console.log(str);
+			}
+		});
+}
+
+function disableObject(id, arg1) {
+	$('li[id=Air_'+id+']').css('border','2px solid #cd544e');
+}
+function chgPower(id, arg1) {
+	$('li[id=Air_'+id+']').css('border','2px solid #407dba');
+	$('li[id=Air_'+id+']').find('input[data-id=air_power]').prop('checked',arg1);
+}
+function chgSetTemp(id, arg1) {
+	$('li[id=Air_'+id+']').find('span[data-id=air_settemp]').text(arg1);
+}
+function chgRootTemp(id, arg1) {
+	$('li[id=Air_'+id+']').find('span[data-id=air_roomtemp]').text(arg1);
+}
+function chgFanSpeed(id, arg1) {
+	if(parseInt(arg1) == 4) {
+		$('li[id=Air_'+id+']').find('button[data-id=air_fanspeed_4]').removeClass('btn_auto_off').addClass('btn_auto_on');
+		for(jj=1;jj<=3;jj++) {
+			$('li[id=Air_'+id+']').find('button[data-id=air_fanspeed_'+jj+']').removeClass('btn_fan_on').addClass('btn_fan_off');
+		}
+	} else {
+		$('li[id=Air_'+id+']').find('button[data-id=air_fanspeed_4]').removeClass('btn_auto_on').addClass('btn_auto_off');
+		for(jj=1;jj<=3;jj++) {
+			if(parseInt(arg1) >= jj) $('li[id=Air_'+id+']').find('button[data-id=air_fanspeed_'+jj+']').removeClass('btn_fan_off').addClass('btn_fan_on');
+			else $('li[id=Air_'+id+']').find('button[data-id=air_fanspeed_'+jj+']').removeClass('btn_fan_on').addClass('btn_fan_off');
+		}
+	}
+}
+function chgOpMode(id, arg1) {
+	$('li[id=Air_'+id+']').find('select[data-id=air_opmode]').val(arg1).prop('selected', true);
+}
+function setAirCornInfo( obj0 ){
+	console.log(obj0);
+	var id, idx;
+	for(var ii=0;ii<_aircorns.length;ii++) {
+		if(_aircorns[ii].grp !=  '{grp}') continue;
+		if(_aircorns[ii].id==$(obj0).attr('data') && _aircorns[ii].status==1) {	// 정보를 가져온 에어컨만 제어
+			id = $(obj0).attr('data');
+			idx = _aircorns[ii].idx;
+			break;
+		}
+	}
+	var tmp_a = $(obj0).attr('data-id').split('_');
+	var sndata;
+	switch(tmp_a[1]) {
+		case 'power':
+						if($('li[id=Air_'+id+']').find('input[data-id=air_power]').prop('checked')) {
+							sndata = 'on';
+						} else {
+							sndata = 'off';
+						}
+						break;
+		case 'temp':
+						var temp_a = parseInt($('li[id=Air_'+id+']').find('span[data-id=air_settemp]').text());
+						switch(tmp_a[2]) {
+							case 'up': if(temp_a >= 30) return false;
+										temp_a++;
+										sndata = temp_a;
+										break;
+							case 'down': if(temp_a <= 16) return false;
+										sndata = temp_a;
+										break;
+						}
+						if(sndata) chgSetTemp(id,sndata);
+						break;
+		case 'fanspeed':
+						sndata = tmp_a[2];
+						if(sndata) chgFanSpeed(id, sndata);
+						break;
+		case 'opmode':
+						sndata = $(obj0).val();
+						break;
+	}
+	
+	if(!sndata) return false;
+	var data0 = { i:id, k:tmp_a[1], v:sndata };
+	$.ajax({
+		url : "http://api.dreamsoft.kr/_/mdmtSt.php"
+		, type : "POST"
+		, dataType : "json"
+		, data : data0
+		, async : false
+		, success : function(data) {
+//			console.log('setAirCornInfo:=>>>>>>>>>>>'+id);
+//			console.log(data);
+			if(data.result == true) {
+				chgPower(id,data.item.pawer);
+				chgSetTemp(id,data.item.setRoomTemp);
+				chgRootTemp(id,data.item.roomTemp);
+				chgFanSpeed(id,data.item.fanSpeed);
+				chgOpMode(id,data.item.opMode);
+			} else {
+				console.log('id: '+id+'______ msg: '+data.msg);
+			}
+		}
+		,error : function(code, msg, error) {
+			var str = code.status + " : " + msg + " : " + error;
+			console.log(str);
+		}
+	});
+}
+
+$(document).ready(function(){
+	for(var ii=0;ii<_aircorns.length;ii++) {
+		if(_aircorns[ii].grp !=  '{grp}') continue;
+//		console.log(_aircorns[ii].grp);
+		_aircorns[ii].idx=ii;
+		var floor = _aircorns[ii].grp.replace('F','층');
+		$('#aircorns').append(addAirCorn(_aircorns[ii], floor));
+	}
+
+	setTimeout(function(){
+		makeCanvas();
+	},10);
+
+});
+</script>

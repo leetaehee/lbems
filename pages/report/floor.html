@@ -1,0 +1,78 @@
+<h2>
+    <img src="../res/images/icon/icon_report.png" class="mr08">
+    조회 <span>층별 사용 현황</span>
+</h2>
+<div class="content report"><span id="grp" style="display:none"></span>
+    <section class="mb20">
+        <h3>
+            층별 사용 현황
+            <span>사용자의 층별 사용 현황을 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>조회</li>
+            <li>층별 사용 현황</li>
+        </ul>
+    </section>
+    <!-- 나중에 사용량, 사용요금 모두 보여주어야 할 경우 복구해야함, 해당 내용은 전기만 하므로 DB에는 넣지 말것  -->
+    <!--
+        <section class="tabList01 floatBox">
+            <button id="" class="on">사용량</button>
+            <button >사용요금</button>
+        </section>
+    -->
+    <section class="tabCont">
+        <div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <select id="select_year" class="w200px mr10">
+                </select>
+                <button class="Btn excelBtn mt38" id="btn_excel_year">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 월을 선택하시면 일별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38 div_chart_label">
+                    <!-- 자바스크립트로 동적으로 생성함 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_year"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_month">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 일을 선택하시면 시간대별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38 div_chart_label">
+                    <!-- 자바스크립트로 동적으로 생성함 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_month"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_day">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 시간을 선택하시면 5분별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38 div_chart_label">
+                    <!-- 자바스크립트로 동적으로 생성함 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_day"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_raw">Excel</button>
+                <div class="graph_legend mt38 div_chart_label">
+                    <!-- 자바스크립트로 동적으로 생성함 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_raw"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./report/js/chart.bar_stack.js"></script>
+
+<script src="./report/js/floor.define.js"></script>
+<script src="./report/js/floor.control.js"></script>

@@ -1,0 +1,112 @@
+<h2><img src="../res/images/icon/icon_control.png" class="mr08">제어 </h2>
+<div class="tabList_dash fr" id="btn_floor_group">
+	<button type="button" id="btn_floor_1F" data-floor="1f" class="on">1층</button>
+	<button type="button" id="btn_floor_2F" data-floor="2f">2층</button>
+	<button type="button" id="btn_floor_3F" data-floor="3f">3층</button>
+</div>
+<div class="content" style="min-width:1500px;min-height:900px">
+	<section class="mb20">
+		<h3>
+			제어
+			<span>사무소의 에어컨 설정을 제어합니다. </span>
+		</h3>
+		<ul class="nav">
+			<li>HOME</li>
+			<li>제어</li>
+		</ul>
+	</section>
+	<section>
+		<div class="floatBox">
+			<div class="fl card planBox f1">
+				<!--
+					에어컨 켜져있을때 li class="on"  / button class="on"
+					에어컨 꺼져있을때 button class="off"
+				-->
+				<!--
+				<ul class="aircon_spot" id="aircon_spot">
+					<li class="on">
+						<button type="button" class="on" id="btn_show_toilet_man_status" data-room="화장실(남)"></button>
+					</li>
+					<li>
+						<button type="button" class="off" id="btn_show_toilet_woman_status" data-room="화장실(여)"></button>
+					</li>
+				</ul>
+				-->
+				<ul class="spot_name" id="spot_name">
+					<li id="btn_show_toilet_man_status" data-room="화장실(남)" class="active">화장실(남) <span class="off"></span></li>
+					<li id="btn_show_toilet_woman_status" data-room="화장실(여)">화장실(여) <span class="off"></span></li>
+				</ul>
+			</div>
+			<div class="control fr card detailBox">
+				<p class="detail_tit">
+					<img src="../res/images/icon/icon_airconditioner2.gif">
+					<span id="label_device_location"></span>
+					<button type="button" id="btn_power" class="aircon_state off">OFF</button><!-- 클릭시 off-> on 으로 클래스 변경 -->
+				</p>
+				<div class="controlBox">
+					<button type="button" id="btn_temperature_down" class="control_down mr20"></button>
+					<div class="graph8">
+						<canvas id="canvas-chart-status" class="chartjs-render-monitor"></canvas>
+						<p class="control_temperature">
+							<span>희망온도</span><br>
+							<span class="control_temp_span" id="roomTemp">0</span><span>℃ </span>
+						</p>
+					</div>
+					<button type="button" id="btn_temperature_up" class="control_up ml20"></button>
+				</div>
+				<table class="tbType03 mt50">
+					<col style="width:22%">
+					<col style="width:8%">
+					<col style="width:70%">
+					<thead>
+						<tr>
+							<th><span>풍 량</span></th>
+							<td></td>
+							<td>
+								<button type="button" id="btn_fan_4" data-fan="4" class="btn_fan_group btn_fan btn_auto btn_auto_off"><span>AUTO</span></button>
+								<button type="button" id="btn_fan_1" data-fan="1" class="btn_fan_group btn_fan btn_fan_off mr08"></button>
+								<button type="button" id="btn_fan_2" data-fan="2" class="btn_fan_group btn_fan btn_fan_off mr08"></button> <!-- btn_fan_on / btn_fan_off -->
+								<button type="button" id="btn_fan_3" data-fan="3" class="btn_fan_group btn_fan btn_fan_off mr08"></button><!--auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요 -->
+								<ul class="control_ul">
+									<li>AUTO</li>
+									<li>약풍</li>
+									<li>중풍</li>
+									<li>강풍</li>
+								</ul>
+							</td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th><span>MODE</span></th>
+							<td></td>
+							<td>
+								<button type="button" id="btn_mode_4" data-mode="4" class="btn_mode_group btn_fan btn_auto btn_auto_on mr08"><span class="f13">AUTO</span></button>
+								<button type="button" id="btn_mode_1" data-mode="1" class="btn_mode_group btn_fan btn_cool_on mr05"></button>
+								<button type="button" id="btn_mode_5" data-mode="5" class="btn_mode_group btn_fan btn_hot_on mr05"></button>
+								<button type="button" id="btn_mode_2" data-mode="2" class="btn_mode_group btn_fan btn_moisture_on mr05"></button>
+								<button type="button" id="btn_mode_3" data-mode="3" class="btn_mode_group btn_fan btn_fan2_on mr05"></button><br>
+								<!-- 기존의 on/off 방식과 같이 기본 'btn_cool_off'로 되어 있다가 클릭하면 'btn_cool_on'로 바뀝니다. -->
+								<ul class="control_ul">
+									<li>AUTO</li>
+									<li>냉방</li>
+									<li>난방</li>
+									<li>제습</li>
+									<li>송풍</li>
+								</ul>
+							</td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.menuManager.js"></script>
+
+<script src="./control/js/loading.chart.pie.js"></script>
+
+<script src="./control/js/control_1f.define.js"></script>
+<script src="./control/js/control.control.js"></script>

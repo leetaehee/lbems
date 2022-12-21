@@ -1,0 +1,156 @@
+<div class="dashWrap total_analysis">
+    <div>
+        <img src="../res/images/icon/icon_analysis.png" class="mr08 mb05">
+        <h2>종합 분석</h2>
+    </div>
+    <div style="width:100%">
+        <div class="dashcontent t20 mb20">
+            <div class="articleBox">
+                <ul>
+                    <li>
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">기준 날짜</label>
+                        <input type="text" id="date_select" class="dateStyle w130px ml10 mr10" readonly></li>
+                    <li>
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">기간 선택</label>
+                        <label class="mr10 ml10">
+                            <input type="radio" name="radio_date" value="2"> 일
+                        </label>
+                        <label class="mr10">
+                            <input type="radio" name="radio_date" value="1" checked> 월
+                        </label>
+                        <label class="mr10">
+                            <input type="radio" name="radio_date" value="0"> 년
+                        </label>
+                    </li>
+                    <li id="search_section">
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">위치 선택</label>
+                        <select id="select_building_dong" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                        <select id="select_building_floor" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                        <!--
+                            <select id="select_building_room" class="w120px ml10">
+                                <option value="all">전체</option>
+                            </select>
+                        -->
+                    </li>
+                    <li>
+                        <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div style="width:100%; height:700px;">
+        <div class="fl" style="width:65%;">
+            <div class="dashcontent mb20">
+                <p class="dashH3">에너지원 종합 사용 및 발전 현황</p>
+                <div class="analysis_total">
+                    <div>
+                        <img src="../res/images/img_building.jpg" class="w90 img_total_img"/>
+                    </div>
+                    <div>
+                        <div>
+                            <p class="w100 fs17 fcBlack">
+                                <img src="../res/images/icon/total_1.png" class="mr10">태양광 <span class="fs17 b fcBlack spanPercentGroup" id="label_solar_percent">0 %</span>
+                            </p>
+                            <p>
+                                <span class="fs17 b fcBlack" id="label_solar_used">0</span> <label id="label_solar_unit">kWh</label><br>
+                                <span class="fs17 b fcBlack" id="label_solar_price">0</span> 원
+                            </p>
+                            <button class="Btn detailBtn2 mt10 elli">
+                                <img src="../res/images/icon/icon_development.png" class="spinicon mr05">
+                                <span class="fcRed">에너지 발전중</span>
+                            </button>
+                        </div>
+                        <div style="height:140px">
+                            <p class="w100 fs17 fcBlack">
+                                <img src="../res/images/icon/total_4.png" class="mr10">전기 <span class="fs17 b fcBlack spanPercentGroup" id="label_electric_percent">0 %</span>
+                            </p>
+                            <p>
+                                <span class="fs17 b fcBlack" id="label_electric_used">0</span> <label id="label_electric_unit">kWh</label><br>
+                                <span class="fs17 b fcBlack" id="label_electric_price">0</span> 원
+                            </p>
+                            <!--
+                                <button type="button" class="Btn detailBtn mt10" id="btn_detail_elec">상세보기<img src="../res/images/icon/link1.png" class="ml10"></button>
+                            -->
+                        </div>
+                        <div style="margin-top: 20px; height:140px; display: none;" id="div_gas_info">
+                            <p class="w100 fs17 fcBlack">
+                                <img src="../res/images/icon/total_2.png" class="mr10">가스 <span class="fs17 b fcBlack spanPercentGroup" id="label_gas_percent">0 %</span>
+                            </p>
+                            <p>
+                                <span class="fs17 b fcBlack" id="label_gas_used">0</span> <label id="label_gas_unit">m³</label><br>
+                                <span class="fs17 b fcBlack" id="label_gas_price">0</span> 원
+                            </p>
+                            <!--
+                                <button type="button" class="Btn detailBtn mt10" id="btn_detail_elec">상세보기<img src="../res/images/icon/link1.png" class="ml10"></button>
+                            -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!---conBox1-->
+        <div class="fr" style="width:34%">
+            <div class="dashcontent floatBox elli mb14">
+                <p class="dashH3 mb20">용도별 사용 분포도</p>
+                <div class="graph2 diIb mt35"><canvas id="chart_pie_usage"></canvas></div>
+                <div class="tbType02 diIb fr mt10" style="width:49%">
+                    <table>
+                        <colgroup>
+                            <col style="width:46%">
+                            <col style="width:54%">
+                        </colgroup>
+                        <tbody id="tbody_usage">
+                            <!-- 자바스크립트로 동적으로 생성함 -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dashcontent floatBox elli">
+                <p class="dashH3 mb20">설비별 사용 분포도</p>
+                <div class="graph2 diIb mt45"><canvas id="chart_pie_facilities"></canvas></div>
+                <div class="tbType02 diIb fr" style="width:49%; margin-top: 40px;">
+                    <table>
+                        <colgroup>
+                            <col style="width:40%">
+                            <col style="width:60%">
+                        </colgroup>
+                        <tbody id="tbody_facility">
+                            <!-- 자바스크립트로 동적으로 생성함 -->
+                            <tr>
+                                <td colspan="2">설비 정보가 존재하지 않습니다.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div><!---conBox2-->
+    </div>
+    <div style="width:100%; display: none;" id="div_findust_graph_section">
+        <div class="dashcontent mt35 t20 mb10">
+            <p class="dashH3 al">실내 온/습도 추이</p>
+            <!--
+                <div class="graph_legend">
+                    <p><span style="background: #A2AACE"></span>사용량 </p>
+                </div>
+            -->
+            <div class="graph7" style="height:200px">
+                <canvas id="canvas_chart_line"></canvas>
+            </div>
+        </div>
+    </div>
+</div><!---dashWrap-->
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+
+<script src="./analysis/js/chart.line.double_y2.js"></script>
+<script src="./analysis/js/total.chart.pie.js"></script>
+
+<script src="./analysis/js/total.define.js"></script>
+<script src="./analysis/js/total.control.js"></script>

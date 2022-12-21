@@ -1,0 +1,158 @@
+<h2>
+    <img src="../res/images/icon/icon_manager.png" class="mr08">관리자 설정
+    <span>건물 관리</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            건물 관리
+            <span>건물 설정</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>관리자 설정</li>
+            <li>건물 관리</li>
+        </ul>
+    </section>
+    <section>
+        <p class="blt01 diIb">기본 정보</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <col style="width:3%">
+                    <col style="width:8%">
+                    <col style="width:5%">
+                    <col style="width:12%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:11%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:4%">
+                    <col style="width:4%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="all_checked"></th>
+                        <th><span class="th_icon"></span>이름<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>코드<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>주소<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>전화번호<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>FAX<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>E-MAIL<span class="th_icon"></span></th>
+                        <th>위도</th>
+                        <th>경도</th>
+                        <th>마감일</th>
+                        <th>관리</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_rorean">
+                    <tr>
+                        <td colspan="11">- 건물 데이터가 존재하지 않습니다 -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt50 mb40 ar">
+            <button type="button" class="Btn btn2 bcBrown btnRorenEnroll">등록하기 </button>
+            <button type="button" class="Btn btn2 bcRed btnRorenDelete">삭제하기</button>
+        </div>
+        <div class="page mb40">
+            <a href="#a" id="btn_roren_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a href="#a" id="btn_roren_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="roren_paging">
+                <li class="on"><a href="#a">1</a></li>
+            </ul>
+            <a href="#a" id="btn_roren_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a href="#a" id="btn_roren_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_700"style="min-height:650px">
+        <div class="pop_tt" style="width:700px">
+            <h1 id="label_popup_title"><!-- 건물 정보 등록 --></h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt50 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"> 건물</span> 의 정보를 <span id="label_popup_title_word" class="fcRed"></span>합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:15%">
+                        <col style="width:20%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th ><span class="th_icon"></span>이름</th>
+                            <td >
+                                <input type="text" id="name" name="name" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>코드</th>
+                            <td>
+                                <input type="text" id="complex_code_pk" name="complex_code_pk" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>층 수</th>
+                            <td>
+                                <input type="text" id="home_dong_cnt" name="home_dong_cnt" class="w100">
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr>
+                            <th ><span class="th_icon"></span>주소</th>
+                            <td colspan="3" >
+                                <input type="text" id="addr" name="addr" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>전화번호</th>
+                            <td>
+                                <input type="text" id="tel" name="tel" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>FAX</td>
+                            <td>
+                                <input type="text" id="fax" name="fax" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>E-MAIL</th>
+                            <td colspan="3">
+                                <input type="text" id="email" name="email" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>위도</th>
+                            <td>
+                                <input type="text" id="lat" name="lat" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>경도</th>
+                            <td>
+                                <input type="text" id="lon" name="lon" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>마감일</th>
+                            <td colspan="3">
+                                <select id="closing_day_electric" name="closing_day_electric" class="w100">
+                                    <option value="">선택하세요.</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 mb40 ac">
+                <button type="button" id="btn_popup_save" class="Btn saveBtn">등록</button>
+                <button type="button" id="btn_popup_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="./manager/js/building.define.js"></script>
+<script src="./manager/js/building.control.js"></script>

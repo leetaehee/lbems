@@ -1,0 +1,72 @@
+<h2>
+    <img src="../res/images/icon/icon_report.png" class="mr08">
+    조회 <span>태양광 발전 현황</span>
+</h2>
+<div class="content report">
+    <section class="mb20">
+        <h3>
+            태양광 발전 현황
+            <span>사용자의 태양광 발전 현황을 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>조회</li>
+            <li>태양광 발전 현황</li>
+        </ul>
+    </section>
+    <section class="tabCont">
+        <div>
+            <div class="floatBox">
+                <p class="blt01 diIb">&nbsp;</p>
+                <select id="select_year" class="w200px mr10">
+                    <option value="">선택</option>
+                </select>
+                <button class="Btn excelBtn mt38" id="btn_excel_year">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 월을 선택하시면 일별 발전 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_year">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_year"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_month">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 일을 선택하시면 시간대별 발전 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_month">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_month"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_day">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 시간을 선택하시면 5분별 발전 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_day">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_day"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_raw">Excel</button>
+                <div class="graph_legend mt38" id="div_chart_legend_raw">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_raw"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./report/js/chart.bar_line.js"></script>
+
+<script src="./report/js/solar.define.js"></script>
+<script src="./report/js/solar.control.js"></script>

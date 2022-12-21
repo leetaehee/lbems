@@ -1,0 +1,207 @@
+<div style="height:30px;"></div>
+<div class="card t20">
+    <div class="tbType1 conc">
+        <table>
+            <colgroup>
+                <col style="width:40%">
+                <col style="width:60%">
+            </colgroup>
+            <tbody>
+            <tr>
+                <td class="brno" colspan="2">김해 행정복지센터</td>
+            </tr>
+            <tr>
+                <th>등급</th>
+                <td><span id="label_independence_grade">0</span></td>
+            </tr>
+            <tr>
+                <th>에너지 자립률</th>
+                <td><span id="label_independence_rate">0</span>%</td>
+            </tr>
+            <tr>
+                <th>층 수</th>
+                <td>1층</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div><!---//card-->
+<div class="card mt10">
+    <h2 class="tt">계통도</h2>
+    <ul class="tabList mt20" id="btn_periods">
+        <li id="btn_daily" class="on">금일</li>
+        <li id="btn_month">금월</li>
+        <li id="btn_year">금년</li>
+    </ul>
+    <div class="diagram_layout mt10">
+        <ul class="conc">
+            <li>
+                <div class="floatBox">
+                    <div class="diagram_box fl">
+                        <p>
+							<span class="diagram_ico ac" style="background: #d77b7b">
+								<img src="./res/image/dia_1.png">
+							</span>
+                            <span style="color:#b44545">태양광</span>
+                        </p>
+                        <div>
+                            <p>발전량 <b><span id="label_solar_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                    <div class="dash_w fr">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                </div>
+                <div class="floatBox">
+                    <div class="diagram_box fl">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_2.png">
+							</span>
+                            <span style="color:#bc8b0f">전기</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                    <div class="dash_w fr">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                </div><!--floatBox-->
+            </li>
+            <li>
+                <!-- margin-top: 160px; <svg> 태그에 viewBox="0 0 3 499" -->
+                <div style="width: 100%;  height: 460px; margin-top: 58px">
+                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 3 602" style="enable-background:new 0 0 640 480;" xml:space="preserve">
+						<line class="st0 dashed-line dash-move-opposite" x1="2" y1="-20" x2="2" y2="100000"></line>
+					</svg>
+                </div>
+            </li>
+            <li>
+                <div class="floatBox">
+                    <div class="dash_w fl" style="margin-top: 150px;">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr" style="margin-top:120px;">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_9.png">
+							</span>
+                            <span style="color:#bc8b0f">조명</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_light_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+                <div class="floatBox">
+                    <div class="dash_w fl">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_8.png">
+							</span>
+                            <span style="color:#bc8b0f">냉/난방</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_cold_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+                <div class="floatBox">
+                    <div class="dash_w fl">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_4.png">
+							</span>
+                            <span style="color:#bc8b0f">급탕</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_hotwater_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+                <div class="floatBox">
+                    <div class="dash_w fl">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_7.png">
+							</span>
+                            <span style="color:#bc8b0f">난방</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_heating_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+                <div class="floatBox">
+                    <div class="dash_w fl">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_6.png">
+							</span>
+                            <span style="color:#bc8b0f">환기</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_electric_vent_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+                <div class="floatBox">
+                    <div class="dash_w fl">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                             viewBox="0 0 20 20" style="enable-background:new 0 0 640 480; display: inline-block;" xml:space="preserve">
+							<line class="st0 dashed-line dash-move-opposite" x1="0" y1="10" x2="800" y2="10"/>
+						</svg>
+                    </div>
+                    <div class="diagram_box fr">
+                        <p>
+							<span class="diagram_ico ac" style="background: #e3c373">
+								<img src="./res/image/dia_8.png">
+							</span>
+                            <span style="color:#bc8b0f">냉장/냉동</span>
+                        </p>
+                        <div>
+                            <p>사용량 <b><span id="label_freeze_used">0</span> </b> <span class="label_unit">kWh</span></p>
+                        </div>
+                    </div><!--diagram_box-->
+                </div><!--floatBox-->
+            </li>
+        </ul>
+    </div>
+</div><!---//card-->
+
+<script src="./diagram/js/diagram.define.js"></script>
+<script src="./diagram/js/diagram.control.js"></script>

@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+
+        <link rel="stylesheet" href="../res/css/common.css">
+        <link rel="stylesheet" href="../res/css/font.css">
+        <link rel="stylesheet" href="../res/css/login.css">
+        <link rel="stylesheet" href="../res/css/layout/layout.css">
+
+        <script src="../libs/js/jquery/jquery-3.3.1.min.js"></script>
+
+        <!--Magnific Popup-->
+        <link rel="stylesheet" href="../libs/js/magnific-popup/magnific-popup.css">
+        <script src="../libs/js/magnific-popup/jquery.magnific-popup.js"></script>
+
+        <!-- module -->
+        <script src="/modules/js/module.js"></script>
+        <script src="/modules/js/module.popup.js"></script>
+        <script src="/modules/js/module.request.js"></script>
+        <script src="/modules/js/module.cookie.js"></script>
+        <script src="/modules/js/module.deviceInfo.js"></script>
+
+		<title>BEMS</title>
+    </head>
+    <body class="login_bg">
+        <div class="login_box">
+            <form id="form_login" class="login_form fr">
+                <img src="../res/images/login_logo.png" alt="4st BEMS">
+                <input type="text" id="input_id" name="input_id" placeholder="아이디">
+                <input type="password" id="input_passwd" name="input_passwd" class="mt15" placeholder="비밀번호">
+                <button type="button" id="btn_login" class="Btn loginBtn mt45">로그인</button>
+                <div class="mt10">
+                    <input type="checkbox" id="checkbox_autologin"><span>자동로그인</span>
+                    <a href="./index.php?page=login/authorization.html" class="fs13 fr fcRed l05" style="text-decoration: underline;">
+                        비밀번호 재설정
+                    </a>
+                    <a id="btn_popup_find_id" class="fs13 fr fcRed" style="text-decoration: underline; cursor: pointer;">
+                        아이디 찾기
+                    </a>
+                </div>
+            </form>
+
+            <!-- 아이디 잃어버렸을 때 -->
+            <a class="form_popup_find_id" href="#form_popup_find_id"></a>
+            <form id="form_popup_find_id" class="mfp-hide mfp-with-anim white-popup-block">
+                <div class="popup_550" style="min-height: 400px">
+                    <div class="pop_tt" style="width:550px">
+                        <h1 id="label_id_error_title"></h1>
+                    </div>
+                    <div class="pop_contents">
+                        <p class="ac lh40 fs20 mt50" id="label_id_error_message"></p>
+                        <div class="ac mt30">
+                            <button type="button" id="btn_find_id_popup_close" class="bcBlack btn2_b fcWhite fs17">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 로그인 실패 시 계정찾기, 로그인하기 선택 팝업 활성화 -->
+            <a class="form_popup_find_account" href="#form_popup_find_account"></a>
+            <form id="form_popup_find_account" class="mfp-hide mfp-with-anim white-popup-block">
+                <div class="popup_550" style="min-height: 400px">
+                    <div class="pop_tt" style="width:550px">
+                        <h1>로그인 실패</h1>
+                    </div>
+                    <div class="pop_contents">
+                        <p class="ac lh40 fs20 mt50" id="label_password_error_message"></p>
+                        <div class="ac mt30">
+                            <button type="button" id="btn_find_account" class="bcRed btn2_b fcWhite fs17">비밀번호 재설정</button>
+                            <button type="button" id="btn_play_login" class="saveBtn btn2_b fcWhite fs17">로그인하기</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- 로그인 5회이상 틀릴 시 비밀번호 초기화 팝업 활성화 -->
+            <a class="form_popup_password_initialize" href="#form_popup_password_initialize"></a>
+            <form id="form_popup_password_initialize" class="mfp-hide mfp-with-anim white-popup-block">
+                <div class="popup_550" style="min-height: 400px">
+                    <div class="pop_tt" style="width:550px">
+                        <h1>비밀번호 초기화</h1>
+                    </div>
+                    <div class="pop_contents">
+                        <p class="ac lh40 fs20 mt50">5회 이상 로그인에 실패하여 비밀번호가 초기화 되었습니다.
+                            <br>비밀번호를 재설정해주세요
+                        </p>
+                        <div class="ac mt50">
+                            <button type="button" id="btn_password_resetting" class="bcRed btn2_b100 fcWhite fs17">
+                                비밀번호 재설정
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <p>Copyright 2019 KevinLAB. All rights reserved.</p>
+
+		<script>
+			const requestUrl = '{requestUrl}';
+		</script>
+
+		<script src="./login/js/login.define.js"></script>
+		<script src="./login/js/login.control.js"></script>
+    </body>
+</html>

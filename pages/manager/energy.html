@@ -1,0 +1,259 @@
+<style>
+    .menu_group_name {
+        font-family: 'Nanum Square';
+        font-size: 25px;
+        color: white;
+    }
+</style>
+<h2>
+    <!-- 메뉴 정보는 자바스크립트로 동적으로 변경함. 해당 메뉴는 설정,관리자설정에서 동일하게 적용 됨. -->
+    <img id="login_log_page_icon" src="../res/images/icon/icon_manager.png" class="mr08">
+    <groupTag class="menu_group_name"></groupTag>
+    <span>장비 관리 - 에너지원별</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            장비 관리 - 에너지원별
+            <span>건물의 장비 관리 - 에너지원별 장비를 관리 합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li class="menu_group_name">관리자 설정</li>
+            <li>장비 관리 - 에너지원별</li>
+        </ul>
+    </section>
+    <form id="form_energy_manage" name="form_energy_manage">
+        <section>
+            <div class="mt40" id="div_building_select_box">
+                <select id="building_type" name="building_type" class="w200px">
+                    <option value="">건물 선택</option>
+                </select>
+            </div>
+            <div class="articleBox mt10">
+                <ul>
+                    <li>
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">기준 날짜</label>
+                        <input type="text" id="start_date" name="start_date" class="dateStyle w130px ml10 mr10" autocomplete="off"> ~
+                        <input type="text" id="end_date" name="end_date" class="dateStyle w130px ml10 mr10" autocomplete="off">
+                    </li>
+                    <li>
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">조건 선택</label>
+                        <select id="fg_use" name="fg_use" class="w120px ml10">
+                            <option value="y">사용함</option>
+                            <option value="n">사용안함</option>
+                        </select>
+                        <select id="energy_type" class="w120px ml10">
+                            <!--
+                            <option value="electric">전기</option>
+                            <option value="gas">가스</option>
+                            <option value="water">수도</option>
+                            -->
+                        </select>
+                        <!--
+                        <input type="text" id="search_name" name="search_name" class="w150px ml10">
+                        -->
+                        <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </form>
+    <section>
+        <p class="blt01 diIb">에너지원별 장비 관리</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <!--<col style="width:4%">-->
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:10%">
+                    <col style="width:14%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:12%">
+                    <col style="width:10%">
+                    <!--
+                        <col class="anomaly_column" style="width:10%;">
+                        <col class="anomaly_column" style="width:14%;">
+                    -->
+                    <col style="width:6%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <!--<th><input type="checkbox" id="all_checked"></th>-->
+                        <th><span class="th_icon"></span>동<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>호<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>층<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>에너지원<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>S/N<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>구입일<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>검교정 주기<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>최신 검교정 일자<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>교체 일자<span class="th_icon"></span></th>
+                        <!--
+                            <th class="anomaly_column"><span class="th_icon"></span>이상증후 결과<span class="th_icon"></span></th>
+                            <th class="anomaly_column"><span class="th_icon"></span>이상증후 점수<span class="th_icon"></span></th>
+                        -->
+                        <th><span class="th_icon"></span>관리<span class="th_icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_equipment">
+                    <tr>
+                        <td id="empty-table-td" colspan="10">- 건물과 에너지원을 선택하세요. -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt50 mb40 ar">
+            <!--<button class="Btn btn2 btn2_b">엑셀</button>-->
+            <!--<button class="Btn btn2 btn2_b">엑셀 업로드</button>-->
+            <button type="button" id="btnEnergyEnroll" class="Btn btn2 bcBrown">등록하기</button>
+            <!--<button type="button" id="btnEnergyDelete" class="Btn btn2 bcRed">삭제하기</button>-->
+        </div>
+        <div class="page mb40">
+            <a href="#a" id="btn_equipment_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a href="#a" id="btn_equipment_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="equipment_paging">
+                <!-- 페이징  (javascript로처리, /modules/js/page/module.page.js) -->
+            </ul>
+            <a href="#a" id="btn_equipment_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a href="#a" id="btn_equipment_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+<div class="popup_770"style="min-height:470px">
+    <div class="pop_tt" style="width:770px">
+        <h1>에너지원 장비 정보 등록</h1>
+    </div>
+    <div class="pop_contents">
+        <p class="mt50 mb10 fcRed">* 장비관리<span id="popup_energy_name" class="fcprimary"> 에너지원 장비</span> 의 정보를 등록합니다.</p>
+        <div class="tbType04">
+            <table>
+                <colgroup>
+                    <col style="width:13%">
+                    <col style="width:20%">
+                    <col style="width:13%">
+                    <col style="width:20%">
+                </colgroup>
+                <tbody>
+                    <tr>
+                        <th><span class="th_icon"></span>건물</th>
+                        <td>
+                            <select id="popup_building_type" name="popup_building_type" class="w100">
+                                <!-- 자바스크립트로 동적 추가 -->
+                                <option value="">건물 선택</option>
+                            </select>
+                        </td>
+                        <th><span class="th_icon"></span>에너지원</th>
+                        <td>
+                            <select id="popup_energy_type" name="popup_energy_type" class="w100">
+                                <!--
+                                    <option value="">에너지원</option>
+                                    <option value="electric">전기</option>
+                                    <option value="gas">가스</option>
+                                    <option value="water">수도</option>
+                                -->
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>Type</th>
+                            <td>
+                                <select id="popup_select_apt_type" name="popup_select_apt_type" class="w100">
+                                    <option value="">전체</option>
+                                </select>
+                                <div id="apt_type_name"></div>
+                            </td>
+                            <th><span class="th_icon"></span>동</th>
+                            <td>
+                                <select id="popup_select_apt_dong" name="popup_select_apt_dong" class="w100">
+                                    <option value="">전체</option>
+                                </select>
+                                <div id="apt_dong_name"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>호</th>
+                            <td>
+                                <select id="popup_select_apt_home" name="popup_select_apt_home" class="w100">
+                                    <option value="">전체</option>
+                                </select>
+                                <div id="apt_ho_name"></div>
+                            </td>
+                            <th><span class="th_icon"></span>층</th>
+                            <td>
+                                <select id="popup_select_apt_floor" name="popup_select_apt_floor" class="w100">
+                                    <option value="">전체</option>
+                                </select>
+                                <div id="apt_floor_name"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>S/N</th>
+                            <td>
+                                <input id="popup_sensor_sn" name="popup_sensor_sn" type="text" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>구입일</th>
+                            <td>
+                                <input id="popup_installed_date" name="popup_installed_date" type="text" class="dateStyle w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>상세 스펙</th>
+                            <td>
+                                <input id="popup_detail_spec" name="popup_detail_spec" type="text" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>관리 등급</th>
+                            <td>
+                                <input id="popup_manage_level" name="popup_manage_level" type="text" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>검교정 주기</th>
+                            <td>
+                                <input id="popup_check_period" name="popup_check_period" type="text" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>최신 검교정 일자</th>
+                            <td>
+                                <input id="popup_lastest_check_date" name="popup_lastest_check_date" type="text" class="dateStyle w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>교체 일자</th>
+                            <td>
+                                <input id="popup_replace_date" name="popup_replace_date" type="text" class="dateStyle w100">
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                        <tr id="tr-super-section">
+                            <th><span class="th_icon"></span>삭제 관리</th>
+                            <td>
+                                <label class="mr10"><input name="popup_fg_use" class="popup_fg_use" value="y" type="radio"> 정상</label>
+                                <label><input name="popup_fg_use" class="popup_fg_use" value="n" type="radio"> 삭제</label>
+                            </td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 ac">
+                <button type="button" id="btn_popup_save" class="Btn saveBtn">등록</button>
+                <button type="button" id="btn_popup_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+<script src="/EMS_Modules/js/module.buildingList.js"></script>
+<script src="/EMS_Modules/js/module.aptInfo.js"></script>
+
+<script src="./manager/js/energy.define.js"></script>
+<script src="./manager/js/equipment.control.js"></script>

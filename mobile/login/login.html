@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- meta -->
+		<meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0">
+		
+		<!-- style -->
+		<link rel="stylesheet" href="./res/css/common.css">
+        <link rel="stylesheet" href="./res/css/font.css">
+		<link rel="stylesheet" href="./res/css/layout.css">
+        
+		<!-- title -->
+		<title>BEMS 관리자 | 로그인</title>
+	</head>
+	<body style="background:#fff;">
+		<form id="form_login" method="post">
+			<div class="loginWrap">
+				<div class="login_logo"><p class="fcOrg fs17">관리자용</p></div>
+				<div class="mt90">
+					<input type="text" name="input_id" id="input_id" placeholder="아이디" tabindex="1">
+					<input type="password" name="input_password" id="input_password" placeholder="패스워드" tabindex="2">
+				</div>
+				<div class="mt30">
+					<input type="checkbox" name="auto_login" id="auto_login">
+					<label for="auto_login">
+						<span></span>자동로그인
+					</label>
+				</div>
+				<div class="mt30 ac">
+					<input type="button" value="로그인" id="btn_login" class="diB btnLog" tabindex="3">
+					<button type="button" id="btn_find_account" class="searchID mt30">아이디<span class="fcccc">｜</span>비밀번호찾기</a></button>
+				</div>
+			</div>
+		</form>
+		<div class="searchLayer" style="display: none;">
+			<div class="popupID">
+				<div>
+					<p class="popID_tt">아이디<span class="fc999">｜</span>비밀번호 찾기</p>
+					<a id="btn_find_account_close" class="popID_closeBtn"></a>
+				</div>
+				<p>
+					BEMS 관리자용 계정은 보안을 위해<br>
+					Kevin LAB에서 일괄 관리하고 있습니다.<br>
+					아이디, 비밀번호를 분실하신 경우,<br>
+					<span class="fcOrg">Kevin LAB : 031-400-3794</span> 로 문의 바랍니다.
+				</p>
+			</div>
+			<div class="dimm"></div>
+		</div>
+		<script>
+			const requestUrl = '../http/index.php';
+		</script>
+
+		<!-- jquery loading -->
+		<script src="/libs/js/jquery/jquery-3.3.1.min.js"></script>
+
+		<!-- jquery.bxslider.js loading -->
+		<script src="./res/js/jquery.bxslider.js"></script>
+
+		<!-- javascript message.js -->
+		<script src="/res/string/string_table_kor.js"></script>
+
+		<!-- module -->
+		<script src="/modules/js/module.js"></script>
+        <script src="/modules/js/module.cookie.js"></script>
+        <script src="/modules/js/module.deviceInfo.js"></script>
+        <script src="/modules/js/module.request.js"></script>
+
+		<!-- login.js -->
+		<script src="./login/js/login.define.js"></script>
+		<script src="./login/js/login.control.js"></script>
+	</body>
+</html>

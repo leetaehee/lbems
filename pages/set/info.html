@@ -1,0 +1,94 @@
+<h2>
+    <img src="../res/images/icon/icon_set2.png" class="mr08">설정
+    <span>기본 정보 관리</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            기본 정보 관리
+            <span>기본 정보를 관리합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>설정</li>
+            <li>기본 정보 관리</li>
+        </ul>
+    </section>
+    <section>
+        <form id="form_basic">
+            <p class="blt01 diIb">기본 정보</p>
+            <div class="setTable ac">
+                <table class="w100">
+                    <colgroup>
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><span class="th_icon"></span>건물 명</th>
+                            <td colspan="3"><input type="text" id="name" name="name" class="w100" placeholder="아파트 명"></td>
+                            <th><span class="th_icon"></span>주소</th>
+                            <td colspan="3"><input type="text" id="addr" name="addr" class="w100" placeholder="주소"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>건물 코드</th>
+                            <td><input type="text" id="complex_code_pk" name="complex_code_pk" class="w100" placeholder="아파트 코드"></td>
+                            <th><span class="th_icon"></span>층수</th>
+                            <td><input type="text" id="home_dong_cnt" name="home_dong_cnt" class="w100" placeholder="동수"></td>
+                            <th><span class="th_icon"></span>TEL</th>
+                            <td><input type="text" id="tel" name="tel" class="w100" placeholder="전화번호"></td>
+                            <th><span class="th_icon"></span>FAX</th>
+                            <td><input type="text" id="fax" name="fax" class="w100" placeholder="팩스번호"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>이메일</th>
+                            <td colspan="3"><input type="text" id="email" name="email" class="w100" placeholder="이메일 주소"></td>
+                            <th><span class="th_icon"></span>연면적</th>
+                            <td><input type="text" id="building_area" name="building_area" class="w100" placeholder="건축면적"></td>
+                            <td colspan="2"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="btn_basic_save" class="Btn saveBtn mt40">저장</button>
+            </div>
+        </form>
+        <form id="form_time_electric">
+            <p class="blt01 diIb">마감일 설정</p>
+            <div class="setTable ac">
+                <table class="w100">
+                    <colgroup>
+                        <col style="width:10%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th colspan="2"><span class="th_icon"></span>마감일</th>
+                            <td colspan="3">
+                                <select id="closing_day_electric" name="closing_day_electric" class="w100">
+                                    <option value="">선택하세요</option>
+                                </select>
+                            </td>
+                            <td colspan="5" ></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" id="btn_electric" class="Btn saveBtn mt40">저장</button>
+            </div>
+        </form>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./set/js/info.define.js"></script>
+<script src="./set/js/info.control.js"></script>

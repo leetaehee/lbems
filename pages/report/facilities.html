@@ -1,0 +1,104 @@
+<h2>
+    <img src="../res/images/icon/icon_report.png" class="mr08">
+    조회 <span>설비별 사용 현황</span>
+</h2>
+<div class="content report">
+    <section class="mb20">
+        <h3>
+            설비별 사용 현황
+            <span>사용자의 설비별 사용 현황을 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>조회</li>
+            <li>설비별 사용 현황</li>
+        </ul>
+    </section>
+    <section class="tabList01 floatBox" id="energy_btn_group">
+        <!-- 동적으로 추가 작업이 발생함. -->
+    </section>
+    <section id="search_section">
+        <div class="articleBox mt10">
+            <ul>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">위치 선택</label>
+                    <select id="select_building_dong" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <select id="select_building_floor" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <!--
+                        <select id="select_building_room" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                    -->
+                </li>
+                <li>
+                    <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회">
+                        <span>조회</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="tabCont">
+        <div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <select id="select_year" class="w200px mr10">
+                    <option value="">선택</option>
+                </select>
+                <button class="Btn excelBtn mt38" id="btn_excel_year">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 월을 선택하시면 일별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_year">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_year"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_month">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 일을 선택하시면 시간대별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_month">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_month"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_day">Excel</button>
+                <p class="diIb ml20 fccomment">*  해당 시간을 선택하시면 5분별 사용 현황을 확인할 수 있습니다.</p>
+                <div class="graph_legend mt38" id="div_chart_legend_day">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_day"></canvas>
+                </div>
+            </div>
+            <div>
+                <p class="blt01 diIb">&nbsp;</p>
+                <button class="Btn excelBtn mt38" id="btn_excel_raw">Excel</button>
+                <div class="graph_legend mt38" id="div_chart_legend_raw">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_raw"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+<script src="/EMS_Modules/js/module.makeEnergyButton.js"></script>
+
+<script src="./report/js/chart.bar_line.js"></script>
+
+<script src="./report/js/facilities.define.js"></script>
+<script src="./report/js/report.control.js"></script>

@@ -1,0 +1,105 @@
+<style>
+    .menu_group_name {
+        font-family: 'Nanum Square';
+        font-size: 25px;
+        color: white;
+    }
+</style>
+<h2>
+    <!-- 메뉴 정보는 자바스크립트로 동적으로 변경함. 해당 메뉴는 설정,관리자설정에서 동일하게 적용 됨. -->
+    <img id="login_log_page_icon" src="../res/images/icon/icon_manager.png" class="mr08">
+    <groupTag class="menu_group_name"></groupTag>
+    <span>로그인 로그</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            로그인 로그
+            <span>로그인 로그 설정</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li class="menu_group_name">관리자 설정</li>
+            <li>로그인 로그</li>
+        </ul>
+    </section>
+	<form id="login_log" name="login_log">
+		<section>
+			<div class="mt40" id="div_building_select_box">
+				<select id="building_type" name="building_type" class="w200px">
+					<option value="">건물 선택</option>
+				</select>
+			</div>
+		</section>
+		<section>
+			<div class="articleBox mt10">
+				<ul>
+					<li>
+						<img src="../res/images/icon/icon_article.png" class="mr10">
+						<label for="" class="fcBlack">일자 선택</label>
+						<input type="text" id="start_date" name="start_date" class="dateStyle w130px ml10 mr10" readonly> ~
+						<input type="text" id="end_date" name="end_date" class="dateStyle w130px ml10 mr10" readonly></li>
+					<li>
+						<img src="../res/images/icon/icon_article.png" class="mr10">
+						<label for="" class="fcBlack">상태 선택</label>
+						<select id="search_status_select" name="search_status_select" class="w120px ml10">
+							<option value="">상태</option>
+							<option value="y">성공</option>
+							<option value="n">실패</option>
+						</select>
+						<select id="search_select" name="search_select" class="w120px ml10">
+							<option value="">검색조건</option>
+							<option value="1">아이디</option>
+						</select>
+						<input type="text" id="search_name" name="search_name" class="w150px ml10">
+						<button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</form>
+    <section>
+        <p class="blt01 diIb">기본 정보</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <col style="width:10%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:10%">
+                    <col style="width:8%">
+                    <col style="width:30%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span class="th_icon"></span>로그인 시각<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>아이디<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>이름<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>IP주소<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>상태<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>브라우저 정보<span class="th_icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_login_log">
+                    <tr>
+                        <td colspan="6">- 건물을 선택 후 조회버튼을 누르세요. -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="page mb40">
+            <a href="#a" id="btn_login_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a href="#a" id="btn_login_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="login_paging">
+                <!-- 페이징  (javascript로처리, /modules/js/page/module.page.js) -->
+            </ul>
+            <a href="#a" id="btn_login_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a href="#a" id="btn_login_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.buildingList.js"></script>
+
+<script src="./manager/js/login.define.js"></script>
+<script src="./manager/js/login.control.js"></script>

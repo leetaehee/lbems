@@ -1,0 +1,178 @@
+<h2>
+    <img src="../res/images/icon/icon_info.png" class="mr08">
+    정보감시 <span>실내 미세먼지</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            실내 미세먼지 <button id="btn_setting_finedust" class="btnSet"></button>
+            <span>미세먼지 농도를 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>정보감시</li>
+            <li>실내 미세먼지</li>
+        </ul>
+    </section>
+    <section>
+        <div class="diIb" style="width:49.65%">
+            <p class="blt01">미세먼지 농도 기준표(한국) <span class="fcLgray">㎍/m³</span></p>
+            <div class="articleBox2 mt10">
+                <div class="ati2Type2">
+                    <div >
+                        <ul class="dust floatBox mt20">
+                            <li class="dust1"></li>
+                            <li class="dust2"></li>
+                            <li class="dust3"></li>
+                            <li class="dust4"></li>
+                        </ul>
+                        <ul class="dust_txt2 floatBox">
+                            <li>0~30 좋음</li>
+                            <li>31~80 보통</li>
+                            <li>81~150 나쁨</li>
+                            <li>151~ 매우나쁨</li>
+                        </ul>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+        <div class="diIb" style="width:49.65%">
+            <p class="blt01"><span class="fcprimary fs17">초미세먼지</span> 농도 기준표(한국) <span class="fcLgray">㎍/m³</span></p>
+            <div class="articleBox2 mt10">
+                <div class="ati2Type2">
+                    <div>
+                        <ul class="dust floatBox mt20">
+                            <li class="dust1"></li>
+                            <li class="dust2"></li>
+                            <li class="dust3"></li>
+                            <li class="dust4"></li>
+                        </ul>
+                        <ul class="dust_txt2 floatBox">
+                            <li>0~15 좋음</li>
+                            <li>16~50 보통</li>
+                            <li>51~100 나쁨</li>
+                            <li>101 ~ 매우나쁨</li>
+                        </ul>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="tabCont">
+        <div class="analysis_box floatBox">
+            <div class="fr info_w80">
+                <p class="blt01 diIb">
+                    미세먼지 농도 추이 분석
+                </p>
+                <select id="select_year_pm10" class="w200px ml30 diIb">
+                    <option value="daily">금일</option>
+                    <option value="month">금월</option>
+                    <option value="year">금년</option>
+                </select>
+                <div class="graph_legend div_chart_legend_finedust">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph12">
+                    <canvas id="canvas_chart_pm10"></canvas>
+                </div>
+            </div>
+            <div class="fl diIb floatBox info_w19">
+                <p class="blt01">미세먼지 농도<span class="fs13 fcLgray"> - PM10</span></p>
+                <div class="articleBox2">
+                    <div id="dust_pm10" class="dust_status_bg1">
+                        <!--
+                            class="dust_status_bg1" -좋음
+                            class="dust_status_bg2" -보통
+                            class="dust_status_bg3" -나쁨
+                            class="dust_status_bg4" -매우나쁨
+                        -->
+                        <div id="dust_pm10_imoticon" class="dust_status_img1"></div>
+                        <!--
+                            class="dust_status_img1" -좋음
+                            class="dust_status_img2" -보통
+                            class="dust_status_img3" -나쁨
+                            class="dust_status_img4" -매우나쁨
+                        -->
+                        <p class="dustnumber"><span id="total_pm10">0</span><span>㎍/m³</span></p>
+                    </div>
+                </div>
+            </div>
+        </div><!---//floatBox-->
+        <div class="analysis_box floatBox">
+            <div class="fr info_w80">
+                <p class="blt01 diIb">
+                    <span class="fcprimary fs17">초</span>미세먼지 농도 추이 분석
+                </p>
+                <select id="select_year_pm25" class="w200px ml30 diIb">
+                    <option value="daily">금일</option>
+                    <option value="month">금월</option>
+                    <option value="year">금년</option>
+                </select>
+                <div class="graph_legend div_chart_legend_finedust">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph12">
+                    <canvas id="canvas_chart_pm25"></canvas>
+                </div>
+            </div>
+            <div class="fl diIb floatBox info_w19">
+                <p class="blt01">
+                    <span class="fcprimary fs17">초</span>미세먼지 농도<span class="fs13 fcLgray"> - PM2.5</span>
+                </p>
+                <div class="articleBox2">
+                    <div id="dust_pm25" class="dust_status_bg1">
+                        <div id="dust_pm25_imoticon" class="dust_status_img1"></div>
+                        <p class="dustnumber"><span id="total_pm25">0</span><span>㎍/m³</span></p>
+                    </div>
+                </div>
+            </div>
+        </div><!---//floatBox-->
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_550" style="min-height: 430px">
+        <div class="pop_tt" style="width:550px">
+            <h1>미세먼지 설정</h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt50 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary">미세먼지 농도, 초미세먼지 농도</span> 기준값을 설정합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:45%">
+                        <col style="width:55%">
+                    </colgroup>
+                    <tbody>
+                    <tr>
+                        <th><img src="../res/images/icon/icon_article.png" class="mr10">미세먼지 농도</th>
+                        <td>
+                            <input id="input_popup_pm10" type="text" class="w60 popup-standard">
+                            <span class="ml05 fs13" id="popup_unit1">㎍/m³</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th><img src="../res/images/icon/icon_article.png" class="mr10">초미세먼지 농도</th>
+                        <td>
+                            <input id="input_popup_pm25" type="text" class="w60 popup-standard">
+                            <span class="ml05 fs13" id="popup_unit2">㎍/m³</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 ac">
+                <button type="button" id="btn_button_save" class="Btn saveBtn">저장</button>
+                <button type="button" id="btn_button_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="./info/js/chart.bar_line_finedust.js"></script>
+
+<script src="./info/js/finedust.define.js"></script>
+<script src="./info/js/finedust.control.js"></script>

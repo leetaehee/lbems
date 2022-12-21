@@ -1,0 +1,155 @@
+<h2>
+	<img src="../res/images/icon/icon_prediction.png" class="mr08">
+	태양광
+</h2>
+<div class="content analysis">
+	<section class="mb20">
+		<h3>
+			태양광
+			<span>태양광 에너지 생산 및 소비량을 조회합니다.</span>
+		</h3>
+		<ul class="nav">
+			<li>HOME</li>
+			<li>예측</li>
+			<li>태양광</li>
+		</ul>
+	</section>
+	<section class="tabCont">
+        <div class="floatBox">
+            <div class="card mt40 floatBox fl" style="width:28%; height:400px;border-bottom: 1px solid #63523e;">
+                <p class="tt_con">태양광 소비 생산 그래프 (월)</p>
+                <div class="floatBox mt30" style="height:60%">
+                    <canvas id="canvas_pie_solar"></canvas>
+                </div>
+				<div class="graph_legend mt30 ac">
+					<div>
+						<p id="year_in_str"><!-- 자바스크립트로 동적 생성 --></p>
+						<p id="year_out_str"><!-- 자바스크립트로 동적 생성 --></p>
+					</div>
+				</div>
+			</div>
+            <div class="card mt40  floatBox fl" style="width:28%;margin:0 2%; height:400px;border-bottom: 1px solid #63523e;">
+                <p class="tt_con">실시간 발전 효율</p>
+                <div class="floatBox mt50 mauto" style="width:70%;">
+                    <div class="graph solar_g" style="height:80%;" id="chart2">
+						<canvas id="canvas_half_pie_efficiency"></canvas>
+						<span class="efficiency_v" id="label_efficiency_percent">0%</span>
+					</div>
+					<!--
+						<div class="gragh_cate">
+							<p>(현재 발전량(kWh) / 발전용량) / 100</p>
+						</div>
+					-->
+                </div>
+            </div><!---//card-->
+            <div class="card mt40 floatBox fr" style="width:40%; height:400px;border-bottom: 1px solid #63523e;">
+				 <p class="tt_con">기간별 발전 집계(마감일 기준)</p>
+                <div class="tbType01 diIb mt40 solar_layout">
+					<table>
+						<colgroup>
+							<col style="width:30%">
+							<col style="width:35%">
+							<col style="width:35%">
+						</colgroup>
+						<tr>
+							<th>기간</th>
+							<th>생산량 (kWh)</td>
+							<th>소비량 (kWh)</td>
+						</tr>
+						<tr>
+							<th class="bg_gray">금일</th>
+							<td id="label_solar_daily_production_used" class="l15">0</td>
+							<td id="label_solar_daily_consumption_used" class="l15">0</td>
+						</tr>
+						<tr>
+							<th class="bg_gray">금월</th>
+							<td id="label_solar_month_production_used" class="l15">0</td>
+							<td id="label_solar_month_consumption_used" class="l15">0</td>
+						</tr>
+						<tr>
+							<th class="bg_gray">금년</th>
+							<td id="label_solar_year_production_used" class="l15">0</td>
+							<td id="label_solar_year_consumption_used" class="l15">0</td>
+						</tr>
+					</table>
+				</div>
+            </div><!---//card-->
+        </div>
+		<div class="articleBox mt10">
+            <ul>
+				<li id="period_hour_box" class="period_box" style="display: none;">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 선택</label>
+					<select id="start_hour" class="w120px ml10"></select>
+                </li>
+                <li id="period_daily_box" class="period_box">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 선택</label>
+					<input type="text" id="start_date" class="dateStyle w130px ml10 mr10" readonly>-
+					<input type="text" id="end_date" class="dateStyle w130px ml10 mr10" readonly>
+                </li>
+				<li id="period_month_box" class="period_box" style="display: none;">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 선택</label>
+					<select id="start_month_ym" class="w120px ml10"></select>
+					<select id="start_month" class="w120px mr10"></select>-
+					<select id="end_month_ym" class="w120px ml10"></select>
+					<select id="end_month" class="w120px mr10"></select>
+                </li>
+				<li id="period_year_box" class="period_box" style="display: none;">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 선택</label>
+
+					<select id="start_year_ym" class="w120px ml10"></select>
+                </li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">주기 선택</label>
+                    <label class="mr10 ml10">
+						<input type="radio" id="btn_period_daily" name="radio_date2" class="radio_period" value="2"> 일
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" id="btn_period_month" name="radio_date3" class="radio_period" value="5"> 월
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" id="btn_period_year" name="radio_date4" class="radio_period" value="0"> 년
+                    </label>
+                </li>
+                <li>
+                    <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회">
+                        <span>조회</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div>
+                <div class="floatBox">
+                    <p class="blt01 diIb">
+						상세그래프
+						<form id="form-excel" method="post" style="display: inline-block;">
+							<input type="hidden" id="form-submit" name="form_submit" value ="excel_download">
+							<input type="hidden" id="form-requester" name="requester" value="solar">
+							<input type="hidden" id="form-request" name="request" value="solar_excel">
+							<input type="hidden" id="form-param" name="params" value="">
+							<button type="button" id="btn_solar_excel" class="Btn excelBtn ml10">Excel</button>
+						</form>
+					</p>
+                </div>
+                <div class="graph_legend fr" id="div_chart_legend_solar">
+					<!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph" id="chart3">
+					<canvas id="canvas_detail_stack_bar"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./solar/js/chart.pie.js"></script>
+<script src="./solar/js/chart.half_pie.js"></script>
+<script src="./solar/js/chart.bar_stack.js"></script>
+
+<script src="./solar/js/solar.define.js"></script>
+<script src="./solar/js/solar.control.js"></script>

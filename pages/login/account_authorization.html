@@ -1,0 +1,52 @@
+<!--
+    <div class="articleBox">
+        <div class="ac">
+            <section class="tabList01_b floatBox">
+                <button type="button" id="" class="on">아이디 찾기</button>
+                <button type="button" id="">비밀번호 재설정</button>
+            </section>
+        </div>
+    </div>
+-->
+<div class="pw_ch center50">
+    <p class="fs20 mt40">
+        * 회원님의 등록한 이름과 이메일 주소를 입력해주세요.
+    </p>
+    <form id="form-password-authorization" method="post">
+        <div class="mt50">
+            <input type="text" id="name" name="name" tabindex="1" placeholder="본인확인을 위해 이름을 입력해주세요">
+            <p class="fs13 fcRed ml10 mb10" id="label_vaild_name">
+                <!-- * 등록되지 않은 이름입니다. -->
+            </p>
+            <input type="text" id="email" name="email" tabindex="2" class="w70" placeholder="회원 정보에 등록된 이메일 주소를 입력해주세요.">
+            <button type="button" id="btn_receive_auth" class="w30 fr btn2 fs15 bcBlue fcWhite" style="line-height: 60px;">인증번호 받기</button>
+            <div>
+                <span class="fs13 fcRed mr10 mb10" id="label_vaild_email">
+                    <!-- * 등록되지 않은 이메일 주소입니다.-->
+                </span>
+                <a id="tooltip_message" class="fs13 fccomment ml10 mb10 fr" style="text-decoration: underline; cursor: pointer;" title="케빈랩 031-400-3794 로 연락주세요.">
+                    등록한 이메일 주소가 기억이 나지 않습니다.
+                </a>
+            </div>
+            <input type="text" id="auth_num" name="auth_num" tabindex="3" placeholder="인증번호를 입력해주세요">
+            <div>
+                <span class="fs13 fcRed ml10 mb10 fr" id="label_auth_time">
+                    <!-- 0분 0초 -->
+                </span>
+                <!-- 인증번호 오지 않았을 경우에는 좀 더 디테일하게 표현을 해야 하지 않을까 싶음, 팝업을 띄어서 한다던지.. 일단 막음 -->
+                <!--
+                    <a class="fs13 fccomment ml10 mb10 fr" title="주소가 스팸 메일로 분류되어 있는지 확인해주세요. 문제가 해결되지 않는다면 케빈랩 031-400-3794 로 연락주세요" style="text-decoration: none; cursor: pointer;">
+                        인증번호가 오지 않습니다.
+                    </a>
+                -->
+            </div>
+        </div>
+        <div class="mt30">
+            <!-- 활성화: #578fac;/ 비활성화: #999999 -->
+            <button type="button" id="btn_password_resetting" class="btn2_b100 fcWhite ac mt10" style="background-color: #999999;">비밀번호 재설정</button>
+        </div>
+    </form>
+</div>
+
+<script src="./login/js/account_authorization_define.js"></script>
+<script src="./login/js/account_authorization_control.js"></script>

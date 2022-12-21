@@ -1,0 +1,271 @@
+<style>
+    .planBox.f1{
+        background:url(../res/images/plan_bh_b1.jpg) no-repeat 0 0;
+    }
+
+    #spot_name li{
+        width:42px;
+        height:42px;
+        background:rgba(255,234,0,0.5);
+        border-radius:21px;
+    }
+
+    #spot_name li:hover,#spot_name li.active {
+        background:rgba(41,112,184,0.5);
+        border:4px solid #2970b8;
+    }
+
+    .planBox .spot_txt_name li{
+        display:inline-block;
+        padding:2px 10px;
+        background:rgba(0,0,0,0.7);
+        color:#fff;
+        font-size:13px;
+        border-radius:3px;
+        position:absolute
+    }
+
+    .f1 #spot_name li:nth-child(1){
+        left:195px;
+        top:597px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(1){
+        left:169px;
+        top:643px
+    }
+
+    .f1 #spot_name li:nth-child(2){
+        left:311px;
+        top:551px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(2){
+        left:293px;
+        top:596px
+    }
+
+    .f1 #spot_name li:nth-child(3){
+        left:434px;
+        top:551px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(3){
+        left:415px;
+        top:595px
+    }
+
+    .f1 #spot_name li:nth-child(4){
+        left:551px;
+        top:499px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(4){
+        left:535px;
+        top:545px
+    }
+
+    .f1 #spot_name li:nth-child(5){
+        left:551px;
+        top:368px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(5){
+        left:572px;
+        top:419px
+    }
+
+    .f1 #spot_name li:nth-child(6){
+        left:632px;
+        top:368px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(6){
+        left:671px;
+        top:545px;
+    }
+
+    .f1 #spot_name li:nth-child(7){
+        left:674px;
+        top:499px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(7){
+        left:821px;
+        top:588px;
+    }
+
+    .f1 #spot_name li:nth-child(8){
+        left:780px;
+        top:540px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(8){
+        left:826px;
+        top:409px;
+    }
+
+    .f1 #spot_name li:nth-child(9){
+        left:879px;
+        top:519px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(9){
+        left:807px;
+        top:249px;
+    }
+
+    .f1 #spot_name li:nth-child(10){
+        left:844px;
+        top:363px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(10){
+        left:694px;
+        top:195px;
+    }
+
+    .f1 #spot_name li:nth-child(11){
+        left:827px;
+        top:202px;
+    }
+
+    .f1 .spot_txt_name li:nth-child(11){
+        left:877px;
+        top:135px;
+    }
+
+    .f1 #spot_name li:nth-child(12){
+        left:726px;
+        top:151px;
+    }
+
+    .f1 #spot_name li:nth-child(13){
+        left:830px;
+        top:126px;
+    }
+</style>
+<h2>
+    <img src="../res/images/icon/icon_control.png" class="mr08">제어
+</h2>
+<div class="tabList_dash fr" id="btn_floor_group">
+    <button type="button" id="btn_floor_B1" data-floor="b1" class="on">지하1층</button>
+    <button type="button" id="btn_floor_1F" data-floor="1f">1층</button>
+    <button type="button" id="btn_floor_2F" data-floor="2f">2층</button>
+</div>
+<div class="content" style="min-width:1500px;min-height:900px">
+    <section class="mb20">
+        <h3>
+            제어
+            <span>사무소의 에어컨 설정을 제어합니다. </span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>제어</li>
+        </ul>
+    </section>
+    <section>
+        <div class="floatBox">
+            <div class="fl card planBox f1">
+                <ul id="spot_name">
+                    <li id="btn_show_test_equipment_room" data-room="시험장비창고" class="active"></li>
+                    <li id="btn_show_waiting_room_1" data-room="대기실-2"></li>
+                    <li id="btn_show_small_meeting_room_2" data-room="소회의실-2"></li>
+                    <li id="btn_show_promotion_room" data-room="홍보/전시"></li>
+                    <li id="btn_show_library_left" data-room="숲속도서관(좌)"></li>
+                    <li id="btn_show_library_right" data-room="숲속도서관(우)"></li>
+                    <li id="btn_show_lobby" data-room="로비"></li>
+                    <li id="btn_show_meeting_room_left" data-room="대회의실(좌)"></li>
+                    <li id="btn_show_meeting_room_right" data-room="대회의실(우)"></li>
+                    <li id="btn_show_fitting_woman_room" data-room="탈의실(여)"></li>
+                    <li id="btn_show_fitting_man_room" data-room="탈의실(남)"></li>
+                    <li id="btn_show_fitness_man_room" data-room="체력단련실(남)"></li>
+                    <li id="btn_show_fitness_woman_room" data-room="체력단련실(여)"></li>
+                </ul>
+                <ul class="spot_txt_name">
+                    <li>시험장비창고</li>
+                    <li>대기실-2</li>
+                    <li>소회의실-2</li>
+                    <li>홍보/전시</li>
+                    <li>숲속도서관</li>
+                    <li>로비</li>
+                    <li>대회의실</li>
+                    <li>탈의실(여)</li>
+                    <li>탈의실(남)</li>
+                    <li>체력단련실(남)</li>
+                    <li>체력단련실(여)</li>
+                </ul>
+            </div>
+            <div class="control fr card detailBox">
+                <p class="detail_tit">
+                    <img src="../res/images/icon/icon_airconditioner2.gif">
+                    <span id="label_device_location"></span>
+                    <button type="button" id="btn_power" class="aircon_state off">OFF</button><!-- 클릭시 off-> on 으로 클래스 변경 -->
+                </p>
+                <div class="controlBox">
+                    <button type="button" id="btn_temperature_down" class="control_down mr20"></button>
+                    <div class="graph8">
+                        <canvas id="canvas-chart-status" class="chartjs-render-monitor"></canvas>
+                        <p class="control_temperature">
+                            <span>희망온도</span><br>
+                            <span class="control_temp_span" id="roomTemp">0</span><span>℃ </span>
+                        </p>
+                    </div>
+                    <button type="button" id="btn_temperature_up" class="control_up ml20"></button>
+                </div>
+                <table class="tbType03 mt50">
+                    <col style="width:22%">
+                    <col style="width:8%">
+                    <col style="width:70%">
+                    <thead>
+                    <tr>
+                        <th><span>풍 량</span></th>
+                        <td></td>
+                        <td>
+                            <button type="button" id="btn_fan_4" data-fan="4" class="btn_fan_group btn_fan btn_auto btn_auto_off"><span>AUTO</span></button>
+                            <button type="button" id="btn_fan_1" data-fan="1" class="btn_fan_group btn_fan btn_fan_off mr08"></button>
+                            <button type="button" id="btn_fan_2" data-fan="2" class="btn_fan_group btn_fan btn_fan_off mr08"></button> <!-- btn_fan_on / btn_fan_off -->
+                            <button type="button" id="btn_fan_3" data-fan="3" class="btn_fan_group btn_fan btn_fan_off mr08"></button><!--auto 버튼을 누르면 fanspeed 는 다꺼지게 해주세요 -->
+                            <ul class="control_ul">
+                                <li>AUTO</li>
+                                <li>약풍</li>
+                                <li>중풍</li>
+                                <li>강풍</li>
+                            </ul>
+                        </td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th><span>MODE</span></th>
+                        <td></td>
+                        <td>
+                            <button type="button" id="btn_mode_4" data-mode="4" class="btn_mode_group btn_fan btn_auto btn_auto_on mr08"><span class="f13">AUTO</span></button>
+                            <button type="button" id="btn_mode_1" data-mode="1" class="btn_mode_group btn_fan btn_cool_on mr05"></button>
+                            <button type="button" id="btn_mode_5" data-mode="5" class="btn_mode_group btn_fan btn_hot_on mr05"></button>
+                            <button type="button" id="btn_mode_2" data-mode="2" class="btn_mode_group btn_fan btn_moisture_on mr05"></button>
+                            <button type="button" id="btn_mode_3" data-mode="3" class="btn_mode_group btn_fan btn_fan2_on mr05"></button><br>
+                            <!-- 기존의 on/off 방식과 같이 기본 'btn_cool_off'로 되어 있다가 클릭하면 'btn_cool_on'로 바뀝니다. -->
+                            <ul class="control_ul">
+                                <li>AUTO</li>
+                                <li>냉방</li>
+                                <li>난방</li>
+                                <li>제습</li>
+                                <li>송풍</li>
+                            </ul>
+                        </td>
+                        <td></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.menuManager.js"></script>
+
+<script src="./control/js/loading.chart.pie.js"></script>
+
+<script src="./control/js/control_b1.define.js"></script>
+<script src="./control/js/control.control.js"></script>

@@ -1,0 +1,3217 @@
+CREATE TABLE `bems_admin` (
+	`admin_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`admin_id` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`name` VARCHAR(255) NULL DEFAULT '-' COLLATE 'utf8_general_ci',
+	`password` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`login_level` INT(11) NULL DEFAULT '70',
+	`email` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`creator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`reg_status` CHAR(1) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	`fg_connect` CHAR(1) NULL DEFAULT 'y' COLLATE 'utf8_general_ci',
+	`last_login_date` DATETIME NULL DEFAULT NULL,
+	`hp` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`memo` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`device_key` VARCHAR(40) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`auto_login` CHAR(1) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	`rcv_mail` CHAR(1) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	`rcv_push` CHAR(1) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	`rcv_sms` CHAR(1) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	`auth_num` VARCHAR(255) NULL DEFAULT NULL COMMENT '비밀번호 찾기할 때 인증번호' COLLATE 'utf8_general_ci',
+	`login_fail_cnt` TINYINT(10) NULL DEFAULT '0' COMMENT '비밀번호 실패 횟수',
+	`auth_valid_time` VARCHAR(15) NULL DEFAULT NULL COMMENT '비밀번호 찾기 시 인증번호 발급시간' COLLATE 'utf8_general_ci',
+	`first_login_date` DATE NULL DEFAULT NULL COMMENT '최초 로그인 일자 (기본 비밀번호 변경을 요구하기 위함)',
+	PRIMARY KEY (`admin_pk`, `admin_id`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_admin_login_log` (
+	`log_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`admin_id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`ip_addr` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`log_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_login` CHAR(1) NULL DEFAULT NULL COMMENT '웹 접속여부' COLLATE 'utf8_general_ci',
+	`fg_mobile` CHAR(1) NULL DEFAULT NULL COMMENT '앱 접속여부' COLLATE 'utf8_general_ci',
+	`fg_api` CHAR(1) NULL DEFAULT NULL COMMENT 'API 로그인여부' COLLATE 'utf8_general_ci',
+	`user_agent` VARCHAR(250) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`log_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_aircondition_control_log` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`exec_cmd` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`updator` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`memo` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_aircondition_status` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`loc_floor` VARCHAR(4) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`location` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`power_on_off` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`set_temp` FLOAT(5,1) NULL DEFAULT NULL,
+	`op_mode` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`air_swing_ud` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fan_speed` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reset_filter` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`remote_con_enable` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`room_temp` FLOAT(5,1) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_alarm_code` (
+	`alarm_category` VARCHAR(20) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`alarm_code` VARCHAR(10) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`alarm_msg` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`alarm_category`, `alarm_code`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_alarm_log` (
+	`no_alarm_log_pk` INT(11) NOT NULL AUTO_INCREMENT,
+	`complex_code_pk` VARCHAR(10) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`sensor_type` VARCHAR(30) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`sensor_sn` VARCHAR(30) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`alarm_code` VARCHAR(10) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`alarm_on_off` VARCHAR(4) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`alarm_msg` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_on_time` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_off_time` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_sms` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	`fg_push` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	`fg_mail` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`no_alarm_log_pk`, `complex_code_pk`, `sensor_type`, `sensor_sn`, `alarm_code`, `alarm_on_off`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_api_account` (
+	`target` VARCHAR(15) NOT NULL COMMENT '적용대상' COLLATE 'utf8_general_ci',
+	`id` VARCHAR(30) NOT NULL COMMENT '아이디' COLLATE 'utf8_general_ci',
+	`account_code` VARCHAR(255) NOT NULL COMMENT '계정코드' COLLATE 'utf8_general_ci',
+	`password` VARCHAR(255) NOT NULL COMMENT '비밀번호' COLLATE 'utf8_general_ci',
+	`access_token` VARCHAR(255) NULL DEFAULT NULL COMMENT 'JWT' COLLATE 'utf8_general_ci',
+	`refresh_token` VARCHAR(255) NULL DEFAULT NULL COMMENT 'JWT' COLLATE 'utf8_general_ci',
+	`client_key` VARCHAR(255) NULL DEFAULT NULL COMMENT '클라이언트 키' COLLATE 'utf8_general_ci',
+	`iv_key` VARCHAR(255) NULL DEFAULT NULL COMMENT 'IV 키' COLLATE 'utf8_general_ci',
+	`last_login_date` DATETIME NULL DEFAULT NULL COMMENT '최근 로그인 시각',
+	`fg_use` CHAR(1) NULL DEFAULT 'n' COMMENT '계정 사용 여부 - 사용 \'y\', 사용안함 \'n\'' COLLATE 'utf8_general_ci',
+	`register_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '계정 생성 시각',
+	`register` INT(11) NULL DEFAULT NULL COMMENT '등록자',
+	`update_date` DATETIME NULL DEFAULT NULL COMMENT '정보 변경 시각',
+	`updator` INT(11) NULL DEFAULT NULL COMMENT '변경자',
+	PRIMARY KEY (`target`, `id`) USING BTREE,
+	INDEX `id_hash` (`account_code`) USING BTREE
+)
+COMMENT='API 계정 정보'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_api_call_log` (
+	`log_date` VARCHAR(15) NOT NULL COMMENT '로그시각' COLLATE 'utf8_general_ci',
+	`ip` VARCHAR(30) NOT NULL COMMENT 'IP' COLLATE 'utf8_general_ci',
+	`type` VARCHAR(30) NOT NULL COMMENT '에너지원' COLLATE 'utf8_general_ci',
+	`url` VARCHAR(100) NULL DEFAULT NULL COMMENT 'API 호출 URL' COLLATE 'utf8_general_ci',
+	`parameter` VARCHAR(6144) NULL DEFAULT NULL COMMENT '파라미터' COLLATE 'utf8_general_ci',
+	`request_info` VARCHAR(6144) NULL DEFAULT NULL COMMENT 'API 호출 시 요청 정보' COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`log_date`, `ip`, `type`) USING BTREE
+)
+COMMENT='API 호출 로그 '
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_api_integration_info` (
+	`target` VARCHAR(15) NOT NULL COMMENT '적용대상' COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NOT NULL COMMENT '단지코드' COLLATE 'utf8_general_ci',
+	`regi_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '계정 생성 시각',
+	`register` INT(11) NULL DEFAULT NULL COMMENT '등록자',
+	`update_date` DATETIME NULL DEFAULT NULL COMMENT '정보 변경 시각',
+	`updator` INT(11) NULL DEFAULT NULL COMMENT '변경자',
+	PRIMARY KEY (`target`, `complex_code_pk`) USING BTREE
+)
+COMMENT='연계 API 단지 정보'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_autologin` (
+	`admin_pk` INT(10) NOT NULL,
+	`device_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`login_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`reg_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_del` CHAR(2) NULL DEFAULT 'n' COLLATE 'utf8_unicode_ci',
+	`fg_mobile` CHAR(1) NULL DEFAULT 'n' COMMENT '모바일 앱 접속여부' COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`admin_pk`, `device_key`, `login_key`) USING BTREE
+)
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_complex` (
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_cnt` INT(11) NULL DEFAULT NULL COMMENT '세대 수',
+	`home_dong_cnt` INT(11) NULL DEFAULT NULL COMMENT '동 수',
+	`floor_cnt` INT(11) NULL DEFAULT NULL COMMENT '층 수',
+	`bems_id` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`bld_id` VARCHAR(11) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`post_code` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`site_type` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`addr` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`tel` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fax` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`lat` DECIMAL(16,14) NULL DEFAULT NULL,
+	`lon` DECIMAL(17,14) NULL DEFAULT NULL,
+	`land_area` VARCHAR(15) NULL DEFAULT NULL COMMENT '로렌하우스에서 사용되는 컬럼, lbems에서는 사용되지 않는것으로 추정' COLLATE 'utf8_general_ci',
+	`building_area` VARCHAR(15) NULL DEFAULT NULL COMMENT '건축면적' COLLATE 'utf8_general_ci',
+	`comp_name` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`service_start_date` DATE NULL DEFAULT NULL COMMENT '서비스 시작일',
+	`closing_day_electric` CHAR(3) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`closing_day_gas` CHAR(3) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`closing_day_water` CHAR(3) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`closing_day_heating` CHAR(3) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`closing_day_hotwater` CHAR(3) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`goal_electric` INT(11) NULL DEFAULT NULL,
+	`goal_gas` INT(11) NULL DEFAULT NULL,
+	`goal_water` INT(11) NULL DEFAULT NULL,
+	`network_korea_api_key` CHAR(50) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	`fg_mobile` CHAR(1) NULL DEFAULT 'n' COMMENT '모바일 앱 사용유무' COLLATE 'utf8_general_ci',
+	`manager` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`hp` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`creator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`air_station_name` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`air_upd_date` DATETIME NULL DEFAULT NULL,
+	`air_pm10` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`air_pm25` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_water` VARCHAR(60) NULL DEFAULT NULL COMMENT '수도 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_solar` VARCHAR(60) NULL DEFAULT NULL COMMENT '태양광 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_gas` VARCHAR(60) NULL DEFAULT NULL COMMENT '가스 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_heating` VARCHAR(60) NULL DEFAULT NULL COMMENT '난방 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_hotwater` VARCHAR(60) NULL DEFAULT NULL COMMENT '급탕 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric` VARCHAR(60) NULL DEFAULT NULL COMMENT '전기 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_light` VARCHAR(60) NULL DEFAULT NULL COMMENT '전등 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_cold` VARCHAR(60) NULL DEFAULT NULL COMMENT '냉방 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_elechot` VARCHAR(60) NULL DEFAULT NULL COMMENT '전열 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_vent` VARCHAR(60) NULL DEFAULT NULL COMMENT '환기 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_boiler` VARCHAR(60) NULL DEFAULT NULL COMMENT '보일러 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_finedust` VARCHAR(60) NULL DEFAULT NULL COMMENT '미세먼지, 초미세먼지, 극초미세먼지 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_cooking` VARCHAR(60) NULL DEFAULT NULL COMMENT '취사 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_heating` VARCHAR(60) NULL DEFAULT NULL COMMENT '전기 난방 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_elevator` VARCHAR(60) NULL DEFAULT NULL COMMENT '승강 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_hotwater` VARCHAR(60) NULL DEFAULT NULL COMMENT '전기급탕 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_water` VARCHAR(60) NULL DEFAULT NULL COMMENT '급수배수펌프 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_electric_equipment` VARCHAR(60) NULL DEFAULT NULL COMMENT '설비 목표값/기준값' COLLATE 'utf8_general_ci',
+	`limit_val_co2` VARCHAR(60) NULL DEFAULT NULL COMMENT 'CO2 기준값' COLLATE 'utf8_general_ci',
+	`electricType` VARCHAR(1) NULL DEFAULT 'H' COMMENT '계약종별' COLLATE 'utf8_general_ci',
+	`typeGubun` VARCHAR(10) NULL DEFAULT NULL COMMENT '용도(low:저압,high:고압,type1:갑1,type2:갑2,type3:을)' COLLATE 'utf8_general_ci',
+	`typeGubun2` VARCHAR(20) NULL DEFAULT NULL COMMENT '수전전압(low,high1,high2,high3)' COLLATE 'utf8_general_ci',
+	`typeSelect` VARCHAR(20) NULL DEFAULT NULL COMMENT '요금제선택' COLLATE 'utf8_general_ci',
+	`contractUseVal` INT(11) NULL DEFAULT NULL COMMENT '계약전력',
+	`any_desk` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`complex_code_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_complex_device_info` (
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(20) NOT NULL COMMENT 'solar, aircondition' COLLATE 'utf8_general_ci',
+	`ip` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`port` INT(11) NULL DEFAULT NULL,
+	`unit_id` INT(11) NULL DEFAULT NULL,
+	`id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`password` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`version` VARCHAR(50) NULL DEFAULT NULL COMMENT 'TEF : php, node.js 버전 구분' COLLATE 'utf8_general_ci',
+	`maker` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`memo` VARCHAR(50) NULL DEFAULT NULL COLLATE 'ucs2_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_del` CHAR(1) NOT NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`complex_code_pk`, `type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_energy_buttons` (
+	`button_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'PK',
+	`group_id` INT(10) UNSIGNED NOT NULL COMMENT '메뉴 그룹 FK',
+	`menu_id` INT(10) UNSIGNED NOT NULL COMMENT '메뉴 FK',
+	`complex_code_pk` VARCHAR(10) NOT NULL COMMENT '단지코드' COLLATE 'utf8_general_ci',
+	`reference_index` INT(10) UNSIGNED NOT NULL COMMENT '에너지원별 참조 인덱스',
+	`button_order` INT(10) UNSIGNED NOT NULL COMMENT '버튼 화면 출력 순서\n',
+	`name` VARCHAR(30) NOT NULL COMMENT '버튼 이름' COLLATE 'utf8_general_ci',
+	`key` VARCHAR(30) NOT NULL COMMENT '버튼 키 (Jquery Selector 할 때 사용됨)\n' COLLATE 'utf8_general_ci',
+	`is_use` CHAR(1) NULL DEFAULT 'N' COMMENT '메뉴에서 버튼 사용 여부' COLLATE 'utf8_general_ci',
+	`memo` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`register` VARCHAR(20) NULL DEFAULT '케빈랩' COMMENT '등록자' COLLATE 'utf8_general_ci',
+	`regi_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록시각\n',
+	`modifier` VARCHAR(20) NULL DEFAULT NULL COMMENT '수정자\n' COLLATE 'utf8_general_ci',
+	`modi_date` DATETIME NULL DEFAULT NULL COMMENT '수정시각',
+	PRIMARY KEY (`button_id`) USING BTREE,
+	INDEX `idx_bems_energy_buttons_group_id` (`group_id`) USING BTREE,
+	INDEX `idx_bems_energy_buttons_menu_id` (`menu_id`) USING BTREE,
+	INDEX `idx_bems_energy_buttons_complex_code_pk` (`complex_code_pk`) USING BTREE,
+	INDEX `idx_bems_energy_buttons_button_order` (`button_order`) USING BTREE
+)
+COMMENT='BEMS WEB 에너지원별 버튼'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_holiday` (
+	`holiday_date` VARCHAR(15) NOT NULL COMMENT '휴일날짜' COLLATE 'utf8_general_ci',
+	`is_holiday` CHAR(1) NULL DEFAULT 'N' COMMENT '공공기관 휴일여부' COLLATE 'utf8_general_ci',
+	`holiday_name` VARCHAR(30) NULL DEFAULT NULL COMMENT '휴일명칭' COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`holiday_date`) USING BTREE
+)
+COMMENT='공휴일, 국경일 정보'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_home` (
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NOT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NOT NULL COMMENT '층별 전체전력은 190,191,192에서 시작할 것 , 사용하지 않거나 조회되지 않은 항목은 180,181,182에서 할것' COLLATE 'utf8_general_ci',
+	`home_ho_nm` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_key_pk` VARCHAR(100) NOT NULL COMMENT '층별 전체 전력은 에너지원_건물코드_층 으로 구성' COLLATE 'utf8_general_ci',
+	`home_grp_pk` VARCHAR(4) NULL DEFAULT NULL COMMENT '0M: 공동(메인전력,태양광 등 층에 상관없는 부분)\n1F: 1층\n2F: 2층\n3F: 3층\nPH:옥탑\nALL: 층 (1층전체전력, 2층전체전력..)' COLLATE 'utf8_general_ci',
+	`home_type` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`family_cnt` TINYINT(4) NULL DEFAULT NULL,
+	`home_size` FLOAT(15,2) NULL DEFAULT NULL,
+	`home_size_p` SMALLINT(11) NULL DEFAULT NULL,
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`creator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`limit_val_water` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_solar` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_gas` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_heating` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_hotwater` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_light` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_cold` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_elechot` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_vent` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_boiler` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_cooking` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_heating` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_elevator` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_hotwater` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_water` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_electric_equipment` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`limit_val_co2` VARCHAR(60) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`complex_code_pk`, `home_dong_pk`, `home_ho_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_member` (
+	`member_pk` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`member_id` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`name` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`passwd` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`hp` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`join_date` DATETIME NULL DEFAULT NULL COMMENT '회원가입 시각\n',
+	`fg_del` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8_general_ci',
+	`fg_push` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8_general_ci',
+	`last_login_date` DATETIME NULL DEFAULT NULL,
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COMMENT '단지' COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COMMENT '동' COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COMMENT '호' COLLATE 'utf8_general_ci',
+	`modify_date` DATETIME NULL DEFAULT NULL COMMENT '회원정보 변경 시각\n',
+	`withdrawal_date` DATETIME NULL DEFAULT NULL COMMENT '회원탈퇴 시각\n',
+	PRIMARY KEY (`member_pk`) USING BTREE
+)
+COMMENT='세대원 테이블 '
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_member_autologin` (
+	`member_pk` INT(10) NOT NULL,
+	`device_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`login_key` VARCHAR(50) NOT NULL COLLATE 'utf8_unicode_ci',
+	`reg_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_del` CHAR(2) NULL DEFAULT 'n' COLLATE 'utf8_unicode_ci',
+	PRIMARY KEY (`member_pk`, `device_key`, `login_key`) USING BTREE
+)
+COMMENT='세대원 자동로그인 설정내역'
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_member_device_token` (
+	`token_pk` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`member_pk` DOUBLE NULL DEFAULT NULL,
+	`token` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`os_type` CHAR(1) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`bems_member_device_tokencol` VARCHAR(45) NULL DEFAULT 'n' COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`token_pk`) USING BTREE
+)
+COMMENT='디바이스 토큰'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_member_login_log` (
+	`log_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`member_id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`ip_addr` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`log_date` DATETIME NULL DEFAULT NULL,
+	`fg_login` CHAR(1) NULL DEFAULT 'N' COLLATE 'utf8_general_ci',
+	`user_agent` VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`log_pk`) USING BTREE
+)
+COMMENT='세대원 로그인 기록'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_menus` (
+	`menu_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'PK',
+	`group_id` INT(10) UNSIGNED NOT NULL COMMENT '메뉴 그룹 FK\n',
+	`complex_code_pk` VARCHAR(10) NOT NULL COMMENT '단지코드\n' COLLATE 'utf8_general_ci',
+	`menu_order` INT(10) UNSIGNED NOT NULL COMMENT '순서\\n',
+	`name` VARCHAR(80) NOT NULL COLLATE 'utf8_general_ci',
+	`is_use` CHAR(1) NULL DEFAULT 'N' COMMENT '메뉴 사용여부\n' COLLATE 'utf8_general_ci',
+	`url` VARCHAR(255) NOT NULL COMMENT 'URL\\\\n' COLLATE 'utf8_general_ci',
+	`register` VARCHAR(20) NULL DEFAULT '케빈랩' COMMENT '등록자\\\\\\\\\\\\\\\\n' COLLATE 'utf8_general_ci',
+	`regi_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록시각\n',
+	`modifier` VARCHAR(20) NULL DEFAULT NULL COMMENT '수정자\\\\n' COLLATE 'utf8_general_ci',
+	`modi_date` DATETIME NULL DEFAULT NULL COMMENT '수정시각\\\\n',
+	PRIMARY KEY (`menu_id`) USING BTREE,
+	INDEX `idx_bems_menus_group_id` (`group_id`) USING BTREE,
+	INDEX `idx_bems_menus_complex_code_pk` (`complex_code_pk`) USING BTREE,
+	INDEX `idx_bems_menus_menu_order` (`menu_order`) USING BTREE,
+	INDEX `idx_bems_menus_name` (`name`) USING BTREE,
+	INDEX `url` (`url`) USING BTREE
+)
+COMMENT='BEMS WEB 서브 메뉴'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_menu_groups` (
+	`group_id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'PK\\n',
+	`complex_code_pk` VARCHAR(45) NOT NULL COMMENT '단지코드' COLLATE 'utf8_general_ci',
+	`menu_order` INT(11) UNSIGNED NOT NULL COMMENT '순서',
+	`name` VARCHAR(80) NOT NULL COMMENT '메뉴그룹 이름' COLLATE 'utf8_general_ci',
+	`is_use` CHAR(1) NULL DEFAULT 'N' COMMENT '메뉴그룹 사용여부\n' COLLATE 'utf8_general_ci',
+	`is_use_sub_menu` CHAR(1) NULL DEFAULT 'N' COMMENT '서브메뉴 사용여부\n' COLLATE 'utf8_general_ci',
+	`url` VARCHAR(255) NULL DEFAULT NULL COMMENT 'URL' COLLATE 'utf8_general_ci',
+	`icon` VARCHAR(100) NOT NULL COMMENT '아이콘\\\\n' COLLATE 'utf8_general_ci',
+	`authority` INT(11) UNSIGNED NULL DEFAULT '70' COMMENT '권한\\n',
+	`is_default_menu` CHAR(1) NULL DEFAULT 'N' COMMENT '디폴트메뉴 사용여부\\n' COLLATE 'utf8_general_ci',
+	`is_use_dashboard` CHAR(1) NULL DEFAULT 'N' COMMENT '대시보드 메뉴 사용여부 (하위메뉴가 없는 그룹메뉴에만 적용 할 수 있도록 개발 할 것)\\n' COLLATE 'utf8_general_ci',
+	`register` VARCHAR(20) NULL DEFAULT '케빈랩' COMMENT '등록자\\\\\\\\n' COLLATE 'utf8_general_ci',
+	`regi_date` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '등록시각\\\\n',
+	`modifier` VARCHAR(20) NULL DEFAULT NULL COMMENT '수정자\n' COLLATE 'utf8_general_ci',
+	`modi_date` DATETIME NULL DEFAULT NULL COMMENT '수정시각',
+	PRIMARY KEY (`group_id`) USING BTREE,
+	INDEX `idx_bems_menu_groups_complex_code_pk` (`complex_code_pk`) USING BTREE,
+	INDEX `idx_bems_menu_groups_name` (`name`) USING BTREE,
+	INDEX `idx_bems_menu_groups_menu_order` (`menu_order`) USING BTREE,
+	INDEX `url` (`url`) USING BTREE
+)
+COMMENT='BEMS WEB 메뉴 그룹'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collec_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_boiler` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collec_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_cold` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`pf` FLOAT(10,1) NULL DEFAULT NULL COMMENT '역률',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collec_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_cooking` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COMMENT='전기 취사_200520'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_elechot` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_elevator` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_equipment` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`sum_usage` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COMMENT='전기 난방_200520'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`pf` FLOAT(10,1) NULL DEFAULT NULL COMMENT '역률',
+	`error_code` TINYINT(4) UNSIGNED NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_light` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_vent` (
+	`sensor_sn` VARCHAR(40) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`sum_usage` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_electric_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_finedust` (
+	`device_eui` VARCHAR(20) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`w_date` DATETIME NOT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`pm10` SMALLINT(11) NULL DEFAULT NULL,
+	`pm25` SMALLINT(11) NULL DEFAULT NULL,
+	`pm1_0` SMALLINT(11) NULL DEFAULT NULL,
+	`temperature` SMALLINT(11) NULL DEFAULT NULL,
+	`humidity` SMALLINT(11) NULL DEFAULT NULL,
+	`co2` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`device_eui`, `w_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_gas` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`in_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`out_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`start_time` INT(11) NULL DEFAULT NULL,
+	`stop_time` INT(11) NULL DEFAULT NULL,
+	`error_code` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_code_com` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_in_temp` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_out_temp` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_bat` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`flow` INT(11) NULL DEFAULT NULL COMMENT '단위 : m3, 아마도 물',
+	`flow_oil` FLOAT(12,2) NULL DEFAULT NULL COMMENT '단위 : 리터, 유량(기름)',
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`lora_hum` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`lora_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` INT(11) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_solar` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`current_w` INT(11) NULL DEFAULT NULL,
+	`total_wh` BIGINT(20) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`info` VARCHAR(300) NULL DEFAULT NULL COMMENT '인버터 전송용' COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_meter_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`collect_type` VARCHAR(30) NULL DEFAULT NULL COMMENT '수집데이터 타입' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `collect_type` (`collect_type`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_reference_value` (
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'latin1_swedish_ci',
+	`energy_type` VARCHAR(20) NOT NULL COLLATE 'latin1_swedish_ci',
+	`time_type` VARCHAR(10) NOT NULL COLLATE 'latin1_swedish_ci',
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	PRIMARY KEY (`complex_code_pk`, `energy_type`, `time_type`) USING BTREE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_aircondition` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`loc_floor` VARCHAR(4) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`location` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'utf8_general_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`fg_anomaly` TINYINT(1) NULL DEFAULT '0' COMMENT '이상증후 결과 - 0 : 정상, 1 : 비정상, -1 : 진단불가',
+	`anomaly_score` DOUBLE NULL DEFAULT '0' COMMENT '이상증후 값',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전기'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_boiler` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='보일러'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_cold` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`pre_val` INT(11) NULL DEFAULT NULL COMMENT '이전 누적값',
+	`pre_sensor_sn` VARCHAR(20) NULL DEFAULT NULL COMMENT '이전 센서번호' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='냉방'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_cooking` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전기 취사 센서_200520'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_elechot` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전열'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_elevator` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='승강(운송) = 엘레베이터'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_equipment` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(30) NULL DEFAULT NULL COMMENT '설비 타입명' COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6164) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE,
+	INDEX `type` (`type`) USING BTREE
+)
+COMMENT='설비와 관련 된 센서 테이블'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전기 난방 센서_200520'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전기급탕'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_light` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='전등 = 조명'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_vent` (
+	`sensor_sn` VARCHAR(40) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='환기'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_electric_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='급수 배수 펌프'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_finedust` (
+	`device_eui` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`pm10` SMALLINT(11) NULL DEFAULT NULL,
+	`pm25` SMALLINT(11) NULL DEFAULT NULL,
+	`pm1_0` SMALLINT(11) NULL DEFAULT NULL,
+	`temperature` SMALLINT(11) NULL DEFAULT NULL,
+	`humidity` SMALLINT(11) NULL DEFAULT NULL,
+	`co2` INT(11) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`device_eui`) USING BTREE
+)
+COMMENT='미세먼지'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_gas` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`pre_val` FLOAT(12,1) NULL DEFAULT NULL COMMENT '이전 누적값',
+	`pre_sensor_sn` VARCHAR(20) NULL DEFAULT NULL COMMENT '이전 센서번호' COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='가스'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_gateway` (
+	`sensor_sn` VARCHAR(20) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`in_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`out_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`start_time` INT(11) NULL DEFAULT NULL,
+	`stop_time` INT(11) NULL DEFAULT NULL,
+	`error_code` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_code_com` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_in_temp` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_out_temp` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`error_bat` CHAR(1) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`flow` INT(11) NULL DEFAULT NULL,
+	`flow_oil` FLOAT(12,2) NULL DEFAULT NULL,
+	`pre_val` FLOAT(12,2) NULL DEFAULT NULL COMMENT '이전 누적값',
+	`pre_sensor_Sn` VARCHAR(20) NULL DEFAULT NULL COMMENT '이전 센서번호' COLLATE 'utf8_general_ci',
+	`lora_hum` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`lora_temp` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='난방'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` INT(11) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='급탕'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_solar` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`replace_sensor_sn` VARCHAR(20) NULL DEFAULT NULL COMMENT '특정 장비번호의 누적값을 사용하고자 할 때 장비번호 입력 ' COLLATE 'utf8_general_ci',
+	`all_data` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`capacity` INT(11) NULL DEFAULT NULL COMMENT '단위: kWh',
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'utf8_general_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`inout` VARCHAR(2) NULL DEFAULT 'I' COMMENT 'I:생산, O: 소비, B: 생산과 소비' COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='태양광'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_sensor_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_dong_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`home_ho_pk` VARCHAR(5) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`installed_date` DATETIME NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`detail_spec` VARCHAR(100) NULL DEFAULT NULL COMMENT '상세스펙' COLLATE 'utf8_general_ci',
+	`manage_level` VARCHAR(50) NULL DEFAULT NULL COMMENT '관리등급' COLLATE 'utf8_general_ci',
+	`check_period` VARCHAR(10) NULL DEFAULT NULL COMMENT '검교정주기' COLLATE 'utf8_general_ci',
+	`lastest_check_date` DATETIME NULL DEFAULT NULL COMMENT '최신 검교정 일자',
+	`replace_date` DATETIME NULL DEFAULT NULL COMMENT '교체일자',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COMMENT='수도'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_co2` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`g_level` TINYINT(4) NULL DEFAULT NULL,
+	`total_val` BIGINT(20) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_boiler` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(9) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_cold` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`efficiency` INT(11) NULL DEFAULT NULL,
+	`efficiency_0` INT(11) NULL DEFAULT NULL,
+	`efficiency_1` INT(11) NULL DEFAULT NULL,
+	`efficiency_2` INT(11) NULL DEFAULT NULL,
+	`efficiency_3` INT(11) NULL DEFAULT NULL,
+	`efficiency_4` INT(11) NULL DEFAULT NULL,
+	`efficiency_5` INT(11) NULL DEFAULT NULL,
+	`efficiency_6` INT(11) NULL DEFAULT NULL,
+	`efficiency_7` INT(11) NULL DEFAULT NULL,
+	`efficiency_8` INT(11) NULL DEFAULT NULL,
+	`efficiency_9` INT(11) NULL DEFAULT NULL,
+	`efficiency_10` INT(11) NULL DEFAULT NULL,
+	`efficiency_11` INT(11) NULL DEFAULT NULL,
+	`efficiency_12` INT(11) NULL DEFAULT NULL,
+	`efficiency_13` INT(11) NULL DEFAULT NULL,
+	`efficiency_14` INT(11) NULL DEFAULT NULL,
+	`efficiency_15` INT(11) NULL DEFAULT NULL,
+	`efficiency_16` INT(11) NULL DEFAULT NULL,
+	`efficiency_17` INT(11) NULL DEFAULT NULL,
+	`efficiency_18` INT(11) NULL DEFAULT NULL,
+	`efficiency_19` INT(11) NULL DEFAULT NULL,
+	`efficiency_20` INT(11) NULL DEFAULT NULL,
+	`efficiency_21` INT(11) NULL DEFAULT NULL,
+	`efficiency_22` INT(11) NULL DEFAULT NULL,
+	`efficiency_23` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_cooking` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_elechot` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_elevator` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_equipment` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`efficiency` INT(11) NULL DEFAULT NULL,
+	`efficiency_0` INT(11) NULL DEFAULT NULL,
+	`efficiency_1` INT(11) NULL DEFAULT NULL,
+	`efficiency_2` INT(11) NULL DEFAULT NULL,
+	`efficiency_3` INT(11) NULL DEFAULT NULL,
+	`efficiency_4` INT(11) NULL DEFAULT NULL,
+	`efficiency_5` INT(11) NULL DEFAULT NULL,
+	`efficiency_6` INT(11) NULL DEFAULT NULL,
+	`efficiency_7` INT(11) NULL DEFAULT NULL,
+	`efficiency_8` INT(11) NULL DEFAULT NULL,
+	`efficiency_9` INT(11) NULL DEFAULT NULL,
+	`efficiency_10` INT(11) NULL DEFAULT NULL,
+	`efficiency_11` INT(11) NULL DEFAULT NULL,
+	`efficiency_12` INT(11) NULL DEFAULT NULL,
+	`efficiency_13` INT(11) NULL DEFAULT NULL,
+	`efficiency_14` INT(11) NULL DEFAULT NULL,
+	`efficiency_15` INT(11) NULL DEFAULT NULL,
+	`efficiency_16` INT(11) NULL DEFAULT NULL,
+	`efficiency_17` INT(11) NULL DEFAULT NULL,
+	`efficiency_18` INT(11) NULL DEFAULT NULL,
+	`efficiency_19` INT(11) NULL DEFAULT NULL,
+	`efficiency_20` INT(11) NULL DEFAULT NULL,
+	`efficiency_21` INT(11) NULL DEFAULT NULL,
+	`efficiency_22` INT(11) NULL DEFAULT NULL,
+	`efficiency_23` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_light` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_vent` (
+	`sensor_sn` VARCHAR(40) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(9) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_electric_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`g_level` TINYINT(4) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_finedust` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_finedust_ultra` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_finedust_ultra_1` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_gas` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_0` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_1` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_2` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_3` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_4` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_5` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_6` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_7` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_8` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_9` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_10` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_11` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_12` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_13` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_14` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_15` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_16` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_17` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_18` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_19` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_20` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_21` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_22` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_23` FLOAT(12,1) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(9) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_0` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_1` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_2` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_3` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_4` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_5` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_6` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_7` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_8` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_9` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_10` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_11` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_12` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_13` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_14` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_15` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_16` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_17` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_18` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_19` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_20` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_21` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_22` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_23` FLOAT(12,1) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_oil_dyu` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_0` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_1` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_2` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_3` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_4` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_5` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_6` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_7` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_8` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_9` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_10` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_11` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_12` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_13` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_14` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_15` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_16` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_17` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_18` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_19` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_20` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_21` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_22` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_23` FLOAT(12,2) NULL DEFAULT NULL,
+	`total_val` FLOAT(12,2) NULL DEFAULT NULL,
+	`predict_day` FLOAT(12,2) NULL DEFAULT NULL,
+	`predict_week` FLOAT(12,2) NULL DEFAULT NULL,
+	`predict_month` FLOAT(12,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_solar` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` INT(11) NULL DEFAULT NULL,
+	`val_0` INT(11) NULL DEFAULT NULL,
+	`val_1` INT(11) NULL DEFAULT NULL,
+	`val_2` INT(11) NULL DEFAULT NULL,
+	`val_3` INT(11) NULL DEFAULT NULL,
+	`val_4` INT(11) NULL DEFAULT NULL,
+	`val_5` INT(11) NULL DEFAULT NULL,
+	`val_6` INT(11) NULL DEFAULT NULL,
+	`val_7` INT(11) NULL DEFAULT NULL,
+	`val_8` INT(11) NULL DEFAULT NULL,
+	`val_9` INT(11) NULL DEFAULT NULL,
+	`val_10` INT(11) NULL DEFAULT NULL,
+	`val_11` INT(11) NULL DEFAULT NULL,
+	`val_12` INT(11) NULL DEFAULT NULL,
+	`val_13` INT(11) NULL DEFAULT NULL,
+	`val_14` INT(11) NULL DEFAULT NULL,
+	`val_15` INT(11) NULL DEFAULT NULL,
+	`val_16` INT(11) NULL DEFAULT NULL,
+	`val_17` INT(11) NULL DEFAULT NULL,
+	`val_18` INT(11) NULL DEFAULT NULL,
+	`val_19` INT(11) NULL DEFAULT NULL,
+	`val_20` INT(11) NULL DEFAULT NULL,
+	`val_21` INT(11) NULL DEFAULT NULL,
+	`val_22` INT(11) NULL DEFAULT NULL,
+	`val_23` INT(11) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_daily_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_0` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_1` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_2` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_3` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_4` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_5` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_6` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_7` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_8` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_9` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_10` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_11` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_12` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_13` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_14` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_15` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_16` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_17` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_18` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_19` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_20` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_21` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_22` FLOAT(12,1) NULL DEFAULT NULL,
+	`val_23` FLOAT(12,1) NULL DEFAULT NULL,
+	`total_val` INT(11) NULL DEFAULT NULL,
+	`predict_day` INT(11) NULL DEFAULT NULL,
+	`predict_week` INT(11) NULL DEFAULT NULL,
+	`predict_month` INT(11) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_co2` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_boiler` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_cold` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`efficiency_st` INT(11) NULL DEFAULT NULL,
+	`efficiency_ed` INT(11) NULL DEFAULT NULL,
+	`efficiency` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_cooking` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_elechot` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_elevator` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_equipment` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`efficiency_st` INT(11) NULL DEFAULT NULL,
+	`efficiency_ed` INT(11) NULL DEFAULT NULL,
+	`efficiency` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_light` (
+	`sensor_sn` VARCHAR(55) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_vent` (
+	`sensor_sn` VARCHAR(40) NOT NULL DEFAULT '' COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_electric_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` BIGINT(20) NULL DEFAULT NULL,
+	`val_ed` BIGINT(20) NULL DEFAULT NULL,
+	`val` BIGINT(20) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`low_status` INT(11) NULL DEFAULT NULL,
+	`mid_status` INT(11) NULL DEFAULT NULL,
+	`max_status` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_finedust` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_finedust_ultra` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_finedust_ultra_1` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_gas` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_heating` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_hotwater` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_oil_dyu` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` FLOAT(12,2) NULL DEFAULT NULL,
+	`val_ed` FLOAT(12,2) NULL DEFAULT NULL,
+	`val` FLOAT(12,2) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_solar` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` INT(11) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_stat_month_water` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`ym` VARCHAR(6) NOT NULL COLLATE 'utf8_general_ci',
+	`st_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`ed_date` VARCHAR(14) NOT NULL COLLATE 'utf8_general_ci',
+	`closing_day` VARCHAR(2) NOT NULL COLLATE 'utf8_general_ci',
+	`val_st` INT(11) NULL DEFAULT NULL,
+	`val_ed` INT(11) NULL DEFAULT NULL,
+	`val` FLOAT(12,1) NULL DEFAULT NULL,
+	`bill` INT(11) NULL DEFAULT NULL,
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `ym`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_unit_cost` (
+	`cost_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`energy_type` CHAR(10) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+	`admin_id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`start_date` VARCHAR(8) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`end_date` VARCHAR(8) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`base_price` INT(11) NULL DEFAULT NULL,
+	`unit_cost` FLOAT(11,5) NULL DEFAULT NULL,
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`cost_pk`, `complex_code_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_unit_cost_electric` (
+	`cost_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`admin_id` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`start_date` VARCHAR(8) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`end_date` VARCHAR(8) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`g_level` TINYINT(4) NULL DEFAULT NULL,
+	`used` INT(11) NULL DEFAULT NULL,
+	`base_price` INT(11) NULL DEFAULT NULL,
+	`unit_cost` FLOAT(10,1) NULL DEFAULT NULL,
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	`updator` INT(11) NULL DEFAULT NULL,
+	`update_date` DATETIME NULL DEFAULT NULL,
+	PRIMARY KEY (`cost_pk`, `complex_code_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `bems_weather` (
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(9) NOT NULL COLLATE 'utf8_general_ci',
+	`name` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`sunrise` DATETIME NULL DEFAULT NULL,
+	`sunset` DATETIME NULL DEFAULT NULL,
+	`temperature_00` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_01` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_02` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_03` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_04` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_05` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_06` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_07` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_08` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_09` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_10` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_11` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_12` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_13` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_14` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_15` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_16` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_17` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_18` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_19` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_20` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_21` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_22` TINYINT(4) NULL DEFAULT NULL,
+	`temperature_23` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_00` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_01` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_02` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_03` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_04` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_05` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_06` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_07` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_08` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_09` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_10` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_11` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_12` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_13` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_14` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_15` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_16` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_17` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_18` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_19` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_20` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_21` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_22` TINYINT(4) NULL DEFAULT NULL,
+	`humidity_23` TINYINT(4) NULL DEFAULT NULL,
+	`weather_00` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_01` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_02` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_03` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_04` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_05` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_06` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_07` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_08` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_09` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_10` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_11` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_12` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_13` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_14` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_15` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_16` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_17` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_18` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_19` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_20` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_21` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_22` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`weather_23` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`complex_code_pk`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `cnc_meter_pulse` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`ch1_pulse_interval_val` INT(11) NULL DEFAULT NULL,
+	`ch1_pulse_val` INT(11) NULL DEFAULT NULL,
+	`ch2_pulse_interval_val` INT(11) NULL DEFAULT NULL,
+	`ch2_pulse_val` INT(11) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `cnc_sensor_pulse` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`ch1_pulse_val` INT(11) NULL DEFAULT NULL,
+	`ch2_pulse_val` INT(11) NULL DEFAULT NULL,
+	`ch1_unit` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`ch2_unit` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`error_code` INT(11) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`all_data` VARCHAR(4096) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `dr_meter_mid_small` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`dr_start_date` VARCHAR(15) NOT NULL COMMENT 'dr 시작일시' COLLATE 'utf8_general_ci',
+	`dr_end_date` VARCHAR(15) NOT NULL COMMENT 'dr 종료일시' COLLATE 'utf8_general_ci',
+	`cbl` INT(11) NULL DEFAULT NULL,
+	`usage_val` INT(11) NULL DEFAULT NULL COMMENT '사용량',
+	`target` INT(11) NULL DEFAULT NULL COMMENT '목표량',
+	`reduction` INT(11) NULL DEFAULT NULL COMMENT '감축량',
+	`reduction_rate` FLOAT(15,1) NULL DEFAULT NULL COMMENT '감축이행률',
+	`dr_type` VARCHAR(20) NOT NULL COMMENT '등록시험(registration) / 감축시험 (regular) / 급전지시(emergency)' COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `dr_start_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `dr_sensor_mid_small` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`complex_code_pk` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`arch_type` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`dr_kind` VARCHAR(20) NOT NULL COMMENT 'ms_dr:중소형 dr' COLLATE 'utf8_general_ci',
+	`dr_type` VARCHAR(20) NOT NULL COMMENT '등록시험(registration) / 감축시험 (regular) / 급전지시(emergency)' COLLATE 'utf8_general_ci',
+	`dr_start_date` VARCHAR(15) NOT NULL COMMENT 'dr 시작일시' COLLATE 'utf8_general_ci',
+	`dr_end_date` VARCHAR(15) NOT NULL COMMENT 'dr 종료일시' COLLATE 'utf8_general_ci',
+	`cbl` INT(11) NULL DEFAULT NULL,
+	`usage_val` INT(11) NULL DEFAULT NULL COMMENT '사용량',
+	`target` INT(11) NULL DEFAULT NULL COMMENT '목표량',
+	`reduction` INT(11) NULL DEFAULT NULL COMMENT '감축량',
+	`reduction_rate` FLOAT(15,1) NULL DEFAULT NULL COMMENT '감축이행률',
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `edge_prediction` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`val_0` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_1` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_2` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_3` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_4` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_5` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_6` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_7` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_8` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_9` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_10` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_11` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_12` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_13` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_14` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_15` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_16` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_17` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_18` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_19` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_20` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_21` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_22` DOUBLE(10,3) NULL DEFAULT NULL,
+	`val_23` DOUBLE(10,3) NULL DEFAULT NULL,
+	`total_val` DOUBLE(10,3) NULL DEFAULT NULL,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `ntek_meter_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NOT NULL COLLATE 'utf8_general_ci',
+	`frequency` FLOAT(4,1) NULL DEFAULT NULL,
+	`temperature` FLOAT(4,1) NULL DEFAULT NULL,
+	`type` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`v_l1` FLOAT(10,1) NULL DEFAULT NULL,
+	`v_l2` FLOAT(10,1) NULL DEFAULT NULL,
+	`v_l3` FLOAT(10,1) NULL DEFAULT NULL,
+	`v_ub` FLOAT(10,1) NULL DEFAULT NULL,
+	`vpp_l1` FLOAT(10,1) NULL DEFAULT NULL,
+	`vpp_l2` FLOAT(10,1) NULL DEFAULT NULL,
+	`vpp_l3` FLOAT(10,1) NULL DEFAULT NULL,
+	`i_l1` FLOAT(10,1) NULL DEFAULT NULL,
+	`i_l2` FLOAT(10,1) NULL DEFAULT NULL,
+	`i_l3` FLOAT(10,1) NULL DEFAULT NULL,
+	`i_ub` FLOAT(10,1) NULL DEFAULT NULL,
+	`watt` FLOAT(10,1) NULL DEFAULT NULL,
+	`var` FLOAT(10,1) NULL DEFAULT NULL,
+	`va` FLOAT(10,1) NULL DEFAULT NULL,
+	`pf` FLOAT(10,1) NULL DEFAULT NULL,
+	`kwh_imp` FLOAT(15,3) NULL DEFAULT NULL,
+	`kwh_exp` FLOAT(15,3) NULL DEFAULT NULL,
+	`kvarh_imp` FLOAT(10,1) NULL DEFAULT NULL,
+	`kvarh_exp` FLOAT(10,1) NULL DEFAULT NULL,
+	`error_code` TINYINT(4) NULL DEFAULT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	PRIMARY KEY (`sensor_sn`, `val_date`) USING BTREE,
+	INDEX `ntek_meter_electric_sensor_sn_index` (`sensor_sn`) USING BTREE,
+	INDEX `ntek_meter_electric_val_date_index` (`val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `ntek_sensor_electric` (
+	`sensor_sn` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(15) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`kwh_imp` FLOAT(15,3) NULL DEFAULT NULL,
+	`kwh_exp` FLOAT(15,3) NULL DEFAULT NULL,
+	`watt` FLOAT(10,1) NULL DEFAULT NULL,
+	`pf` FLOAT(10,1) NULL DEFAULT NULL,
+	`error_code` INT(11) NULL DEFAULT NULL,
+	`place` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`fg_use` CHAR(1) NULL DEFAULT 'y' COLLATE 'latin1_swedish_ci',
+	`memo` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`maker` VARCHAR(10) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`all_data` VARCHAR(6144) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`sensor_sn`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `rems_alarm_code` (
+	`alarm_code_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`plante_pk` INT(11) NULL DEFAULT NULL,
+	`alarm_category` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_code` INT(11) NULL DEFAULT NULL,
+	`alarm_msg` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`alarm_code_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `rems_alarm_log` (
+	`alarm_log_pk` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+	`alarm_category` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_value` VARCHAR(3) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_msg` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`plante_pk` INT(11) NULL DEFAULT NULL,
+	`rtu_sn` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`inverter_name` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`alarm_time` DATETIME NULL DEFAULT NULL,
+	`alarm_off_time` DATETIME NULL DEFAULT NULL,
+	`alarm_on_time` DATETIME NULL DEFAULT NULL,
+	`alarm_on_off` VARCHAR(4) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`etc` VARCHAR(50) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_sms` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	`fg_push` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	`fg_mail` CHAR(1) NULL DEFAULT '0' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`alarm_log_pk`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_component_info` (
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`version` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`inverter_name` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`group_range` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	`vendor` VARCHAR(30) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`model` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`serial`, `inverter_name`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_groups` (
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`group_id` INT(11) NOT NULL,
+	`inverter_name` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`name` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`type` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`elec_type` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`serial`, `group_id`, `inverter_name`, `reg_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_group_data_1_raw_data` (
+	`group_id` INT(11) NOT NULL,
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`average_temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_dc_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_dc_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_dc_electric_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_dc_ampere` FLOAT(15,2) NULL DEFAULT NULL,
+	`accumulate_dc_power_consumption` FLOAT(15,2) NULL DEFAULT NULL,
+	`pv_temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`solar_radiation_quantity` FLOAT(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`group_id`, `serial`, `val_date`) USING BTREE
+)
+COMMENT='DC data'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_group_data_2_raw_data` (
+	`group_id` INT(11) NOT NULL,
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`average_phase_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_line_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_phase_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_active_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_reactive_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`power_factor` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_frequency` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_thd_phase_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_thd_phase_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`average_temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`sum_apparent_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`accumulate_power_consumption` FLOAT(15,2) NULL DEFAULT NULL,
+	`raw_accumulate_power_consumption` FLOAT(15,2) NULL DEFAULT NULL,
+	`electric_charge` FLOAT(15,2) NULL DEFAULT NULL,
+	`line_voltage_t_r` FLOAT(15,2) NULL DEFAULT NULL,
+	`line_voltage_s_t` FLOAT(15,2) NULL DEFAULT NULL,
+	`line_voltage_r_s` FLOAT(15,2) NULL DEFAULT NULL,
+	`inverter_conversion_efficiency` FLOAT(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`group_id`, `serial`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_modules` (
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`group_id` INT(11) NULL DEFAULT NULL,
+	`inverter_name` VARCHAR(30) NOT NULL COLLATE 'utf8_general_ci',
+	`module_id` INT(11) NOT NULL,
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`name` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`phase` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`rate` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`elec_type` VARCHAR(10) NOT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`serial`, `module_id`, `inverter_name`, `reg_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_module_data_1_raw_data` (
+	`module_id` INT(11) NOT NULL,
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`dc_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`dc_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`dc_electric_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`dc_ampere` FLOAT(15,2) NULL DEFAULT NULL,
+	`temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`pv_temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`solar_radiation_quantity` FLOAT(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`module_id`, `serial`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_module_data_2_raw_data` (
+	`module_id` INT(11) NOT NULL,
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`val_date` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`phase_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`line_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`phase_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`active_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`reactive_power` FLOAT(15,2) NULL DEFAULT NULL,
+	`power_factor` FLOAT(15,2) NULL DEFAULT NULL,
+	`frequency` FLOAT(15,2) NULL DEFAULT NULL,
+	`thd_phase_voltage` FLOAT(15,2) NULL DEFAULT NULL,
+	`thd_phase_current` FLOAT(15,2) NULL DEFAULT NULL,
+	`temperature` FLOAT(15,2) NULL DEFAULT NULL,
+	`apparent_power` FLOAT(15,2) NULL DEFAULT NULL,
+	PRIMARY KEY (`module_id`, `serial`, `val_date`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `reti_system_conf` (
+	`serial` VARCHAR(50) NOT NULL COLLATE 'utf8_general_ci',
+	`version` VARCHAR(20) NOT NULL COLLATE 'utf8_general_ci',
+	`reg_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`model` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`control_board_version` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`module_version` VARCHAR(20) NULL DEFAULT NULL COLLATE 'utf8_general_ci',
+	`fg_del` CHAR(1) NULL DEFAULT 'n' COLLATE 'latin1_swedish_ci',
+	PRIMARY KEY (`serial`) USING BTREE
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+;
+
+CREATE TABLE `toc_info` (
+	`complex_code_pk` VARCHAR(10) NOT NULL DEFAULT '' COMMENT '건물코드' COLLATE 'utf8_general_ci',
+	`type` VARCHAR(30) NOT NULL DEFAULT '' COMMENT '타입' COLLATE 'utf8_general_ci',
+	`arch_type` VARCHAR(20) NULL DEFAULT NULL COMMENT '건축물타입' COLLATE 'utf8_general_ci',
+	`dr_type` VARCHAR(20) NULL DEFAULT NULL COMMENT 'DR타입: 시민-국민-중소형 순서' COLLATE 'utf8_general_ci',
+	`sensor_sn` VARCHAR(20) NULL DEFAULT NULL COMMENT '센서번호' COLLATE 'utf8_general_ci',
+	PRIMARY KEY (`complex_code_pk`, `type`) USING BTREE,
+	INDEX `sensor_sn` (`sensor_sn`) USING BTREE
+)
+COMMENT='TOC 정보 '
+COLLATE='utf8_unicode_ci'
+ENGINE=InnoDB
+;

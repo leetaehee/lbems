@@ -1,0 +1,129 @@
+<style>
+    .colorUl li{
+        float: left;
+        width:50%; /* width: 33% 미설치가 함께 들어가면..*/
+        text-align: center;
+        padding: 20px 0 30px;
+    }
+    .bcG{background-color: #6fc48d}
+    .bcO{background-color: #e67e66;}
+    .bcGG{background-color: #cfcfcf;}
+
+    .reportUl li {
+        float:left;
+        margin-top: 20px;
+        border-bottom: solid 1px #eeeeee;
+        padding-bottom: 10px;
+    }
+    .reportUl li > p:first-child{
+        width:150px; height:20px;
+        display: inline-block;
+        text-align: center;
+    }
+    .reportUl li > p:nth-child(2){
+        text-align: center;
+        margin-top: 5px;
+    }
+    .report_Ninstall{
+        background: url(../res/images/report_Ninstall.png) no-repeat center;
+    }
+    .report_error{
+        background: url(../res/images/report_error.png) no-repeat center;
+    }
+    .report_normal{
+        background: url(../res/images/report_normal.png) no-repeat center;
+    }
+</style>
+<h2>
+	<img src="../res/images/icon/icon_prediction.png" class="mr08">
+	설정
+</h2>
+<div class="content analysis">
+	<section class="mb20">
+		<h3>
+			계측기 현황
+			<span>계측기 현황을 조회합니다.</span>
+		</h3>
+		<ul class="nav">
+			<li>HOME</li>
+			<li>설정</li>
+			<li>계측기 현황</li>
+		</ul>
+	</section>
+	<section class="tabCont">
+        <div class="floatBox">
+            <div class="card mt40  floatBox fl" style="width:25%; height:330px">
+                <p class="tt_con">계측기 현황</p>
+                <div class="floatBox mt50 mauto" style="width:100%;">
+					<p class="ac">전체 <br><span id="label_total_instrument_count" class="fs22 t10 diB">0</span><p>
+					<ul class="colorUl mt30">
+                        <li class="bcG">정상 <br><span id="label_instrument_nomal_count" class="fs22 t10 diB">0</span></li>
+                        <li class="bcO">장애 <br><span id="label_instrument_defect_count" class="fs22 t10 diB">0</span></li>
+                        <!--<li class="bcGG">미설치 <br><span class="fs22 t10 diB">2</span></li>-->
+                    </ul>
+                </div>
+            </div><!---//card-->
+            <div class="card mt40 floatBox fr" style="width:74%; height:330px">
+				 <p class="tt_con">연결상태</p>
+                <ul id="div_instrument_connection_group" class="reportUl mt10" style="height: 250px; overflow-y: scroll;">
+                    <!--
+                        아이콘 정리
+                        미설치 class="report_Ninstall"
+                        장애 class="report_error"
+                        정상 lass="report_normal
+
+                        <li><p class="report_Ninstall"></p><p>1층_위치</p></li>
+                    -->
+                </ul>
+            </div><!---//card-->
+        </div>
+        <div>
+            <div class="floatBox">
+                <p class="blt01 diIb">
+                    세부진단
+                </p>
+            </div>
+            <div class="popTable">
+                <table>
+                    <colgroup>
+                        <col style="width:7%">
+                        <col style="width:18%">
+                        <col style="width:10%">
+                        <col style="width:16%">
+                        <col style="width:8%">
+                        <col style="width:10%">
+                        <col style="width:20%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>층</th>
+                            <th>위치명</th>
+                            <th>타입</th>
+                            <th>S/N</td>
+                            <th>설치일</td>
+                            <th>상태</td>
+                            <th>원인(이상 시에만)</td>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_instrument">
+                        <tr>
+                            <td id="empty-table-td" colspan="7">- 등록된 계측기가 존재하지 않습니다. -</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page">
+                <a id="btn_instrument_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+                <a id="btn_instrument_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+                <ul id="instrument_paging">
+                    <li class="on"><a href="#a">1</a></li>
+                </ul>
+                <a id="btn_instrument_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+                <a id="btn_instrument_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./set/js/instrument.define.js"></script>
+<script src="./set/js/instrument.control.js"></script>

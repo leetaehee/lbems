@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+	<head>
+		<!-- meta -->
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+		<!-- style -->
+		<link rel="stylesheet" href="./res/css/common.css">
+        <link rel="stylesheet" href="./res/css/font.css">
+		<link rel="stylesheet" href="./res/css/layout.css?v=1">
+
+		<!-- jquery loading -->
+		<script src="/libs/js/jquery/jquery-3.3.1.min.js"></script>
+
+		<!-- jquery.bxslider.js loading -->
+		<script src="./res/js/jquery.bxslider.js"></script>
+
+		<!-- javascript message.js -->
+		<script src="/res/string/string_table_kor.js"></script>
+
+		<!-- Chart.js -->
+		<script src="/libs/js/chart.js/chart.bundle.js" charset="utf-8"></script>
+		<script src="/libs/js/chart.js/chart.custom.js" charset="utf-8"></script>
+
+        <!--Devextreme-->
+        <link rel="stylesheet" type="text/css" href="/libs/js/devextreme/18.2/css/dx.common.css" />
+        <link rel="stylesheet" data-theme="generic.light" href="/libs/js/devextreme/18.2/css/dx.light.css" />
+        <script src="/libs/js/devextreme/18.2/js/dx.all.js"></script>
+
+		<!-- module -->
+		<script src="/modules/js/module.js"></script>
+        <script src="/modules/js/module.cookie.js"></script>
+        <script src="/modules/js/module.deviceInfo.js"></script>
+		<script src="/EMS_Modules/js/module.utility.js"></script>
+        <script src="/modules/js/module.request.js"></script>
+		<script src="/modules/js/module.subRequest.js"></script>
+        <script src="/EMS_Modules/js/module.config.js"></script>
+
+        <!-- frame.js -->
+        <script src="./frame/js/frame.define.js"></script>
+        <script src="./frame/js/frame.control.js"></script>
+
+		<title>BEMS 관리자 앱</title>
+	</head>
+	<body>
+        <!-- 라우팅 정보 -->
+        <script>
+            const requestUrl = '{requestUrl}';
+            const selectedMenu = '{selectedMenu}';
+            const gComplexCodePk = '{gComplexCodePk}';
+            const gSkinType = '{gSkinType}';
+            const gBuildingFeCode = '{gBuildingFeCode}';
+            const gBuildingName = '{gBuildingName}';
+            const gIsDevMode = parseInt('{gIsDev}');
+
+            // 업체별 CONFIG 파일 불러오기
+            const CONFIGS = module.config().getConfig(gComplexCodePk, gBuildingFeCode, gBuildingName, gSkinType, gIsDevMode);
+        </script>
+		<div id="skipToContent"><a href="#wrapCont" title="메뉴 건너 뛰기">메뉴 건너 뛰기</a></div>
+        <div id="header">
+            <div>
+                <h1>
+                    <a href="./index.php?menu=home">
+                        <img src="./res/image/h1_logo.png" alt="4st BEMS">
+                    </a>
+                </h1>
+                <a class="menuBtn" id="btn_navigation_menu">
+                    <img src="./res/image/menu.png" alt="메뉴열기">
+                </a>
+            </div>
+            <div class="allMenuLayer" style="display: none;">
+                <div class="lnb">
+                    <div class="lnb_tt">
+                        <a class="closeBtn" id="btn_close_layer"></a>
+                        <p>
+                            <span id="label_popup_building_name" style="padding-top: 20px; font-size: 20px; color: #f15419;"></span><br>
+                            <span id="label_popup_building_addr" class="fc666 mt05 diB"></span>
+                        </p>
+                        <a id="btn_logout" class="btn btn_info mt40">로그아웃</a>
+                    </div>
+                    <ul id="side_menu">
+                        <!-- 사이드 메뉴 동적으로 생성 (퍼블리싱 테스트 하려면 아래 주석을 해제하고, 자바스크립트를  막으세요.)-->
+                        <!--
+                        <li><a href="./index.php?menu=home">홈</a></li>
+                        <li><a href="./index.php?menu=diagram">계통도</a></li>
+                        <li class="dept">
+                            <a href="./index.php?menu=prediction_energy" class="lnb_up">예측</a>
+                            <ul>
+                                <li><a href="./index.php?menu=prediction_energy">에너지원별</a></li>
+                                <li><a href="./index.php?menu=prediction_solar">태양광 발전</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="./index.php?menu=control">제어</a></li>
+                        <li><a href="./index.php?menu=alarm">알람</a></li>
+                        -->
+                    </ul>
+                </div>
+                <div class="dimm"></div>
+            </div><!--allMenuLayer-->
+        </div>
+		<div class="gnb">
+            <ul id="tab_menu">
+                <!-- 탭 메뉴 동적으로 생성 (퍼블리싱 테스트 하려면 아래 주석을 해제하고, 자바스크립트를  막으세요.) -->
+                <!-- 알람메뉴- 신규 알람 있을 경우, 느낌표 표시 -->
+                <!--
+                <li id="btn_nav_home" class="on"><a href="./index.php?menu=home">홈</a></li>
+                <li id="btn_nav_diagram"><a href="./index.php?menu=diagram">계통도</a></li>
+				<li id="btn_nav_prediction"><a href="./index.php?menu=prediction_energy">예측</a></li>
+                <li id="btn_nav_control"><a href="./index.php?menu=control">제어</a></li>
+                -->
+            </ul>
+        </div>
+		<div id="wrapCont">
+            <div class="loading_window"></div>
+            <div class="card mt00 b00" id="div_prediction_detail_menu" style="display: none;">
+                <ul class="sub subType2" id="prediction_button_group">
+                    <li id="btn_prediction_energy" class="on"><a href="./index.php?menu=prediction_energy">에너지원별</a></li>
+                    <li id="btn_prediction_solar"><a href="./index.php?menu=prediction_solar">태양광발전</a></li>
+                </ul>
+            </div>
+            {body}
+		</div>
+    </body>
+</html>

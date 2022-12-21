@@ -1,0 +1,148 @@
+<h2>
+    <img src="../res/images/icon/icon_info.png" class="mr08">
+    정보 감시 <span>설비별 부하 감시</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            설비별 부하 감시
+            <span>설비별 부하정보를 감시합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>정보 감시</li>
+            <li>설비별 부하 감시</li>
+        </ul>
+    </section>
+    <section class="tabList01" id="energy_btn_group">
+        <!-- 동적으로 추가 작업이 발생함. -->
+    </section>
+    <section>
+        <div class="articleBox mt10">
+            <ul>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <input type="text" class="dateStyle w130px ml10 mr10" id="date_select" readonly></li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기간 선택</label>
+                    <label class="mr10 ml10">
+                        <input type="radio" name="radio_date1" class="radio_period" value="2" checked> 일
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" name="radio_date2" class="radio_period" value="1"> 월
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" name="radio_date3" class="radio_period" value="0"> 년
+                    </label>
+                </li>
+                <li id="search_section">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">위치 선택</label>
+                    <select id="select_building_dong" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <select id="select_building_floor" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <select id="select_building_room" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                </li>
+                <li>
+                    <button id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="tabCont">
+        <p class="blt01">주요지표</p>
+        <div class="tbType01 ml30">
+            <table>
+                <col style="width:33%">
+                <col style="width:33%">
+                <col style="width:33%">
+                <tbody>
+                <tr>
+                    <td>
+                        <p>
+                            <span></span>
+                            <span class="fs17 fcBrown">경부하</span>
+                        </p>
+                        <div class="mt20">
+                            <p class="diIb t50 b40"><span class="diIb highlight" id="label_usage_now">0</span> <span class="label_unit">kWh</span></p>
+                            <p class="info_text fcGray" id="label_percent_color_low_top">
+                                <!-- 상승일때 class="fcRed" 하강일때  class="fcprimary" 변동없을때 : class ="fcGray"-->
+
+                                이전 기간 대비 &nbsp;<span id="label_percent_value_low_top" class="fs22 fcGray">0</span> % &nbsp;&nbsp;
+                                <span class="percent_zero mb10" id="label_percent_low_top"></span><br>
+                                <!-- 상승일때 class="percent_up"  / 하강일때  class="percent_down / 변동 없을때  class="percent_zero"-->
+
+                                <span class="fs13 diB mt10">
+									( 이전 기간 &nbsp;&nbsp;&nbsp;<span id="label_prev_low_sum" class="fs17 b">0</span> <span class="label_unit">kwh</span> )
+								</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <p>
+                            <span></span>
+                            <span class="fs17 fcBrown">중부하</span>
+                        </p>
+                        <div class="mt20">
+                            <p class="diIb t50 b40"><span class="diIb highlight" id="label_usage_last">0</span> <span class="label_unit">kWh</span></p>
+                            <p class="info_text fcGray" id="label_percent_color_mid_top">
+                                <!-- 상승일때 class="fcRed" 하강일때  class="fcprimary" 변동없을때 : class ="fcGray"-->
+                                이전 기간 대비 &nbsp;<span id="label_percent_value_mid_top" class="fs22 fcGray">0</span> % &nbsp;&nbsp;
+                                <span class="percent_zero mb10" id="label_percent_mid_top"></span><br>
+                                <!-- 상승일때 class="percent_up"  / 하강일때  class="percent_down / 변동 없을때  class="percent_zero"-->
+                                <span class="fs13 diB mt10">
+									( 이전 기간 &nbsp;&nbsp;&nbsp;<span id="label_prev_mid_sum" class="fs17 b">0</span> <span class="label_unit">kwh</span> )
+								</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>
+                        <p>
+                            <span></span>
+                            <span class="fs17 fcBrown">최대부하</span>
+                        </p>
+                        <div class="mt20">
+                            <p class="diIb t50 b40"><span class="diIb highlight" id="label_diff">0</span> <span class="label_unit">kWh</span></p>
+                            <p class="info_text fcGray" id="label_percent_color_max_top">
+                                <!-- 상승일때 class="fcRed" 하강일때  class="fcprimary" 변동없을때 : class ="fcGray"-->
+                                이전 기간 대비 &nbsp;<span id="label_percent_value_max_top" class="fs22 fcGray">0</span> % &nbsp;&nbsp;
+                                <span class="percent_zero mb10" id="label_percent_max_top"></span><br>
+                                <!-- 상승일때 class="percent_up"  / 하강일때  class="percent_down / 변동 없을때  class="percent_zero"-->
+                                <span class="fs13 diB mt10">
+									( 이전 기간 &nbsp;&nbsp;&nbsp;<span id="label_prev_max_sum" class="fs17 b">0</span> <span class="label_unit">kwh</span> )
+								</span>
+                            </p>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </section><!-- //tabCont-->
+    <section>
+        <div>
+            <p class="blt01">부하 현황</p>
+            <div class="graph_legend" id="div_chart_legend">
+                <!-- 자바스크립트로 동적 생성 -->
+            </div>
+            <div class="graph11">
+                <canvas id="canvas_chart"></canvas>
+            </div>
+        </div><!---//floatBox-->
+    </section>
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+<script src="/EMS_Modules/js/module.makeEnergyButton.js"></script>
+
+<script src="./info/js/chart.bar.js"></script>
+
+<script src="./info/js/facilities_status.define.js"></script>
+<script src="./info/js/status.control.js"></script>

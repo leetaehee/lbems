@@ -1,0 +1,153 @@
+<h2>
+    <img src="../res/images/icon/icon_analysis.png" class="mr08">
+    분석 <span>단위면적당 사용 분석(에너지원별)</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            단위면적당 사용 분석(에너지원별)
+            <span>사용자의 단위면적당 사용 현황(에너지원별)을 분석합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>분석</li>
+            <li>단위면적당 사용 분석(에너지원별)</li>
+        </ul>
+    </section>
+    <section class="tabList01 floatBox" id="energy_btn_group">
+        <!-- 동적으로 추가 작업이 발생함. -->
+    </section>
+    <section>
+        <div class="articleBox mt10">
+            <ul>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <input type="text" class="dateStyle w130px ml10 mr10" id="date_select" readonly>
+                </li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기간 선택</label>
+                    <label class="mr10 ml10">
+                        <input type="radio" name="radio_date" value="2"> 일
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" name="radio_date" value="1"> 월
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" name="radio_date" value="0" checked> 년
+                    </label>
+                </li>
+                <li>
+                    <!--  층으로 단위 면적 조회 하려면 건물면적으로 층마다 존재 해야함 .. (GS인증으로 주석처리) -->
+                    <!--
+                        <img src="../res/images/icon/icon_article.png" class="mr10">
+                        <label class="fcBlack">위치 선택</label>
+                        <select id="select_building_floor" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                        <select id="select_building_room" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                    -->
+                    <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="tabCont">
+        <div class="analysis_box floatBox">
+            <div class="fl">
+                <p class="blt01 diIb ">이전 기간 대비 단위면적당 사용량</p>
+                <section class="tabList02 floatBox diIb ml20">
+                    <button type="button" id="btn_used_transition_graph" class="on mt00 used_graph">추이 그래프</button>
+                    <button type="button" id="btn_used_bar_graph" class="mt00 used_graph">누적 그래프</button>
+                </section>
+                <div class="graph_legend" id="div_chart_legend_used">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph4">
+                    <canvas id="canvas_chart_middle"></canvas>
+                </div>
+            </div>
+            <div class="fr diIb floatBox">
+                <p class="blt01">단위면적당 평균 사용량 비교</p>
+                <div class="articleBox2">
+                    <div class="ati2Type1 floatBox">
+                        <div>
+                            <div>
+                                <div class="analysis_percent" style="height:500px;">
+                                    <p class="analysis_percent_chart1" id="bar_chart_usage_last"></p>
+                                </div>
+                                <p><span id="label_diff_usage_last">0</span> <span class="label_unit_now">Wh</span> (이전)</p>
+                            </div>
+                            <div>
+                                <div class="analysis_percent">
+                                    <p class="analysis_percent_chart2" id="bar_chart_usage_now"></p>
+                                </div>
+                                <p><span id="label_diff_usage_now">0</span> <span class="label_unit_now"> Wh</span> (현재)</p>
+                            </div>
+                        </div>
+                        <p class="diIb" style="margin-top: 40%;"><span class="fs20 b fcBlack" id="label_diff_middle">+ 0</span> <span class="label_unit_now"> Wh</span>
+                            <br><br><span class="fs17 fcRed" id="label_percent_color_middle">(<b class="percent_up" id="label_percent_middle"></b><span id="label_percent_value_middle">0</span>%)</span>
+                            <!-- span class 상승일때 fcRed 하강일때 fcprimary -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div><!---//floatBox-->
+        <!--
+        <div class="analysis_box floatBox">
+            <div class="fl">
+                <p class="blt01 diIb ">이전 기간 대비 단위면적당 사용 요금</p>
+                <section class="tabList02 floatBox diIb ml20">
+                    <button type="button" id="btn_price_transition_graph" class="on mt00 price_graph">추이 그래프</button>
+                    <button type="button" id="btn_price_bar_graph" class="mt00 price_graph">누적 그래프</button>
+                </section>
+                <div class="graph_legend" id="div_chart_legend_price">
+                     자바스크립트로 동적 생성 
+                </div>
+                <div class="graph4">
+                    <canvas id="canvas_chart_bottom"></canvas>
+                </div>
+            </div>
+            <div class="fr diIb floatBox">
+                <p class="blt01">단위면적당 평균 사용 요금 비교</p>
+                <div class="articleBox2">
+                    <div class="ati2Type1 floatBox">
+                        <div>
+                            <div>
+                                <div class="analysis_percent">
+                                    <p class="analysis_percent_chart1" id="bar_chart_price_last" style="background: #a5bab0"></p>
+                                </div>
+                                <p><span id="label_diff_price_last">0</span> <span id="label_diff_unit_now_bottom">원</span>(이전)</p>
+                            </div>
+                            <div>
+                                <div class="analysis_percent">
+                                    <p class="analysis_percent_chart2" id="bar_chart_price_now" style="background: #598b74"></p>
+                                </div>
+                                <p><span id="label_diff_price_now">0</span> <span id="label_diff_unit_last_bottom">원</span>(현재)</p>
+                            </div>
+                        </div>
+                        <p class="diIb"><span class="fs20 b fcBlack" id="label_diff_bottom">+ 0</span> <span id="label_diff_unit_bottom"> 원</span>
+                            <br><br><span class="fs17 fcRed" id="label_percent_color_bottom">(<b class="percent_up" id="label_percent_bottom"></b><span id="label_percent_value_bottom">0</span>%)</span>
+
+                                상승일때 span class="fcRed"  b class="percent_up"
+                                하강일때  span class="fcprimary"  b class="percent_down"
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>//floatBox-->
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+<script src="/EMS_Modules/js/module.makeEnergyButton.js"></script>
+
+<script src="./analysis/js/chart.bar_two.js"></script>
+<script src="./analysis/js/chart.area_transition.js"></script>
+
+<script src="./analysis/js/energy.define.js"></script>
+<script src="./analysis/js/analysis_area.control.js"></script>

@@ -1,0 +1,234 @@
+<div class="dashWrap floatBox">
+    <div>
+        <h2>&nbsp;</h2>
+        <div class="tabList_dash fr">
+            <button type="button" id="btn_dashboard_all" style="width:120px;" data-group="dashboard" data-file_type="dashboard_dark">
+                대시보드 전체
+            </button>
+        </div>
+    </div>
+    <div class="dash_contents">
+        <div class="floor_tt">
+            <p class="diIb">에너지 사용 현황</p>
+            <select id="select_energy" class="w100px diIb ml10">
+                <option value="2">금일</option>
+                <option value="1">금월</option>
+                <option value="0">금년</option>
+            </select>
+        </div>
+        <ul class="floor_ul" style="height:100%">
+            <li style="height: 100%;">
+                <!-- 대시보드 세부 이미지는 자바스크립트에 의해 동적으로 변경 됨 (module.config.js 참조) -->
+                <div class="dashcontent mb20 birdeye" style="height: 100%">
+                    <p class="dashH3 mt30">조회 정보 <!-- 선택 --></p>
+                    <p class="mt30 floatBox fs17">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 위치 <!--선택-->
+                        <span class="unit" style="float:right">(단위:<label class="label_unit">kWh</label>)</span>
+                    </p>
+                    <div class="tbType04  tdType04-1 mt10">
+                        <table>
+                            <colgroup>
+                                <col style="width:7%">
+                                <col style="width:20%">
+                                <col style="width:20%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th><!--<input type="checkbox" id="">--></th>
+                                    <th>층</th>
+                                    <th>총사용량</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_floor">
+                                <!-- 자바스크립트로 동적으로 생성함 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </li>
+            <li style="height: 100%;">
+                <div class="dashcontent mb20" style="height: 60.1%">
+                    <p class="dashH3 diIb"><span id="label_current_floor_name" class="dashH3 diIb">전체</span> 사용량 및 사용 요금</p>
+                    <div class="con floatBox" style="height: 96%" id="energy_con_elec">
+                        <div class="floatBox">
+                            <div class="energy_con">
+                                <p>목표 : <span id="label_target_elec">0</span>  <span class="label_unit">kWh</span><button type="button" id="btn_set_elec" class="btnSet"></button></p>
+                                <p><span id="label_usage_elec" style="color:#E5C195">0</span> <span class="label_unit" style="color:#E5C195">kWh</span></p>
+                                <p>이전사용량 <span id="label_before_elec" class="ml20">0</span> <span class="fs13 label_unit">kWh</span></p>
+                                <div class="graph_legend" id="div_chart_legend_energy">
+                                    <!-- 자바스크립트로 동적 생성 -->
+                                </div>
+                                <div style="width: 100%; height: 245px; margin: 0 0 25px;">
+                                    <canvas id="canvas_elec"></canvas>
+                                </div>
+                                <p class=" energy_con_p4"> 예상 사용 요금<span class="ml10" id="label_price_elec">0</span> 원</p><br>
+                                <p>* 실제 요금과는 다소 차이가 있을 수 있습니다</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="status_floor">
+                    <ul style="height:100%">
+                        <li class="dashcontent m00">
+                            <p class="dashH3 diIb">용도별 사용현황</p>
+                            <div style="margin-top: 3%; height:68%;padding:10px 10px 5px">
+                                <canvas id="chart_pie_usage"></canvas>
+                            </div>
+                            <div class="graph_legend mt10" style="text-align: center;" id="div_chart_legend_usage">
+                                <!-- 자바스크립트로 동적으로 생성함 -->
+                            </div>
+                        </li>
+                        <li class="dashcontent b0">
+                            <p class="dashH3 diIb" id="label_facility_title">설비별 사용량<!-- 및 효율--></p>
+                            <div class="tbType04 tdType04-1 mt30">
+                                <table class="w100">
+                                    <colgroup>
+                                        <col style="width:20%">
+                                        <col style="width:15%">
+                                        <col style="width:12%">
+                                        <!--<col style="width:12%">-->
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>설비명</th>
+                                            <th>작동상태</th>
+                                            <th>사용량<br>(kWh)</th>
+                                            <!--<th>효율<br>(%)</th>-->
+                                        </tr>
+                                    </thead>
+                                    <tbody id="tbody_facility">
+                                        <!-- 자바스크립트로 동적으로 생성함 -->
+                                        <tr>
+                                            <td colspan="3">설비 정보가 존재하지 않습니다.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div><!--</div>conBox2-->
+            </li>
+            <li style="height: 100%;">
+                <div class="dashcontent mb20" style="height:60.1%">
+                    <p class="dashH3 diIb">예측 사용량</p><p class="bcLgray diIb ml10 p05 r10 l10" id="label_prediction_period" style="font-size:11px">로딩중..</p>
+                    <div class="tabList02 ac">
+                        <button id="btn_daily" class="on">일간</button>
+                        <button id="btn_weekly">주간</button>
+                        <button id="btn_month">월간</button>
+                    </div>
+                    <div style="margin-top:7%; height:409px; padding:10px"><canvas id="canvas_predict_bar_chart"></canvas></div>
+                </div>
+                <div class="dashcontent mb20" style="height:38%">
+                    <input type="hidden" class="dateStyle w130px ml10 mr10" id="date_select" readonly>
+                    <p class="dashH3 diIb">건물 단위 면적당 사용 현황</p>
+                    <div class="floatBox w100 mt20">
+                        <p class="floatBox fs17" style="margin-top: 20%;">
+                            <img src="../res/images/icon/leftM_on.png" class="mr08"> 이전기간 대비 평균 사용량 (Wh/m2)
+                        </p>
+                    </div>
+                    <div class="usage_graph mt20">
+                        <div style="position:relative">
+                            <p style="top:26.5%">이전</p>
+                            <div class="day_graph" style="background: #3C3C3C;">
+                                <span id="graph_prev_area_used" style="background: #8a7255; width: 0%"></span>
+                                <span class="ml05" style="color:#fff"><i id="label_prev_area_used" style="color:#fff">0</i> Wh</span>
+                            </div>
+                        </div>
+                        <div style="position:relative">
+                            <p style="top:29.5%">현재</p>
+                            <div class="day_graph" style="background: #3C3C3C;">
+                                <span id="graph_current_area_used" style="background: #8a7255; width: 0%"></span>
+                                <span class="ml05" style="color:#fff"><i id="label_current_area_used" style="color:#fff">0</i> Wh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="floatBox w100 mt20">
+                        <p class="floatBox fs17" style="margin-top: 7%;">
+                            <img src="../res/images/icon/leftM_on.png" class="mr08"> 이전기간 대비 평균 사용 요금 (kWh/<span id="label_period_time_unit">hour</span>)
+                        </p>
+                    </div>
+                    <div class="usage_graph mt20">
+                        <div style="position:relative">
+                            <p style="top:26.5%">이전</p>
+                            <div style="background: #3C3C3C;">
+                                <span id="graph_prev_area_price" style="background: #8a7255; width: 0%"></span>
+                                <span class="ml05"><i id="label_prev_area_price">0</i> 원</span>
+                            </div>
+                        </div>
+                        <div style="position:relative">
+                            <p style="top:29.5%">현재</p>
+                            <div style="background: #3C3C3C;">
+                                <span id="graph_current_area_price" style="background: #63523e; width: 0%"></span>
+                                <span class="ml05"><i id="label_current_area_price">0</i> 원</span>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </li>
+        </ul>
+    </div>
+</div><!---dashWrap-->
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_550" style="min-height: 460px">
+        <div class="pop_tt" style="width:550px">
+            <h1>목표 사용량 설정</h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt40 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"></span> 에너지의 목표 사용량을 설정합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:45%">
+                        <col style="width:55%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">한 시간 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_hour" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit1"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">하루 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_day" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit2"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">한 달 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_month" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit3"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">일 년 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_year" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit4"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt30 ac">
+                <button type="button" id="btn_button_save" class="Btn saveBtn">저장</button>
+                <button type="button" id="btn_button_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="/EMS_Modules/js/module.menuManager.js"></script>
+
+<script src="./dashboard/js/chart.line.y2.js"></script>
+<script src="./dashboard/js/dashboard.chart_use_pie.js"></script>
+<script src="./dashboard/js/dashboard_predict.chart_bar.js"></script>
+
+<script src="./dashboard/js/floor_facility.define.js"></script>
+<script src="./dashboard/js/floor_facility.control.js"></script>

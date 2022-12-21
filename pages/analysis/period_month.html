@@ -1,0 +1,108 @@
+<h2>
+    <img src="../res/images/icon/icon_report.png" class="mr08">
+    분석 <span>월별 비교 분석</span>
+</h2>
+<div class="content report">
+    <section class="mb20">
+        <h3>
+            월별 비교 분석
+            <span>월별 비교 분석을 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>분석</li>
+            <li>월별 비교 분석</li>
+        </ul>
+    </section>
+    <section id="search_section">
+        <div class="articleBox mt10">
+            <ul>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">위치 선택</label>
+                    <select id="select_building_dong" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <select id="select_building_floor" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <!--
+                        <select id="select_building_room" class="w120px ml10">
+                            <option value="all">전체</option>
+                        </select>
+                    -->
+                    <button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회">
+                        <span>조회</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section class="tabCont">
+        <!-- 전기 tab -->
+        <div>
+            <div id="div_energy_group">
+                <div class="floatBox">
+                    <p class="blt01 diIb">에너지원별 사용량 비교 분석(전월)</p>
+                    <select id="select_energy" class="w100px ml30 diIb">
+                        <!-- 동적으로 생성함 -->
+                    </select>
+                    <section class="tabList02 floatBox diIb ml20">
+                        <button type="button" id="btn_energy_transition_graph" class="on mt00 energy_graph">추이 그래프</button>
+                        <button type="button" id="btn_energy_bar_graph" class="mt00 energy_graph">누적 그래프</button>
+                    </section>
+                </div>
+                <div class="graph_legend fr" id="div_chart_legend_energy">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_period1"></canvas>
+                </div>
+            </div>
+            <div id="div_usage_group">
+                <div>
+                    <p class="blt01 diIb">용도별 사용량 비교 분석(전월)</p>
+                    <select id="select_usage" class="w100px ml30 diIb">
+                        <!-- 동적으로 생성함 -->
+                    </select>
+                    <section class="tabList02 floatBox diIb ml20">
+                        <button type="button" id="btn_usage_transition_graph" class="on mt00 usage_graph">추이 그래프</button>
+                        <button type="button" id="btn_usage_bar_graph" class="mt00 usage_graph">누적 그래프</button>
+                    </section>
+                </div>
+                <div class="graph_legend" id="div_chart_legend_usage">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_period2"></canvas>
+                </div>
+            </div>
+            <div id="div_facility_group">
+                <div>
+                    <p class="blt01 diIb">설비별 사용량 비교 분석(전월)</p>
+                    <select id="select_facility" class="w100px diIb">
+                        <!-- 동적으로 생성함 -->
+                    </select>
+                    <section class="tabList02 floatBox diIb ml20">
+                        <button type="button" id="btn_facility_transition_graph" class="on mt00 facility_graph">추이 그래프</button>
+                        <button type="button" id="btn_facility_bar_graph" class="mt00 facility_graph">누적 그래프</button>
+                    </section>
+                </div>
+                <div class="graph_legend" id="div_chart_legend_facility">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph">
+                    <canvas id="canvas_chart_period3"></canvas>
+                </div>
+            </div>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+
+<script src="./analysis/js/chart.bar_two.js"></script>
+<script src="./analysis/js/chart.line_two.js"></script>
+
+<script src="./analysis/js/period_month.define.js"></script>
+<script src="./analysis/js/analysis_period.control.js"></script>

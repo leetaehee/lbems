@@ -1,0 +1,182 @@
+<h2>
+    <img src="../res/images/icon/icon_manager.png" class="mr08">관리자 설정
+    <span>권한 관리</span>
+</h2>
+<div class="content">
+	<form id="form_authority" name="form_authority">
+		<section class="mb20">
+			<h3>
+				권한 관리
+				<span>권한 관리자 설정</span>
+			</h3>
+			<ul class="nav">
+				<li>HOME</li>
+				<li>관리자 설정</li>
+				<li>권한 관리</li>
+			</ul>
+		</section>
+		<section>
+			<div class="mt40">
+				<select id="roren_type" name="roren_type" class="w200px roren_type">
+					<option value="">건물 선택</option>
+				</select>
+			</div>
+		</section>
+		<section>
+			<div class="articleBox mt10">
+				<ul>
+					<li>
+						<img src="../res/images/icon/icon_article.png" class="mr10">
+						<label class="fcBlack">조건선택</label>
+						<select id="authority_type" name="authority_type" class="w120px ml10">
+							<option value="">권한</option>
+						</select>
+						<select id="search_select" name="search_select" class="w120px ml10">
+							<option value="">검색조건</option>
+							<option value="1">이름</option>
+						</select>
+						<input type="text" id="search_name" name="search_name" class="w150px ml10">
+						<button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+					</li>
+				</ul>
+			</div>
+		</section>
+	</form>
+    <section>
+        <p class="blt01 diIb">기본 정보</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <col style="width:12%">
+                    <col style="width:6%">
+                    <col style="width:6%">
+                    <col style="width:8%">
+                    <col style="width:8%">
+                    <col style="width:12%">
+                    <col style="width:7%">
+                    <col style="width:6%">
+                    <col style="width:6%">
+                    <col style="width:5%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span class="th_icon"></span>건물명<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>ID<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>이름<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>레벨<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>전화번호<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>E-MAIL<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>등록일<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>접속여부<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>삭제여부<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>관리<span class="th_icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_authority">
+                    <tr>
+                        <td colspan="10">- 건물을 선택 후 조회버튼을 누르세요. -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt50 mb40 ar">
+            <button type="button" class="Btn btn2 bcBrown btnAuthorityEnroll">등록하기 </button>
+        </div>
+        <div class="page mb40">
+            <a href="#a" id="btn_authority_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a href="#a" id="btn_authority_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="authority_paging">
+                <!-- 페이징  (javascript로처리, /modules/js/page/module.page.js) -->
+            </ul>
+            <a href="#a" id="btn_authority_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a href="#a" id="btn_authority_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_700"style="min-height:550px">
+        <div class="pop_tt" style="width:700px">
+            <h1 id="label_popup_title"><!-- 권한 정보 등록 --></h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt50 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"> 권한정보</span> 를 <span id="label_popup_title_word" class="fcRed"></span>합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:15%">
+                        <col style="width:20%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><span class="th_icon"></span>건물명</th>
+                            <td colspan="3">
+                                <select id="popup_roren_type" name="popup_roren_type" class="w100 roren_type">
+                                    <option value="">건물 선택</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>ID</th>
+                            <td>
+                                <input id="admin_id" name="admin_id" type="text" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>이름</th>
+                            <td>
+                                <input id="name" name="name" type="text" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th ><span class="th_icon"></span>레벨</th>
+                            <td colspan="3" >
+                                <select id="login_level" name="login_level" class="w100">
+                                    <option value="">레벨 선택</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th ><span class="th_icon"></span>전화번호</th>
+                            <td>
+                                <input id="hp" name="hp" type="text" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>E-MAIL</th>
+                            <td>
+                                <input id="email" name="email" type="text" class="w100">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>접속관리</th>
+                            <td>
+                                <label class="mr10"><input name="fg_connect" class="fg_connect" value="y" type="radio"> 허용</label class="ml10">
+                                <label><input name="fg_connect" class="fg_connect" value="n" type="radio"> 차단</label>
+                            </td>
+                            <th><span class="th_icon"></span>삭제관리</th>
+                            <td>
+                                <label class="mr10"><input name="fg_del" class="fg_del" value="n" type="radio"> 정상</label class="ml10">
+                                <label><input name="fg_del" class="fg_del" value="y" type="radio"> 삭제</label>
+                            </td>
+                        </tr>
+                        <tr id="popup_tr_password_initialize">
+                            <th><span class="th_icon"></span>비밀번호</th>
+                            <td colspan="3">
+                                <button type="button" class="Btn saveBtn btnPasswordInitialize">초기화</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 mb40 ac">
+                <button type="button" id="btn_popup_save" class="Btn saveBtn">등록</button>
+                <button type="button" id="btn_popup_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="/EMS_Modules/js/module.buildingList.js"></script>
+
+<script src="./manager/js/authority.define.js"></script>
+<script src="./manager/js/authority.control.js"></script>

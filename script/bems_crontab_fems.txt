@@ -1,0 +1,29 @@
+# ntek 데이터 수신
+*/5 * * * * /home/fems/script/bems_raw_data_ntek.sh
+
+# 에너지원별 일,월,시간추가
+30 0 * * * /home/fems/script/bems_statistics.sh
+10 */1 * * * /home/fems/script/bems_statistics_time.sh
+
+# 캐시
+* */1 * * * /home/fems/script/bems_cache.sh
+
+# toc db로 하루 2번 단지정보 전달
+0 0,12 * * * /home/fems/script/bems_complex_data_toc.sh
+
+# toc db로 1시간마다 데이터 전달
+0 */1 * * * /home/fems/script/bems_raw_data_toc.sh
+
+# 공휴일 데이터 갱신
+30 0 1 * * /home/fems/script/bems_holiday_api.sh
+
+# 날씨정보
+0 * * * * /home/fems/script/bems_get_weather_info.sh
+0,30 * * * * /home/fems/script/weather_ministry_finedust.sh
+
+# 장애정보
+*/1 * * * * /home/fems/script/bems_monitor_alarm_on.sh
+*/1 * * * * /home/fems/script/bems_monitor_alarm_off.sh
+
+# 5분 데이터 추가
+*/5 * * * * /home/fems/script/bems_5_min_data_java.sh

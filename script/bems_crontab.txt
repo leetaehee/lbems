@@ -1,0 +1,67 @@
+# bems 크론탭 설정 목록
+
+# 5분 데이터 추가 (무등산 전용)
+*/5 * * * * /home/lbems/script/bems_raw_data_mdmt.sh
+
+# ntek 데이터 수신
+*/5 * * * * /home/lbems/script/bems_raw_data_ntek.sh
+
+# cnc 데이터수신
+*/5 * * * * /home/lbems/script/bems_raw_data_cnc.sh
+
+# 개발 로그 삭제
+30 0 * * * /home/lbems/script/bems_web_log_delete.sh
+
+# 미세먼지 데이터 수신
+*/5 * * * * /home/lbems/script/bems_raw_data_finedust.sh
+
+# 전열, 환기등 미터데이터 추가
+*/5 * * * * /home/lbems/script/bems_electhot_total_w.sh
+
+# 전기 층,룸별 미터 데이터 추가
+*/5 * * * * /home/lbems/script/bems_electric_total_w.sh
+
+# 에너지원별 일,월,시간추가
+30 0 * * * /home/lbems/script/bems_statistics.sh
+0 1 * * *  /home/lbems/script/bems_statistics_month_effici.sh
+10 */1 * * * /home/lbems/script/bems_statistics_time.sh
+15 */1 * * * /home/lbems/script/bems_statistics_time_effici.sh
+
+# 경부하, 중부하, 최대부하 통계 생성
+15 1 * * * /home/lbems/script/bems_status_day.sh
+40 1 * * * /home/lbems/script/bems_status_month.sh
+
+# 예측 AI 데이터 수신
+#30 4 * * * /home/lbems/script/bems_ai_prediction.sh
+
+# 공휴일 데이터 갱신
+30 0 1 * * /home/lbems/script/bems_holiday_api.sh
+
+# toc db로 하루 2번 단지정보 전달
+#* 0,12 * * * /home/lbems/script/bems_complex_data_toc.sh
+
+# toc db로 1시간마다 데이터 전달
+#0 */1 * * * /home/lbems/script/bems_raw_data_toc.sh
+
+# 미세먼지 통계 데이터
+0 1 1 * * /home/lbems/script/bems_finedust_month.sh
+
+# 캐시
+* */1 * * * /home/lbems/script/bems_cache.sh
+
+# 1분 데이터 추가
+*/5 * * * * /home/lbems/script/bems_1_min_data_java.sh
+
+# 날씨정보
+0 * * * * /home/lbems/script/bems_get_weather_info.sh
+0,30 * * * * /home/lbems/script/weather_ministry_finedust.sh
+
+# 장애정보
+*/1 * * * * /home/lbems/script/bems_monitor_alarm_on.sh
+*/1 * * * * /home/lbems/script/bems_monitor_alarm_off.sh
+
+# 5분마다 실행하는 내용
+#*/5 * * * * /home/lbems/script/bems_5_minute_common.sh
+
+# 0시, 6시, 12시, 18시 마다 실행하는 내용
+#* 0,6,12,18 * * * /home/lbems/script/bems_unregular_hour_common.sh

@@ -1,0 +1,393 @@
+<div class="dashWrap floatBox">
+    <div>
+        <h2>&nbsp;</h2>
+        <div class="tabList_dash fr">
+            <button type="button" id="btn_dashboard_detail" style="width:120px;" data-group="dashboard">
+                대시보드 세부
+            </button>
+        </div>
+    </div>
+    <div style="height: 92%;">
+        <ul class="dash_ul" style="height:100%">
+            <li style="height: 93%; margin-top: 12px;">
+                <div class="dashcontent mb20" style="height:35.2%">
+                    <p class="dashH3 diIb">제로에너지건축물 등급(금년)</p>
+                    <a id="btn_zero" class="Btn btn_more fr" data-group="analysis" data-file_type="zeroenergy"> more</a>
+                    <div style="margin:4% 0%;">
+                        <div class="graph1" style="padding:20px 0px">
+                            <canvas id="canvas_pie_emission" style="max-height:130px;"></canvas>
+                            <p class="graph1_rate" style="top:50%">
+                                <span id="label_independent_percent">0%</span><span id="label_independent_grade">0등급</span>
+                            </p>
+                        </div>
+                        <div class="fr graph1_dd mt40" style="display:none">
+                            <p>생산량 <br>
+                                <span id="label_produce">0</span> kWh
+                            </p>
+                            <p class="mt20">소비량 <br>
+                                <span id="label_consume">0</span> kWh
+                            </p>
+                        </div>
+                    </div>
+                    <p class="dashH3 diIb">온실가스 배출량 (전일)</p>
+                    <div class="con ac mt20">
+                        <p><span id="label_co2_emission" class="fs32 fcRed b">0</span><span class="ml10">kgCO2eq</span><p>
+                    </div>
+                </div>
+                <div class="dashcontent mb20" style="height:34%; padding-bottom: 44px;">
+                    <p class="dashH3 diIb">에너지 소비량 대비 생산량 </p>
+                    <div class="floatBox w100 mt20">
+                        <h4 class="mb00 fl">전일</h4>
+                        <p class="status_p elli fr">
+                            <span>소비량</span><b id="label_daily_consumption_used">0</b> &nbsp;&nbsp;&nbsp;kWh<br>
+                            <span>생산량</span><b id="label_daily_production_used">0</b> &nbsp;&nbsp;&nbsp;kWh
+                            <!--
+                                <span>절감비용</span><b id="label_price_solar_today">0</b>&nbsp;&nbsp;&nbsp;&nbsp; 원 &nbsp;&nbsp;&nbsp;<br>
+                                <span>발전량</span><b id="label_gen_solar_today">0</b>&nbsp;&nbsp;&nbsp;kWh
+                            -->
+                        </p>
+                    </div>
+                    <div class="status_graph"><span class="status_graph_active1" id="graph_daily_independence" title="전일 소비량 대비 생산량"></span></div>
+                    <div class="floatBox w100 mt20">
+                        <h4 class="mb00 fl">전월</h4>
+                        <p class="status_p elli fr">
+                            <span>소비량</span><b id="label_month_consumption_used">0</b> &nbsp;&nbsp;&nbsp;kWh<br>
+                            <span>생산량</span><b id="label_month_production_used">0</b> &nbsp;&nbsp;&nbsp;kWh
+                            <!--
+                                <span>절감비용</span><b id="label_price_solar_month">0</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 원 &nbsp;&nbsp;&nbsp;<br>
+                                <span>발전량</span><b id="label_gen_solar_month">0</b>&nbsp;&nbsp;&nbsp;kWh
+                            -->
+                        </p>
+                    </div>
+                    <div class="status_graph"><span class="status_graph_active2" id="graph_month_independence" title="전월 소비량 대비 생산량"></span></div>
+                    <div class="floatBox w100 mt20">
+                        <h4 class="mb00 fl">금년</h4>
+                        <p class="status_p elli fr">
+                            <span>소비량</span><b id="label_year_consumption_used">0</b> &nbsp;&nbsp;&nbsp;kWh<br>
+                            <span>생산량</span><b id="label_year_production_used">0</b> &nbsp;&nbsp;&nbsp;kWh
+                            <!--
+                                <span>절감비용</span><b id="label_priec_solar_year">0</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 원 &nbsp;&nbsp;&nbsp;<br>
+                                <span>발전량</span><b id="label_gen_solar_year">0</b>&nbsp;&nbsp;&nbsp;kWh
+                            -->
+                        </p>
+                    </div>
+                    <div class="status_graph"><span class="status_graph_active3" id="graph_year_independence" title="금년 소비량 대비 생산량"></span></div>
+                </div>
+                <div class="dashcontent" style="height:27.2%;">
+                    <div id="div_finedust_group" style="display: none;">
+                        <!-- 미세먼지와 초미세먼지를 보여주는 경우 -->
+                        <h4 class="diIb mt00 mb00">미세먼지
+                            <span class="fs13 fcLgray ml10">㎍/m³</span>
+                            <span class="fcGray">(환경부기준 : </span>
+                            <span class="fs13 fcLgray ml10" id="label_air_pm10">0</span> <span class="fs13 fcLgray">㎍/m³</span>
+                            <span class="fcGray">) </span>
+                        </h4>
+                        <div class="con mt20">
+                            <div class="poRe dustBox">
+                                <div id="div_dust" class="dust_status dust_status_1 dust1"><span id="label_dust">좋음 0</span><span id="span_dust" class="dustb1"></span></div>
+                            </div>
+                            <!---
+                                div class="dust_status_1" left 퍼센트로 위치변경
+                                div class="dust1,2,3,4"/ span class="dustb1,2,3,4" 로 컬러변경
+                                dust1 : 좋음 / dustb1 : 좋음
+                                dust2 : 보통 / dustb2 : 보통
+                                dust3 : 나쁨 / dustb3 : 나쁨
+                                dust4 : 매우 나쁨 / dustb4 : 매우 나쁨
+                            -->
+                            <ul class="dust floatBox">
+                                <li class="dust1"></li>
+                                <li class="dust2"></li>
+                                <li class="dust3"></li>
+                                <li class="dust4"></li>
+                            </ul>
+                            <ul class="dust_txt floatBox">
+                                <li>0</li>
+                                <li>30</li>
+                                <li>80</li>
+                                <li>150</li>
+                                <li>151~</li>
+                            </ul>
+                        </div>
+                        <h4 class="mt20 mb00">초미세먼지<span class="fs13 fcLgray ml10">㎍/m³</span></h4>
+                        <div class="con">
+                            <div class="poRe" style="width:85%">
+                                <div id="div_ultra_dust" class="dust_status dust_status_1 dust1"><span id="label_ultra_dust">좋음 0</span><span id="span_ultra_dust" class="dustb1"></span></div>
+                            </div>
+                            <!---
+                                div class="dust_status_1" left 퍼센트로 위치변경
+                                div class="dust1,2,3,4"/ span class="dustb1,2,3,4" 로 컬러변경
+                                dust1 : 좋음 / dustb1 : 좋음
+                                dust2 : 보통 / dustb2 : 보통
+                                dust3 : 나쁨 / dustb3 : 나쁨
+                                dust4 : 매우 나쁨 / dustb4 : 매우 나쁨
+                            -->
+                            <ul class="dust floatBox">
+                                <li class="dust1"></li>
+                                <li class="dust2"></li>
+                                <li class="dust3"></li>
+                                <li class="dust4"></li>
+                            </ul>
+                            <ul class="dust_txt floatBox">
+                                <li>0</li>
+                                <li>15</li>
+                                <li>35</li>
+                                <li>75</li>
+                                <li>76~</li>
+                            </ul>
+                        </div>
+                        <p class="fs13 ar fccomment mt10" style="line-height: 12px;">* 환경부수치와 상이할수 있습니다</p>
+                    </div>
+                    <div id="div_environment_group" style="display: none;">
+                        <!-- co2와 초미세먼지를 보여주는 경우 -->
+                        <!--
+                            div class="dust_status_1" left 퍼센트로 위치변경
+                            div class="dust6,1,2,3,4"/ span class="dustb6,1,2,3,4" 로 컬러변경
+                            dust6 : 매우좋음 / dustb6 : 매우좋음
+                            dust1 : 좋음 / dustb1 : 좋음
+                            dust2 : 보통 / dustb2 : 보통
+                            dust3 : 나쁨 / dustb3 : 나쁨
+                            dust4 : 매우 나쁨 / dustb4 : 매우 나쁨
+                        -->
+                        <h4 class="diIb mt00 mb00">CO2 농도
+                            <span class="fs13 fcLgray ml10"><span id="label_co2_value">0</span> ppm</span>
+                        </h4>
+                        <div class="con mt20">
+                            <div class="poRe dustBox">
+                                <div id="div_co2" class="dust_status dust_status_1 dust6"><span id="label_co2">매우 좋음 0</span><span id="span_co2" class="dustb1"></span></div>
+                            </div>
+                            <ul class="dust5 floatBox">
+                                <li class="dust6"></li>
+                                <li class="dust5"></li>
+                                <li class="dust2"></li>
+                                <li class="dust3"></li>
+                                <li class="dust4"></li>
+                            </ul>
+                            <ul class="dust_txt5 floatBox">
+                                <li>0</li>
+                                <li>450</li>
+                                <li>1000</li>
+                                <li>2000</li>
+                                <li>5000~</li>
+                                <li></li>
+                            </ul>
+                        </div>
+                        <!---
+                            div class="dust_status_1" left 퍼센트로 위치변경
+                            div class="dust1,2,3,4"/ span class="dustb1,2,3,4" 로 컬러변경
+                            dust1 : 좋음 / dustb1 : 좋음
+                            dust2 : 보통 / dustb2 : 보통
+                            dust3 : 나쁨 / dustb3 : 나쁨
+                            dust4 : 매우 나쁨 / dustb4 : 매우 나쁨
+                        -->
+                        <h4 class="mt20 mb00">
+                            초미세먼지<span class="fs13 fcLgray ml10">㎍/m³</span>
+                            <span class="fs13 fcGray">(환경부기준 : </span>
+                            <span class="fcLgray ml10" id="label_air_pm25">0</span> <span class="fs13 fcLgray">㎍/m³</span>
+                            <span class="fs13 fcGray">) </span>
+                        </h4>
+                        <div class="con">
+                            <div class="poRe" style="width:85%">
+                                <div id="div_ultra_by_co2_dust" class="dust_status dust_status_1 dust1"><span id="label_ultra_by_co2_dust">좋음 0</span><span id="span_ultra_by_co2_dust" class="dustb1"></span></div>
+                            </div>
+                            <ul class="dust floatBox">
+                                <li class="dust1"></li>
+                                <li class="dust2"></li>
+                                <li class="dust3"></li>
+                                <li class="dust4"></li>
+                            </ul>
+                            <ul class="dust_txt floatBox">
+                                <li>0</li>
+                                <li>15</li>
+                                <li>35</li>
+                                <li>75</li>
+                                <li>76~</li>
+                            </ul>
+                        </div>
+                        <p class="fs13 ar fccomment mt10" style="line-height: 12px;">* 환경부수치와 상이할수 있습니다</p>
+                    </div>
+                </div>
+            </li>
+            <li class="dash_contents poRe">
+                <ul class="dash_ul2" style="height: 100%;">
+                    <li style="height: 100%;">
+                        <div class="dashcontent img_graphy"  style="height: 100%;">
+                            <div class="value v1">
+                                <p>소비량</p>
+                                <span id="label_center_use">0</span> <span>kWh</span>
+                            </div>
+                            <div class="value v2">
+                                <p>발전량</p>
+                                <span id="label_center_gen">0</span> <span>kWh</span>
+                            </div>
+                            <div class="value v3">
+                                <p>발전량 - 소비량</p>
+                                <span id="label_center_diff">0</span> <span>kWh</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li style="height: 100%;">
+                        <div class="dash_tt">
+                            <p class="diIb">에너지 사용 현황</p>
+                            <select id="select_energy" class="w100px diIb ml20">
+                                <option value="2">금일</option>
+                                <option value="1">금월</option>
+                                <option value="0">금년</option>
+                            </select>
+                        </div>
+                        <div class="dashcontent mb20" style="height: 60.1%">
+                            <p class="dashH3 diIb">전체 에너지 사용 현황</p>
+                            <div class="con floatBox" style="height: 96%" id="energy_con_elec">
+                                <div class="floatBox">
+                                    <div class="energy_con">
+                                        <p>목표 : <span id="label_target_elec">0</span>  <span class="label_unit">kWh</span><button type="button" id="btn_set_elec" class="btnSet"></button></p>
+                                        <p><span id="label_usage_elec" style="color:#FBB814">0</span> <span class="label_unit" style="color:#FBB814">kWh</span></p>
+                                        <p>이전사용량 <span id="label_before_elec" class="ml20">0</span> <span class="fs13 label_unit">kWh</span></p>
+                                        <div class="graph_legend" id="div_chart_legend_energy">
+                                            <!-- 자바스크립트로 동적 생성 -->
+                                        </div>
+                                        <div style="width: 100%; height: 245px; margin: 0 0 3%;">
+                                            <canvas id="canvas_elec"></canvas>
+                                        </div>
+                                        <p class=" energy_con_p4"> 예상 사용 요금<span class="ml10" id="label_price_elec">0</span> 원</p><br>
+                                        <p>* 실제 요금과는 다소 차이가 있을 수 있습니다</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="status">
+                            <ul style="height:100%">
+                                <li class="dashcontent m00">
+                                    <p class="dashH3 diIb">용도별 사용 현황</p>
+                                    <div style="margin-top: 6%; height: 60%;padding:10px 10px 5px">
+                                        <canvas id="chart_pie_usage"></canvas>
+                                    </div>
+                                    <div class="graph_legend mt10" style="text-align: center;" id="div_chart_legend_usage">
+                                        <!-- 자바스크립트로 동적으로 생성함 -->
+                                    </div>
+                                    <div class="graph_legend" style="display:none">
+                                        <p><span style="background: #7abdb8"></span>실측값(<span>㎍/m³</span>)</p>
+                                        <p><span style="background: #7380a4"></span>기준값(<span>㎍/m³</span>)</p>
+                                    </div>
+                                </li>
+                                <li class="dashcontent">
+                                    <p class="dashH3 diIb" id="label_facility_title">설비별 사용량<!-- 및 효율--></p>
+                                    <div class="tbType04 tdType04-1 mt10">
+                                        <table class="w100">
+                                            <colgroup>
+                                                <col style="width:20%">
+                                                <col style="width:15%">
+                                                <col style="width:12%">
+                                                <!--<col style="width:12%">-->
+                                            </colgroup>
+                                            <thead>
+                                                <tr>
+                                                    <th>설비명</th>
+                                                    <th>작동상태</th>
+                                                    <th>사용량<br>(kWh)</th>
+                                                    <!--<th>효율<br>(%)</th>-->
+                                                </tr>
+                                            </thead>
+                                            <tbody id="tbody_facility">
+                                                <!-- 자바스크립트로 동적으로 생성함 -->
+                                                <tr>
+                                                    <td colspan="3">설비 정보가 존재하지 않습니다.</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div><!---dashWrap-->
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_550" style="min-height: 460px">
+        <div class="pop_tt" style="width:550px">
+            <h1>목표 사용량 설정</h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt40 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"></span> 에너지의 목표 사용량을 설정합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:45%">
+                        <col style="width:55%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">한 시간 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_hour" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit1"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">하루 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_day" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit2"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">한 달 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_month" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit3"></span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><img src="../res/images/icon/icon_article.png" class="mr10">일 년 목표 사용량</td>
+                            <td>
+                                <input id="input_popup_year" type="text" class="w60"/>
+                                <span class="ml05 fs13" id="popup_unit4"></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt30 ac">
+                <button type="button" id="btn_button_save" class="Btn saveBtn">저장</button>
+                <button type="button" id="btn_button_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<input type="button" id="btn_watchdog" value="watchdog.">
+
+<script src="/EMS_Modules/js/module.menuManager.js"></script>
+
+<script src="./dashboard/js/chart.line.y2.js"></script>
+<script src="./dashboard/js/dashboard.chart.pie.js"></script>
+<script src="./dashboard/js/dashboard.chart.distribution_pie.js"></script>
+
+<script src="./dashboard/js/dashboard.define.js"></script>
+<script src="./dashboard/js/dashboard.control.js"></script>
+
+<script>
+    $("#btn_watchdog").on('click', function() {
+        let params = [];
+        let data = [];
+
+        params.push(
+            { name: 'requester', value: 'watchdog' },
+            { name: 'request', value: 'arrange_time' },
+            { name: 'params', value: JSON.stringify(data) }
+        );
+
+        let requestParams = {
+            url: '../http/index.php',
+            params: params,
+            callback: null,
+            callbackParams: null,
+            showAlert: true
+        };
+
+        module.request(requestParams);
+    });
+</script>

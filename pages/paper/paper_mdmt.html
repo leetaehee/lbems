@@ -1,0 +1,323 @@
+<h2>
+	<img src="../res/images/icon/icon_report.png" class="mr08">
+	보고서
+</h2>
+<div class="content report" style="min-height: 1308px;">
+	<section class="mb20">
+		<form id="form-excel" method="post">
+			<input type="hidden" id="form-submit" name="form_submit" value ="excel_download">
+			<input type="hidden" id="form-requester" name="requester" value="paper">
+			<input type="hidden" id="form-request" name="request" value="paper_excel">
+			<input type="hidden" id="form-param" name="params" value="">
+			<h3>
+				보고서
+				<span>보고서를 조회하고 엑셀 다운로드 할 수 있습니다.
+				<button type="button" id="btn_paper_excel" class="Btn excelBtn fr">Excel</button>
+				</span>
+			</h3>
+		</form>
+		<ul class="nav">
+			<li>HOME</li>
+			<li>보고서</li>
+		</ul>
+	</section>
+	<section>
+		<div class="articleBox mt10">
+			<ul>
+				<li id="period_hour_box" class="period_box" style="display: none;">
+					<img src="../res/images/icon/icon_article.png" class="mr10">
+					<label class="fcBlack">기준선택</label>
+
+					<select id="start_hour" class="w120px ml10"></select>
+				</li>
+				<li id="period_daily_box" class="period_box">
+					<img src="../res/images/icon/icon_article.png" class="mr10">
+					<label class="fcBlack">기준선택</label>
+					<input type="text" id="start_date" class="dateStyle w130px ml10 mr10" readonly>-
+					<input type="text" id="end_date" class="dateStyle w130px ml10 mr10" readonly>
+				</li>
+				<li id="period_month_box" class="period_box" style="display: none;">
+					<img src="../res/images/icon/icon_article.png" class="mr10">
+					<label class="fcBlack">기준선택</label>
+					<select id="start_month_ym" class="w120px ml10"></select>
+					<select id="start_month" class="w120px mr10"></select>-
+					<select id="end_month_ym" class="w120px ml10"></select>
+					<select id="end_month" class="w120px mr10"></select>
+				</li>
+				<li id="period_year_box" class="period_box" style="display: none;">
+					<img src="../res/images/icon/icon_article.png" class="mr10">
+					<label class="fcBlack">기준선택</label>
+
+					<select id="start_year_ym" class="w120px ml10"></select>
+				</li>
+				<li id="period_enjoy_box">
+					<button type="button" id="btn_search_today" class="Btn btn_more2 ml10">
+						오늘
+					</button>
+					<button type="button" id="btn_search_yesterday" class="Btn btn_more2 ml10">
+						어제
+					</button>
+					<button type="button" id="btn_search_last_week" class="Btn btn_more2 ml10">
+						지난 주
+					</button>
+					<button type="button" id="btn_search_last_month" class="Btn btn_more2 ml10">
+						지난 달
+					</button>
+					<button type="button" id="btn_search_1_week" class="Btn btn_more2 ml10">
+						최근 7일
+					</button>
+				</li>
+				<li>
+					<img src="../res/images/icon/icon_article.png" class="mr10">
+					<label class="fcBlack">주기선택</label>
+					<label class="mr10 ml10">
+						<input type="radio" id="btn_period_daily" name="radio_date2" class="radio_period" value="2"> 일
+					</label>
+					<label class="mr10">
+						<input type="radio" id="btn_period_month" name="radio_date3" class="radio_period" value="5"> 월
+					</label>
+					<label class="mr10">
+						<input type="radio" id="btn_period_year" name="radio_date4" class="radio_period" value="0"> 년
+					</label>
+				</li>
+				<li>
+					<button type="button" id="btn_search" class="Btn searchBtn ml10" title="조회">
+						<span>조회</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+	</section>
+	<section class="tabCont floatBox mt30">
+		<div class="fl card" style="position:absolute">
+			<div class="pLnb bno">
+				<ul>
+					<li>
+						<!--
+							에너지원 색상표
+							조명 #e87269,전열 #f6aa79,급탕 #e7ea8f,냉난방 #d4ea8f,환기 #9aea8f,운송 #8feade,전기온수 #8fb1ea,EHP #9c8fea,바닥난방 #ea8fbc
+
+							href="#"
+						-->
+						<a href="#">
+							<input type="checkbox"
+								   id="checkbox_electric"
+								   name="checkbox_electric"
+								   class="checkbox_all checkbox_report"
+								   value="electric"> 전체 전기
+						</a>
+						<ul id="btn_items_fold">
+							<li class="dept">
+								<a class="lnb_up">
+									<input type="checkbox"
+										   id="checkbox_1f_group"
+										   name="checkbox_1f_group"
+										   class="checkbox_floor checkbox_report"
+										   value="1f_group"> 1층
+								</a>
+								<ul>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_1f_electric_light"
+											   name="checkbox_1f_electric_light"
+											   class="checkbox_item checkbox_1f checkbox_report"
+											   value="1f_electric_light"> 조명
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_1f_electric_elechot"
+											   name="checkbox_1f_electric_elechot"
+											   class="checkbox_item checkbox_1f checkbox_report"
+											   value="1f_electric_elechot"> 전열
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_1f_electric_water_heater"
+											   name="checkbox_1f_electric_water_heater"
+											   class="checkbox_item checkbox_1f checkbox_report"
+											   value="1f_electric_water_heater"> 전기온수기
+									</li>
+								</ul>
+							</li>
+							<li class="dept">
+								<a class="lnb_up">
+									<input type="checkbox"
+										   id="checkbox_2f_group"
+										   name="checkbox_2f_group"
+										   class="checkbox_floor checkbox_report"
+										   value="2f_group"> 2층
+								</a>
+								<ul>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_2f_electric_light"
+											   name="checkbox_2f_electric_light"
+											   class="checkbox_item checkbox_2f checkbox_report"
+											   value="2f_electric_light"> 조명
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_2f_electric_elechot"
+											   name="checkbox_2f_electric_elechot"
+											   class="checkbox_item checkbox_2f checkbox_report"
+											   value="2f_electric_elechot"> 전열
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_2f_electric_heating"
+											   name="checkbox_2f_electric_heating"
+											   class="checkbox_item checkbox_2f checkbox_report"
+											   value="2f_electric_floor_heating"> 바닥난방
+									</li>
+								</ul>
+							</li>
+							<li class="dept">
+								<a class="lnb_up">
+									<input type="checkbox"
+										   id="checkbox_3f_group"
+										   name="checkbox_3f_group"
+										   class="checkbox_floor checkbox_report"
+										   value="3f_group"> 3층
+								</a>
+								<ul>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_3f_electric_light"
+											   name="checkbox_3f_electric_light"
+											   class="checkbox_item checkbox_3f checkbox_report"
+											   value="3f_electric_light"> 조명
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_3f_electric_elechot"
+											   name="checkbox_3f_electric_elechot"
+											   class="checkbox_item checkbox_3f checkbox_report"
+											   value="3f_electric_elechot"> 전열
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_3f_electric_vent"
+											   name="checkbox_3f_electric_vent"
+											   class="checkbox_item checkbox_3f checkbox_report"
+											   value="3f_electric_vent"> 환기
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_3f_electric_heating"
+											   name="checkbox_3f_electric_heating"
+											   class="checkbox_item checkbox_3f checkbox_report"
+											   value="3f_electric_heating"> 난방
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_3f_electric_elavator"
+											   name="checkbox_3f_electric_elavator"
+											   class="checkbox_item checkbox_3f checkbox_report"
+											   value="3f_electric_eleavator"> 운송(승강기)
+									</li>
+								</ul>
+							</li>
+							<li class="dept">
+								<a class="lnb_up">
+									<input type="checkbox"
+										   id="checkbox_ph_group"
+										   name="checkbox_ph_group"
+										   class="checkbox_floor checkbox_report"
+										   value="ph_group"> 옥탑
+								</a>
+								<ul>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_ph_electric_cold"
+											   name="checkbox_ph_electric_cold"
+											   class="checkbox_item checkbox_ph checkbox_report"
+											   value="ph_electric_cold"> 냉 난방
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_ph_electric_ehp"
+											   name="checkbox_ph_electric_ehp"
+											   class="checkbox_item checkbox_ph checkbox_report"
+											   value="ph_electric_ehp"> EHP
+									</li>
+									<li>
+										<input type="checkbox"
+											   id="checkbox_ph_electric_vent"
+											   name="checkbox_ph_electric_vent"
+											   class="checkbox_item checkbox_ph checkbox_report"
+											   value="ph_electric_vent"> 환기
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="fr paper_ul" style="width:100%; padding-left: 285px;">
+			<ul>
+				<li>
+					<p>총 사용량<br> <span class="fs13 n">(kWh)</span></p>
+					<p id="label_total_used">0</p>
+				</li>
+				<!--
+                    <li>
+                        <p>총 사용요금<br> <span class="fs13 n">(원)</span></p>
+                        <p id="label_total_price">0</p>
+                    </li>
+                -->
+				<li>
+					<p>평균 사용량<br> <span class="fs13 n">(kWh/<span id="label_period_time_unit">day</span>)</span></p>
+					<p id="label_average_used">0</p>
+				</li>
+				<!--
+                    <li>
+                        <p>평균 사용요금<br> <span class="fs13 n">(원)</span></p>
+                        <p id="label_average_price">0</p>
+                    </li>
+                -->
+				<li>
+					<p>최저 사용량<br> <span class="fs13 n">(kWh)</span></p>
+					<p id="label_minimum_used">0</p>
+				</li>
+				<!--
+                    <li>
+                        <p>최저 사용요금<br> <span class="fs13 n">(원)</span></p>
+                        <p id="label_minimum_price">0</p>
+                    </li>
+                -->
+				<li class="mr00">
+					<p>최고 사용량<br> <span class="fs13 n">(kWh)</span></p>
+					<p id="label_maximum_used">0</p>
+				</li>
+				<!--
+                    <li class="mr00">
+                        <p>최고 사용요금<br> <span class="fs13 n">(원)</span></p>
+                        <p id="label_maximum_price">0</p>
+                    </li>
+                -->
+			</ul>
+			<div class="card mt30">
+				<p class="tt_con poRe">그래프
+					<!-- 무등산은 요금 개선 후 반영할 예정 우선 분기처리 -->
+					<!--
+                    <span class="tabList2">
+                        <button id="btn_used_graph" class="on">사용량</button>
+						<button id="btn_price_graph">사용요금</button>
+                    </span>
+					-->
+				</p>
+				<!-- bcLgray 은 그래프 영역 표시할 때 사용 (태희) -->
+				<div class="mt20" style="width:100%; height:690px;">
+					<canvas id="canvas_chart_report"></canvas>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+
+<script src="./paper/js/chart.bar_stack_all.js"></script>
+<script src="./paper/js/chart.bar_stack_floor.js"></script>
+
+<script src="./paper/js/paper_mdmt.define.js"></script>
+<script src="./paper/js/paper.control.js"></script>

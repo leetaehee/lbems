@@ -1,0 +1,154 @@
+<style>
+    .menu_group_name {
+        font-family: 'Nanum Square';
+        font-size: 25px;
+        color: white;
+    }
+</style>
+<h2>
+    <!-- 메뉴 정보는 자바스크립트로 동적으로 변경함. 해당 메뉴는 설정,관리자설정에서 동일하게 적용 됨. -->
+    <img id="login_log_page_icon" src="../res/images/icon/icon_set2.png" class="mr08">
+    <groupTag class="menu_group_name"></groupTag>
+    <span>전기 요금 관리</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            전기 요금 관리
+            <span>전기 요금을 관리합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li class="menu_group_name">설정</li>
+            <li>전기 요금 관리</li>
+        </ul>
+    </section>
+    <section>
+        <p class="blt01 diIb">기본 정보</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <col style="width:11%">
+                    <col style="width:11%">
+                    <col style="width:11%">
+                    <col style="width:11%">
+                    <col style="width:16%">
+
+                    <col style="width:12%">
+                    <col style="width:13%">
+                    <col style="width:13%">
+                    <col style="width:14%">
+                    <col style="width:14%">
+
+                    <col style="width:15%">
+                    <col class="modify-button-area" style="width:9%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><span class="th_icon"></span>계약 종별<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>용도(전압)<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>전압<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>전압선택<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>계절구분<span class="th_icon"></span></th>
+
+                        <th><span class="th_icon"></span>기본값<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>단가<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>기후환경요금<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>연료비조정액<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>부가가치세<span class="th_icon"></span></th>
+
+                        <th><span class="th_icon"></span>전력산업기반기금<span class="th_icon"></span></th>
+                        <th class="modify-button-area"><span class="th_icon"></span>관리<span class="th_icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_energy_unit_price">
+                    <tr>
+                        <td id="empty-table-td" colspan="12">- 에너지 단가 데이터가 존재하지 않습니다 -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="page mb40">
+            <a id="btn_price_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a id="btn_price_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="price_paging">
+                <li class="on"><a href="#a">1</a></li>
+            </ul>
+            <a id="btn_price_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a id="btn_price_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section>
+</div>
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_1000" style="min-height:450px; margin-left: -247px;">
+        <div class="pop_tt" style="width:1000px">
+            <h1 id="label_popup_title">전기 요금 정보 수정</h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt50 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"> 전기 요금</span> 정보를 <span class="fcRed">수정</span>합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:18%">
+                        <col style="width:20%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><span class="th_icon"></span>계약 종별</td>
+                            <td id="label_electric_type_name"></td>
+                            <th><span class="th_icon"></span>용도(전압)</td>
+                            <td id="label_type_gubun_name"></td>
+                            <th><span class="th_icon"></span>전압</td>
+                            <td id="label_type_gubun2_name"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>전압선택</td>
+                            <td id="label_type_select_name"></td>
+                            <th><span class="th_icon"></span>계절구분</td>
+                            <td id="label_summer_gubun_name"></td>
+                            <th><span class="th_icon"></span>적용시작일</th>
+                            <td id="label_apply_start_date"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>적용종료일</th>
+                            <td id="label_apply_end_date"></td>
+                            <th><span class="th_icon"></span>적용구간</th>
+                            <td id="label_section"></td>
+                            <th><span class="th_icon"></span>부하단계</th>
+                            <td id="label_status_level"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>기본요금</td>
+                            <td><input type="text" id="popup_defaultPrice" name="popup_defaultPrice" class="w100"></td>
+                            <th><span class="th_icon"></span>단가</td>
+                            <td><input type="text" id="popup_cost" name="popup_cost" class="w100"></td>
+                            <th><span class="th_icon"></span>기후환경요금</th>
+                            <td id="label_etc_price1"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>연료비조정액</td>
+                            <td id="label_etc_price2"></td>
+                            <th><span class="th_icon"></span>부가가치세</td>
+                            <td id="label_etc_price3"></td>
+                            <th><span class="th_icon"></span>전력산업기반기금</td>
+                            <td id="label_etc_price4"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 ac">
+                <button type="button" id="btn_price_button_save" class="Btn saveBtn">등록</button>
+                <button type="button" id="btn_price_button_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="./set/js/unit_price_kepco.define.js"></script>
+<script src="./set/js/unit_price_kepco.control.js"></script>

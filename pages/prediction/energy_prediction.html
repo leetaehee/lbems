@@ -1,0 +1,218 @@
+<style>
+    .tabList00 > button{
+        display: inline-block;
+        width:10%;
+        min-width:100px;
+        margin-right:5px;
+        margin-top:0px;
+        line-height: 40px;
+        color: #9d9d9d;
+        border: 1px solid #999;
+        background-color: white;
+        transition-property: background-color,border;
+        -webkit-transition-property: background-color,border;
+        -moz-transition-property: background-color,border;
+        transition-duration: 0.3s;
+        -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+    }
+    .tabList00 > button:hover,.tabList00 > button.on{
+        background: #284F44;
+        border: 1px solid #284F44;
+        color: #fff;
+    }
+</style>
+
+<h2>
+    <img src="../res/images/icon/icon_prediction.png" class="mr08">
+    예측 <span>에너지원별 사용 예측</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            에너지원별 사용 예측
+            <span>사용자의 에너지원별 사용 현황을 예측합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>예측</li>
+            <li>에너지원별 사용 예측</li>
+        </ul>
+    </section>
+
+    <section class="tabCont">
+        <div class="floatBox card mt40">
+            <p class="tt_con">건물 전체 사용량 예측</p>
+            <div class="floatBox mt30 bbno" style="height:100%;">
+                <div class="energy">
+                    <p class="fs17 b">
+                        금일 사용량 예측
+                        <span class="n fcLgray">｜</span>
+                        <span class="n fcLgray" id="label_daily_period"></span>
+                    </p>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금일 현재까지 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_daily_used" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_daily_used_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금일 예상 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_daily_predict" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_daily_predict_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 층별 금일 사용량 예측
+                    </p>
+                    <div class="tbType01 tdType04-1 mt20">
+                        <table>
+                            <colgroup>
+                                <col style="width:10%">
+                                <col style="width:20%">
+                                <col style="width:20%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>층</th>
+                                    <th>금일 현재(kWh)</th>
+                                    <th>금일 예상(kWh)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_daily">
+                                <!-- 자바스크립트로 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="energy">
+                    <p class="fs17 b">
+                        금주 사용량 예측
+                        <span class="n fcLgray">｜</span>
+                        <span class="n fcLgray" id="label_weekly_period"></span>
+                    </p>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금주 현재까지 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_weekly_used" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_weekly_used_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금주 예상 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_weekly_predict" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_weekly_predict_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 층별 금주 사용량 예측
+                    </p>
+                    <div class="tbType01 tdType04-1 mt20">
+                        <table>
+                            <colgroup>
+                                <col style="width:10%">
+                                <col style="width:20%">
+                                <col style="width:20%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>층</th>
+                                    <th>금주 현재(kWh)</th>
+                                    <th>금주 예상(kWh)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_weekly">
+                                <!-- 자바스크립트로 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="energy">
+                    <p class="fs17 b">
+                        금월 사용량 예측
+                        <span class="n fcLgray">｜</span>
+                        <span class="n fcLgray" id="label_month_period"></span>
+                    </p>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금월 현재까지 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_month_used" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_month_used_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 금월 예상 사용량
+                    </p>
+                    <div class="day_graph mt20" style="background: #edecf3;">
+                        <span id="label_graph_month_predict" style="width: 0%; background: #877DBD;">&nbsp;</span>
+                        <span><b id="label_graph_month_predict_text">0</b> kWh</span>
+                    </div>
+                    <p class="mt40 floatBox fcBrown">
+                        <img src="../res/images/icon/leftM_on.png" class="mr08"> 층별 금월 사용량 예측
+                    </p>
+                    <div class="tbType01 tdType04-1 mt20">
+                        <table>
+                            <colgroup>
+                                <col style="width:10%">
+                                <col style="width:20%">
+                                <col style="width:20%">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>층</th>
+                                    <th>금월 현재(kWh)</th>
+                                    <th>금월 예상(kWh)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody_month">
+                                <!-- 자바스크립트로 동적 생성 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!---//card-->
+    </section>
+    <section class="tabCont">
+        <div class="floatBox mt50">
+            <div id="btn_period" class="tabList00 ac" style="margin-top:10px;border-color:#fff">
+                <button id="btn_daily" class="on">일간</button>
+                <button id="btn_weekly">주간</button>
+                <button id="btn_month">월간</button>
+            </div>
+        </div>
+        <div class="analysis_box floatBox">
+            <div class="fl">
+                <p class="blt01">층별 예측 사용량</p>
+                <div class="graph_legend" id="div_chart_legend_floor">
+                    <!-- 자바스크립트로 동적 생성 -->
+                </div>
+                <div class="graph4">
+                    <canvas id="canvas_chart_middle1"></canvas>
+                </div>
+            </div>
+            <div class="fr diIb floatBox">
+                <p class="blt01">사무소 예측 사용량</p>
+                <div class="articleBox2">
+                    <div class="ati2Type2 floatBox">
+                        <div class="graph_legend mt10" id="div_chart_legend_office">
+                            <!-- 자바스크립트로 동적 생성 -->
+                        </div>
+                        <div class="graph9">
+                            <canvas id="canvas_chart_middle2"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!---//floatBox-->
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<script src="./prediction/js/building_chart.bar.js"></script>
+<script src="./prediction/js/type_chart.bar.js"></script>
+
+<script src="./prediction/js/energy_prediction.define.js"></script>
+<script src="./prediction/js/energy_prediction.control.js"></script>

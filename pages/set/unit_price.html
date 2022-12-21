@@ -1,0 +1,144 @@
+<h2>
+    <img src="../res/images/icon/icon_set2.png" class="mr08">설정
+    <span>단가 관리</span>
+</h2>
+<div class="content">
+    <section class="mb20">
+        <h3>
+            단가 관리
+            <span>전기 외에  단가를 관리합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>설정</li>
+            <li>에너지 단가 관리</li>
+        </ul>
+    </section>
+    <section>
+        <p class="blt01 diIb">기본 정보</p>
+        <div class="tbType04 tdType04-1">
+            <table class="w100">
+                <colgroup>
+                    <col style="width:5%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                    <col style="width:10%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="all_checked"></th>
+                        <th><span class="th_icon"></span>에너지원<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>시작일<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>종료일<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>마감일<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>누진단계<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>사용량<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>기본요금(원)<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>단가(원)<span class="th_icon"></span></th>
+                        <th><span class="th_icon"></span>관리<span class="th_icon"></span></th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_energy_unit_price">
+                    <tr>
+                        <td colspan="10">- 에너지 단가 데이터가 존재하지 않습니다 -</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt50 mb40 ar">
+            <!--<button class="Btn btn2 btn2_b excelBtn">엑셀 업로드</button>-->
+            <!--<button type="button" id="" class="Btn btn2 excelBtn">엑셀업로드</button>-->
+            <button type="button"  class="Btn btn2 bcBrown price-enroll">등록하기 </button>
+            <button type="button" class="Btn btn2 bcRed price-delete">삭제하기</button>
+        </div>
+        <div class="page mb40">
+            <a href="#a" id="btn_price_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+            <a href="#a" id="btn_price_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+            <ul id="price_paging">
+                <li class="on"><a href="#a">1</a></li>
+            </ul>
+            <a href="#a" id="btn_price_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+            <a href="#a" id="btn_price_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+        </div>
+    </section><!-- //tabCont-->
+</div><!-- //content-->
+
+<a class="form_popup_setting" href="#form_popup_setting"></a>
+<form id="form_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_1000"style="min-height:450px">
+        <div class="pop_tt" style="width:1000px">
+            <h1 id="label_popup_title"><!--에너지 단가 정보 등록--></h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt50 mb10 fcRed">* <span id="popup_energy_name" class="fcprimary"> 에너지 단가</span> 의 정보를 <span id="label_popup_title_word" class="fcRed"></span>합니다.</p>
+            <div class="tbType04">
+                <table>
+                    <colgroup>
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:15%">
+                        <col style="width:20%">
+                        <col style="width:15%">
+                        <col style="width:20%">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th><span class="th_icon"></span>에너지원</td>
+                            <td colspan="3">
+                                <select id="energy_type" name="energy_type" class="w100">
+                                    <option value="">선택하세요</option>
+									<option value="gas">가스</option>
+                                    <option value="water">수도</option>
+                                </select>
+                            </td>
+                            <td colspan="2" style="background:#f8f8f8"></td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>시작일</td>
+                            <td>
+                                <input type="text" id="start_date" name="start_date" class="w100 dateStyle" readonly>
+                            </td>
+                            <th><span class="th_icon"></span>종료일</td>
+                            <td>
+                                <input type="text" id="end_date" name="end_date" class="w100 dateStyle" readonly>
+                            </td>
+                            <th><span class="th_icon"></span>누진단계</td>
+                            <td >
+                                <select id="g_level" name="g_level" class="w100">
+                                    <option value="">선택해주세요</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><span class="th_icon"></span>사용량</td>
+                            <td>
+                                <input type="text" id="used" name="used" class="w100 bcReadonly">
+                            </td>
+                            <th><span class="th_icon"></span>기본요금 (원)</td>
+                            <td>
+                                <input type="text" id="base_price" name="base_price" class="w100">
+                            </td>
+                            <th><span class="th_icon"></span>단가 (원)</td>
+                            <td>
+                                <input type="text" id="unit_cost" name="unit_cost" class="w100">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt40 ac">
+                <button type="button" id="btn_price_button_save" class="Btn saveBtn">등록</button>
+                <button type="button" id="btn_price_button_close" class="Btn closeBtn">닫기</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script src="./set/js/unit_price.define.js"></script>
+<script src="./set/js/unit_price.control.js"></script>

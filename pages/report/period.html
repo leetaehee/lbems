@@ -1,0 +1,108 @@
+<style>
+    .content {
+        min-height: 0px;
+    }
+</style>
+<h2>
+    <img src="../res/images/icon/icon_report.png" class="mr08">
+    조회 <span>기간별 사용 현황</span>
+</h2>
+<div class="content analysis">
+    <section class="mb20">
+        <h3>
+            기간별 사용 현황
+            <span>기간별로 사용 현황을 조회합니다.</span>
+        </h3>
+        <ul class="nav">
+            <li>HOME</li>
+            <li>조회</li>
+            <li>기간별 사용 현황</li>
+        </ul>
+    </section>
+    <section>
+        <div class="articleBox mt10">
+            <ul>
+                <li id="period_daily_box" class="period_box">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <input type="text" id="start_date" class="dateStyle w130px ml10 mr10" readonly>-
+                    <input type="text" id="end_date" class="dateStyle w130px ml10 mr10" readonly>
+                </li>
+                <li id="period_month_box" class="period_box" style="display: none;">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <select id="start_month_ym" class="w120px ml10"></select>
+                    <select id="start_month" class="w120px mr10"></select>-
+                    <select id="end_month_ym" class="w120px ml10"></select>
+                    <select id="end_month" class="w120px mr10"></select>
+                </li>
+                <li id="period_year_box" class="period_box" style="display: none;">
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기준 날짜</label>
+                    <select id="start_year_ym" class="w120px ml10"></select>
+                </li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <label class="fcBlack">기간 선택</label>
+                    <label class="mr10 ml10">
+                        <input type="radio" id="btn_period_daily" name="radio_date2" class="radio_period" value="2"> 일
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" id="btn_period_month" name="radio_date3" class="radio_period" value="5"> 월
+                    </label>
+                    <label class="mr10">
+                        <input type="radio" id="btn_period_year" name="radio_date4" class="radio_period" value="0"> 년
+                    </label>
+                </li>
+                <li>
+                    <img src="../res/images/icon/icon_article.png" class="mr10">
+                    <select id="select_energy_type" class="w120px ml10">
+                    </select>
+                    <select id="select_building_dong" class="w120px ml10">
+                        <option value="all">전체</option>
+                    </select>
+                    <select id="select_building_floor" class="w120px ml10 select-floor-section">
+                        <option value="all">전체</option>
+                    </select>
+                </li>
+                <li>
+                    <button type="button" id="btn_search" class="Btn searchBtn" title="조회">
+                        <span>조회</span>
+                    </button>
+                    <button type="button" id="btn_excel_period" class="Btn excelBtn ml10">
+                        Excel
+                    </button>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <div class="floatBox">
+                <p class="blt01 diIb">
+                    상세 그래프
+                    <!--
+                    <form id="form-excel" method="post" style="display: inline-block;">
+                        <input type="hidden" id="form-submit" name="form_submit" value="excel_download">
+                        <input type="hidden" id="form-requester" name="requester" value="solar">
+                        <input type="hidden" id="form-request" name="request" value="solar_excel">
+                        <input type="hidden" id="form-param" name="params" value="">
+                        <button type="button" id="btn_solar_excel" class="Btn excelBtn ml10">Excel</button>
+                    </form>
+                    -->
+                </p>
+            </div>
+            <div class="graph_legend fr" id="div_chart_legend">
+                <!-- 자바스크립트로 동적 생성 -->
+            </div>
+            <div class="graph" id="chart3">
+                <canvas id="canvas_period_bar"></canvas>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script src="/EMS_Modules/js/module.buildingManager.js"></script>
+
+<script src="./report/js/chart.bar_line.js"></script>
+
+<script src="./report/js/period.define.js"></script>
+<script src="./report/js/period.control.js"></script>

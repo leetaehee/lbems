@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0">
+
+    <!-- 다국어버전 js -->
+    <script type="text/javascript" src="/res/string/string_table_kor.js"></script>
+
+    <!--JQuery-->
+    <script src="/libs/js/jquery/jquery-3.3.1.min.js" charset="utf-8"></script>
+
+    <!--Datatables-->
+    <link rel="stylesheet" type="text/css" href="/libs/js/datatables/DataTables-1.10.13/media/css/jquery.datatables.min.css"/>
+    <script type="text/javascript" src="/libs/js/datatables/DataTables-1.10.13/media/js/jquery.dataTables.min.js"></script>
+
+    <!-- datatables plugin (export) -->
+    <script src="/libs/js/datatables/DataTables-1.10.13/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="/libs/js/datatables/DataTables-1.10.13/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="/libs/js/datatables/DataTables-1.10.13/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="/libs/js/datatables/DataTables-1.10.13/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="/libs/js/datatables/jszip.min.js"></script>
+    <script src="/libs/js/datatables/pdfmake.min.js"></script>
+    <script src="/libs/js/datatables/vfs_fonts.js"></script>
+
+    <!--Chart.js-->
+    <!-- <script src="../libs/js/chart.js/chart.bundle.js" charset="utf-8"></script> -->
+    <script src="/libs/js/chart.js/chart.min.js" charset="utf-8"></script>
+    <script src="/libs/js/chart.js/chart.custom.js" charset="utf-8"></script>
+
+    <!--Devextreme-->
+    <link rel="stylesheet" type="text/css" href="/libs/js/devextreme/18.2/css/dx.common.css" />
+    <link rel="stylesheet" data-theme="generic.light" href="/libs/js/devextreme/18.2/css/dx.light.css" />
+    <script src="/libs/js/devextreme/18.2/js/dx.all.js"></script>
+
+    <!--Magnific Popup-->
+    <link rel="stylesheet" href="/libs/js/magnific-popup/magnific-popup.css">
+    <script src="/libs/js/magnific-popup/jquery.magnific-popup.js"></script>
+
+    <!-- calendar.js -->
+    <script src="/libs/js/jquery/jquery-ui-1.12.1.js" charset="utf-8"></script>
+    <link rel="stylesheet" href="/libs/js/jquery/jquery-ui-1.12.1.css">
+
+    <!--common js-->
+    <script src="/modules/js/module.js"></script>
+    <script src="/modules/js/module.popup.js"></script>
+    <script src="/modules/js/module.cookie.js"></script>
+    <script src="/modules/js/module.request.js"></script>
+    <script src="/modules/js/module.subRequest.js"></script>
+    <script src="/modules/js/module.date.js"></script>
+    <script src="/modules/js/module.table.js"></script>
+    <script src="/modules/js/module.page.js"></script>
+    <script src="/EMS_Modules/js/module.config.js"></script>
+    <script src="/EMS_Modules/js/module.utility.js"></script>
+
+    <script src="./frame/js/frame.define.js"></script>
+    <script src="./frame/js/frame.control.js"></script>
+
+    <link rel="stylesheet" href="/res/css/common.css">
+    <link rel="stylesheet" href="/res/css/font.css">
+    <link rel="stylesheet" href="/res/css/layout/layout_mdmt.css">
+
+    <style>
+        .chart-legend li
+        {
+            float:left;
+            margin: 10px 10px 0px 0px;
+            font-size:12px;
+        }
+
+        .chart-legend li span
+        {
+            display: inline-block;
+            width: 15px;
+            height: 12px;
+            line-height:12px;
+            margin-right: 5px;
+            vertical-align:middle;
+        }
+    </style>
+
+    <!-- calendar.js -->
+    <script src="/libs/js/jquery/jquery-ui-1.12.1.js" charset="utf-8"></script>
+    <link href="/libs/js/jquery/jquery-ui-1.12.1.css" rel="stylesheet">
+
+    <!-- excel.js -->
+    <script src="/libs/js/sheetjs/shim.min.js"></script>
+    <script src="/libs/js/sheetjs/xlsx.full.min.js"></script>
+    <script src="/libs/js/filesaver/FileSaver.min.js"></script>
+    <script src="/modules/js/module.excel.js"></script>
+
+    <title>BEMS</title>
+</head>
+<body>
+<header>
+    <div class="header">
+        <h1 id="btnUpdate">
+            <a id="main_page_url">
+                <img src="../res/images/login_logo.png" style="width:130px" alt="4st BEMS" >
+            </a>
+        </h1>
+        <ul>
+            <li><span id="label_date">0000-00-00</span> (<span id="label_day">-</span>) <span id="label_time">00:00:00</span></li>
+            <li>미세먼지 : <span id="label_pm10_status" class="dustfc1">좋음</span> &nbsp; / &nbsp; 초미세먼지 : <span id="label_pm25_status" class="dustfc1">좋음</span></li>
+            <!---
+                dustfc1 : 좋음
+                dustfc2 : 보통
+                dustfc3 : 나쁨
+                dustfc4 : 매우 나쁨
+            -->
+            <li><span class="w50n" id="weather"></span></li>
+            <!--
+                clear sky : w01d  / w01n
+                few clouds : w02d / w02n
+                scatterd clouds : w03d / w03n
+                broken clouds : w04d / w04n
+                shower rain :  w09d / w09n
+                rain :  w10d / w10n
+                thunderstorm : w11d / w11n
+                snow :  w13d / w13n
+                mist :  w50d / w50n
+            -->
+            <li class="b fcRed">
+                <img src="../res/images/icon/icon_tem.png" alt="온도아이콘 " >
+                <span id="temperature" class="fcRed"></span>&nbsp;℃
+            </li>
+            <li class="b fcBlue">
+                <img src="../res/images/icon/icon_hum.png" alt="습도아이콘" >
+                <span id="humidity" class="fcBlue"></span>&nbsp;%
+            </li>
+            <li>
+                <a id="openErrorBtn" style="cursor: pointer">
+                    <span class="icon_error0" id="error-icon"></span>
+                    <!--
+                        에러없음 -     class="icon_error0"
+                        에러발생 -	   class="icon_error"
+                    -->
+                </a>
+            </li>
+            <li id="download-manual" style="display: none;">
+                <form id="form-common-excel" method="post" style="display: inline-block;">
+                    <input type="hidden" id="form-submit" name="form_submit" value="excel_download">
+                    <input type="hidden" id="form-requester" name="requester" value="common">
+                    <input type="hidden" id="form-request" name="request" value="file_download">
+                    <input type="hidden" id="form-common-param" name="params" value="">
+                    <div id="btn_manual_download" style="cursor: pointer;">
+                        <img src="../res/images/icon_download.png" alt="lbems 매뉴얼">
+                        <span class="l05">매뉴얼</span>
+                    </div>
+                </form>
+            </li>
+            <li class="r00" style="height: 60px">
+                <a id="btn_logout" class="btn_logout Btn">
+                    로그아웃
+                    <!--
+                    <img src="../res/images/icon//icon_user.png" alt="user아이콘 " >
+                    <img src="../res/images/icon//icon_down.png" alt="user아이콘 " class="ml10">
+                    -->
+                </a>
+            </li>
+        </ul>
+    </div>
+</header>
+<section class="contents">
+    <script>
+        const requestUrl = '{requestUrl}';
+
+        const group = '{group}';
+        const menu = '{selected}';
+        const page = '{page}';
+
+        const gComplexCodePk = '{gComplexCodePk}';
+        const gSkinType = '{gSkinType}';
+        const gBuildingFeCode = '{gBuildingFeCode}';
+        const gBuildingName = '{gBuildingName}';
+        const gIsDevMode = parseInt('{gIsDev}');
+        const gServiceStartDate = '{gServiceStartDate}';
+        const gServiceStartYm = '{gServiceStartYm}';
+
+        // 업체별 CONFIG 파일 불러오기
+        const CONFIGS = module.config().getConfig(gComplexCodePk, gBuildingFeCode, gBuildingName, gSkinType, gIsDevMode);
+    </script>
+    <div class="loading_window">
+    </div>
+    <div class="wrap">
+        <span class="wrap_bg"></span>
+        {menu}
+        <div class="wrapCont">
+            {body}
+        </div>
+    </div>
+</section>
+<a class="error_popup_setting" href="#error_popup_setting" id="error_popup"></a>
+<form id="error_popup_setting" class="mfp-hide mfp-with-anim white-popup-block">
+    <div class="popup_1200" style="min-height: 700px">
+        <div class="pop_tt" style="width:1200px">
+            <h1>
+                장애관리
+                <button type="button" title="Close (Esc)" class="fr pop_close closeErrorBtn" data-dismiss="modal"></button>
+            </h1>
+        </div>
+        <div class="pop_contents">
+            <p class="mt40 mb10 fcRed floatBox">* BEMS 의
+                <span id="popup_energy_name" class="fcprimary"> 장애관리</span>
+                리스트입니다.
+                <button type="button" id="btn_excel" class="Btn excelBtn fr">Excel</button>
+            </p>
+            <section>
+                <div class="articleBox mt10">
+                    <ul>
+                        <li>
+                            <img src="../res/images/icon/icon_article.png" class="mr10">
+                            <label class="fcBlack">일자선택</label>
+                            <input type="text" id="frame_start_date" name="frame_start_date" class="dateStyle w130px ml10" readonly> ~
+                            <input type="text" id="frame_end_date" name="frame_end_date" class="dateStyle w130px mr10" readonly>
+                        </li>
+                        <li>
+                            <img src="../res/images/icon/icon_article.png" class="mr10">
+                            <label class="fcBlack">위치선택</label>
+                            <select id="frame_select_floor_type" name="frame_select_floor_type" class="w120px ml10">
+                                <!-- 동적으로 생성함 -->
+                            </select>
+                        </li>
+                        <li>
+                            <img src="../res/images/icon/icon_article.png" class="mr10">
+                            <label class="fcBlack">조건선택</label>
+                            <select id="frame_select_energy_type" name="frame_select_energy_type" class="w120px ml10">
+                                <!-- 동적으로 생성함 -->
+                            </select>
+                            <select id="frame_error_status" name="frame_error_status" class="w120px ml10">
+                                <option value="">전체</option>
+                                <option value="on">발생</option>
+                                <option value="off">해제</option>
+                            </select>
+                            <button type="button" id="btn_popup_search" class="Btn searchBtn ml10" title="조회"><span>조회</span></button>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <div class="popTable mt20" style="border-bottom: solid 1px #5582af">
+                <table class="w100">
+                    <colgroup>
+                        <col style="width:4%">
+                        <col style="width:9%">
+                        <col style="width:5%">
+                        <col style="width:10%">
+                        <col style="width:6%">
+                        <col style="width:12%">
+                        <col style="width:8%">
+                        <col style="width:12%">
+                        <col style="width:6%">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>건물명</th>
+                        <th>위치</th>
+                        <th>센서 아이디</th>
+                        <th>종류</th>
+                        <th>발생 일시</th>
+                        <th>장애 메시지</th>
+                        <th>처리 일시</th>
+                        <th>현재 상태</th>
+                    </tr>
+                    </thead>
+                    <tbody id="hindrance-tbody">
+                    <tr id="delete-row">
+                        <td colspan="9">장애 조회 내용이 존재하지 않습니다.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="page mb40">
+                <a href="#a" id="btn_hindrance_first_page"><img src="../res/images/page_first.png" alt="첫 페이지로 이동"></a>
+                <a href="#a" id="btn_hindrance_prev_page"><img src="../res/images/page_prev.png" alt="이전 페이지로 이동"></a>
+                <ul id="hindrance_paging">
+                    <!-- 페이징  (javascript로처리, /modules/js/page/module.page.js) -->
+                </ul>
+                <a href="#a" id="btn_hindrance_next_page"><img src="../res/images/page_next.png" alt="다음 페이지로 이동"></a>
+                <a href="#a" id="btn_hindrance_last_page"><img src="../res/images/page_last.png" alt="마지막 페이지로 이동"></a>
+            </div>
+            <!--
+            <div class="mt40 ac">
+                <button type="button" id="btn_button_close" class="Btn closeBtn closeErrorBtn">닫기</button>
+            </div>
+            -->
+        </div>
+    </div>
+</form>
+</body>
+</html>

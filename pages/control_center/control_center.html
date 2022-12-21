@@ -1,0 +1,267 @@
+<div class="dashWrap floatBox">
+    <div>
+        <img src="../res/images/icon/icon_control_center.png" class="mr08 mb07">
+        <h2>통합관제</h2>
+    </div>
+    <div class="controlCenter">
+        <ul style="height:100%">
+            <li>
+                <div class="dashcontent mt00" style="height: 25%">
+                    <p class="dashH3">실시간 사용자 통합 현황</p>
+                    <h4 class="fs17 mt40">
+                        <img class="mr05 ml10" src="../res/images/icon/icon_roren.png"> 로렌하우스 : 
+                        <span class="fs20 b w60px diIb ar">3</span> &nbsp;곳
+                    </h4>
+                    <h4 class="fs17">
+                        <img class="mr05 ml10" src="../res/images/icon/icon_roren.png"> 총 가구 수 :  &nbsp;
+                        <span class="fs20 b w60px diIb ar">60</span> &nbsp;세대
+                    </h4>
+                </div>
+                <div class="dashcontent" style="height: 38%">
+                    <p class="dashH3">발전량 대비 소비량 (월)</p>
+                    <div class="p15 mt20 floatBox" style="background-color: #EBF6F7; height: 85%;" >
+                        <div class="diIb control_img">
+                            <img src="../res/images/zero_img.png">
+                        </div>
+                        <div class="fr graph1_dd mt40">
+                            <p>생산량 <br>
+                                <span id="label_produce">+ 0</span> kWh
+                            </p>
+                            <p class="mt20">소비량 <br>
+                                <span id="label_consume">- 0</span> kWh
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashcontent floatBox" style="height: 32.8%">
+                    <p class="dashH3 mb10">실시간 기기 현황</p>
+                    <div class="center_graph fl" style="background: #eeeeee;">
+                        실시간 기기현황 그래프를 넣어주세요
+                    </div>
+                    <div class="status_p fr mt50">
+                        <span>전체 :</span><b>210</b>&nbsp;개<br><br>
+                        <span class="mt10">정상 :</span><b>200</b>&nbsp;개<br><br>
+                        <span>오류 :</span><b>10</b>&nbsp;건
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dashcontent mb20" style="height: 100%">
+                    <p class="dashH3 diIb">통합관제 Map</p>
+                    <div id="map" class="map">
+                        <script>
+                            var map;
+                            function initMap() {
+                              map = new google.maps.Map(document.getElementById('map'), {
+                                center: {lat: 37.2980337, lng: 126.8349423},
+                                zoom: 13
+                              });
+                            }
+                          </script>
+                          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT7sSTMO5sgyqu_1l0KuaIK_QAyv0U44c &callback=initMap"
+                          async defer></script>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="dashcontent mb20 floatBox" style="height: 100%">
+                    <p class="dashH3 diIb">기간별 에너지 현황 관리</p>
+                    <select  class="w200px ml10 fr mt10">
+                        <option value="2">일별</option>
+                        <option value="1">월별</option>
+                        <option value="0">년별</option>
+                    </select>
+                    <div class="floatBox b20" style="border-bottom: solid 2px #e9edf5">
+                        <h4 class="mt89 mb00 fs17"><img src="../res/images/icon/icon_article.png" class="mr10">태양광</h4>
+                        <div class="status_p">
+                            <span>발전량</span><b>23</b>&nbsp;&nbsp;kwh
+                        </div>
+                    </div>
+                    <h4 class="mb00 fs17"><img src="../res/images/icon/icon_article.png" class="mr10">전기</h4>
+                    <div class="status_p">
+                        <span>사용량</span><b>23</b>&nbsp;&nbsp;kwh
+                    </div>
+                    <div class="control_gr">
+                        <ul class="floatBox">
+                            <li class="on1"></li>
+                            <li class="on2"></li>
+                            <li class="on3"></li>
+                            <li class="on4"></li>
+                            <li class="on5"></li>
+                        </ul>
+                    </div>
+                    <div class="tbType04 tdType04-1 mt20 b40" style="width:100%; border-bottom: solid 2px #e9edf5">
+                        <table>
+                            <colgroup>
+                                <col  style="width:40%">
+                                <col  style="width:60%">
+                            </colgroup>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #648BAF;"></span> 보일러</th>
+                                <td><span id="label_energy_light">0</span> kWh(<span id="label_percent_light">0</span>%)</td>
+                            </tr>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #93C984;"></span> 조명</th>
+                                <td><span id="label_energy_elechot">0</span> kWh (<span id="label_percent_elechot">0</span>%)</td>
+                            </tr>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #CBD861;"></span> 냉방</th>
+                                <td><span id="label_energy_cold">0</span> kWh (<span id="label_percent_cold">0</span>%)</td>
+                            </tr>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #9ADDE5;"></span> 전열</th>
+                                <td><span id="label_energy_vent">0</span> kWh (<span id="label_percent_vent">0</span>%)</td>
+                            </tr>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #6CAAB8;"></span> 환기</th>
+                                <td><span id="label_energy_vent">0</span> kWh (<span id="label_percent_vent">0</span>%)</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h4 class="mt20 mb00 fs17"><img src="../res/images/icon/icon_article.png" class="mr10">가스</h4>
+                    <div class="status_p">
+                        <span>사용량</span><b>23</b>&nbsp;&nbsp;kwh
+                    </div>
+                    <div class="control_gr2">
+                        <ul class="floatBox">
+                            <li class="on1"></li>
+                            <li class="on2"></li>
+                        </ul>
+                    </div>
+                    <div class="tbType04 tdType04-1 mt20" style="width:100%">
+                        <table>
+                            <colgroup>
+                                <col  style="width:40%">
+                                <col  style="width:60%">
+                            </colgroup>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #DE6262;"></span> 급탕</th>
+                                <td><span id="label_energy_light">0</span> kWh (<span id="label_percent_light">0</span>%)</td> 
+                            </tr>
+                            <tr>
+                                <th><span class="colorchip mr05" style="background-color: #95242E;"></span> 난방</th>
+                                <td><span id="label_energy_elechot">0</span> kWh (<span id="label_percent_elechot">0</span>%)</td>
+                            </tr>
+                        </table>
+                    </div>
+            </li>
+        </ul>
+    </div>
+    <div style="width:100%">
+        <div class="dashcontent mt20 mb10">
+            <p class="dashH3">장애리스트</p>
+            <div class="tbType04 tdType04-1 mt30 mb10">
+                <table class="w100">
+                    <colgroup>
+                        <col style="width:5%">
+                        <col style="width:8%">
+                        <col style="width:5%">
+                        <col style="width:5%">
+                        <col style="width:10%">
+                        <col style="width:8%">
+                        <col style="width:15%">
+                        <col style="width:10%">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>로렌하우스명</th>
+                            <th>동</th>
+                            <th>호</th>
+                            <th>센서아이디</th>
+                            <th>종류</th>
+                            <th>발생일시</th>
+                            <th>장애메세지</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody_login_log">
+                        <tr>
+                            <td>1</td>
+                            <td>세종시 로렌하우스</td>
+                            <td>101</td>
+                            <td>101</td>
+                            <td>admin</td>
+                            <td>전기</td>
+                            <td>2019-04-22  21:00:01</td>
+                            <td>서버오류</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>세종시 로렌하우스</td>
+                            <td>101</td>
+                            <td>101</td>
+                            <td>admin</td>
+                            <td>전기</td>
+                            <td>2019-04-22  21:00:01</td>
+                            <td>서버오류</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>세종시 로렌하우스</td>
+                            <td>101</td>
+                            <td>101</td>
+                            <td>admin</td>
+                            <td>전기</td>
+                            <td>2019-04-22  21:00:01</td>
+                            <td>서버오류</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>세종시 로렌하우스</td>
+                            <td>101</td>
+                            <td>101</td>
+                            <td>admin</td>
+                            <td>전기</td>
+                            <td>2019-04-22  21:00:01</td>
+                            <td>서버오류</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>세종시 로렌하우스</td>
+                            <td>101</td>
+                            <td>101</td>
+                            <td>admin</td>
+                            <td>전기</td>
+                            <td>2019-04-22  21:00:01</td>
+                            <td>서버오류</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div><!---dashWrap-->
+
+
+<script src="dashboard/js/chart.line.y2.js"></script>
+<script src="dashboard/js/dashboard.chart.pie.js"></script>
+<script src="dashboard/js/dashboard.chart.use_pie.js"></script>
+<script src="dashboard/js/dashboard.define.js"></script>
+<script src="dashboard/js/dashboard.control.js"></script>
+
+<script>
+$("#btn_watchdog").on("click", function() {
+    var params  = [];
+    var data    = [];
+
+    params.push(
+        {name: "requester", value: "watchdog"},
+        {name: "request", value: "arrange_finedust_day"},
+        {name: "params", value: JSON.stringify(data)}
+        );
+
+    var requestParams = {
+        url: "../http/index.php",
+        params: params,
+        callback: callbackFunc,
+        callbackParams: null,
+        showAlert: true
+    };
+
+    module.request(requestParams);
+});
+
+function callbackFunc(a, b) {
+    console.log(a);
+}
+</script>

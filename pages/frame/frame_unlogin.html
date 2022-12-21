@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1.0">
+
+        <link rel="stylesheet" href="/res/css/common.css">
+        <link rel="stylesheet" href="/res/css/font.css">
+        <link rel="stylesheet" href="/res/css/layout/layout.css">
+
+        <!-- jqeury -->
+        <script src="/libs/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="/libs/js/jquery/jquery-ui-1.12.1.js" charset="utf-8"></script>
+        <link rel="stylesheet" href="/libs/js/jquery/jquery-ui-1.12.1.css">
+
+        <!--Magnific Popup-->
+        <link rel="stylesheet" href="/libs/js/magnific-popup/magnific-popup.css">
+        <script src="/libs/js/magnific-popup/jquery.magnific-popup.js"></script>
+
+        <!--Devextreme-->
+        <link rel="stylesheet" type="text/css" href="/libs/js/devextreme/18.2/css/dx.common.css" />
+        <link rel="stylesheet" data-theme="generic.light" href="/libs/js/devextreme/18.2/css/dx.light.css" />
+        <script src="/libs/js/devextreme/18.2/js/dx.all.js"></script>
+
+        <!-- module -->
+        <script src="/modules/js/module.js"></script>
+        <script src="/modules/js/module.popup.js"></script>
+        <script src="/modules/js/module.request.js"></script>
+        <script src="/modules/js/module.cookie.js"></script>
+        <script src="/modules/js/module.deviceInfo.js"></script>
+
+        <title>BEMS</title>
+    </head>
+
+    <body style="background: url(../../res/images/box_bg.png)">
+        <header>
+            <div class="header">
+                <h1 id="btnUpdate">
+                    <a href="./index.php">
+                        <img src="../../res/images/login_logo.png" style="width:130px" alt="4st BEMS" >
+                    </a>
+                </h1>
+            </div>
+        </header>
+        <div class="loading_window">
+        </div>
+        <section class="contents" style="height: 100%;">
+            <script>
+                const requestUrl = '{requestUrl}';
+
+                let $loadingWindow = $(".loading_window");
+                let loadingWindow = $loadingWindow.dxLoadPanel({
+                    shadingColor : "rgba(255,255,255,0.4)",
+                    position : { of : ".tabs" },
+                    visible : false,
+                    showIndicator : true,
+                    showPane : true,
+                    shading : true,
+                    closeOnOutsideClick : false,
+                    onShown : function(){},
+                    onHidden : function(){}
+                }).dxLoadPanel("instance");
+
+                $(function() {
+                    $(document).tooltip();
+                });
+            </script>
+            {body}
+        </section>
+    </body>
+</html>
