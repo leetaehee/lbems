@@ -4,5 +4,10 @@
 # 숨겨야되는 파일
 .hidden
 
+# 기타
+.git
+.idea
+.svn
+
 
 
