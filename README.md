@@ -13,8 +13,6 @@
 - env파일이 없는 경우 .env.example 파일을 복사해서 .env로 만들 것
 
 [네임스페이스 구분]
-1. WEB: Web\
-2. Mobile: Mobile\
 
 [설정파일]
 1. .env
