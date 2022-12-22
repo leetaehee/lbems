@@ -13,3 +13,6 @@ LBEMS 개발 가이드 라인
 [네임스페이스 구분]
 1. WEB: Web\
 2. Mobile: Mobile\
+
+[설정파일]
+1. .env
