@@ -1,8 +1,4 @@
 <?php
-header('X-Frame-Options: DENY');
-header('X-XSS-Protection: 1; mode=block');
-setcookie('samesite_test', '1', 0, '/; samesite=strict');
-
 include_once '../setting.php';
 include_once '../libs/php/template.php';
 
