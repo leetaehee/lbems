@@ -1,6 +1,8 @@
 <?php
 namespace Http\Command;
 
+use EMS_Module\Utility;
+
 /**
  * Class SMSGabiaTest 가비아 문자 요청 테스트
  */
@@ -36,11 +38,13 @@ class SMSGabiaTest extends Command
 
         $curl = curl_init();
 
-        $message = '케빈랩 Rest API 테스트 중입니다.';
+        $message = '에너지플랫폼 BEMS SMS 서비스 입니다.';
 
         $smsKey = $devOptions['SMS_KEY'];
         $smsId = $devOptions['SMS_ID'];
         $smsSensorNumber = $devOptions['SMS_SENDER_NUMBER'];
+
+        $sendPhoneNumber = '01027891039';
 
         $base64AppKey = base64_encode("{$smsId}:{$smsKey}");
 
@@ -64,24 +68,16 @@ class SMSGabiaTest extends Command
             ],
         ]);
 
-        $response = curl_exec($curl);
+        $authData = json_decode(curl_exec($curl), true);
 
-        $err = curl_error($curl);
-        if ($err) {
-            $this->data = [
-              'message' => 'Curl Error #: ' . $err
-            ];
-
+        if (empty($authData['message']) === false) {
+            $this->data['message'] = $authData['message'];
             return true;
         }
 
-        $oAuths = json_decode($response, true);
-
-        $accessToken = $oAuths['access_token'];
+        $accessToken = $authData['access_token'];
         if ($accessToken === '' || $accessToken === null) {
-            $this->data = [
-                'message' => 'Curl Error #: No access Token.',
-            ];
+            $this->data['message'] = 'No access Token.';
             return true;
         }
 
@@ -97,14 +93,23 @@ class SMSGabiaTest extends Command
             CURLOPT_FOLLOWLOCATION => false,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => "phone=01027891039&callback={$smsSensorNumber}&message={$message}&refkey=[[RESTAPITEST1549847130]]",
+            CURLOPT_POSTFIELDS => "phone={$sendPhoneNumber}&callback={$smsSensorNumber}&message={$message}&refkey=[[RESTAPITEST1549847130]]",
             CURLOPT_HTTPHEADER => [
               "Content-Type: application/x-www-form-urlencoded",
               "Authorization: Basic {$authorizationKey}",
             ],
         ]);
 
+        $receiveData = json_decode(curl_exec($curl), true);
+
+        curl_close($curl);
+
+
+
+        /*
         $response = curl_exec($curl);
+
+        print_r(json_decode($response, true));
 
         $err = curl_error($curl);
         curl_close($curl);
@@ -115,8 +120,9 @@ class SMSGabiaTest extends Command
             ];
             return true;
         }
+        */
 
-        $this->data = [];
+        $this->data = $receiveData;
         return true;
     }
 }

@@ -114,4 +114,4 @@ if ($result == false) {
 	$ret['data'] = $manager->getData();
 }
 
-exit(json_encode($ret));
+exit(Utility::getInstance()->responseJSON($ret));
