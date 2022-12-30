@@ -1,8 +1,6 @@
 <?php
 namespace Http\Command;
 
-use EMS_Module\Utility;
-
 /**
  * Class SMSGabiaTest 가비아 문자 요청 테스트
  */
