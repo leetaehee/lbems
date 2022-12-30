@@ -154,7 +154,7 @@ class ReceiveAuthNum extends Command
 
         // 인증번호 발송
         $mails = [
-            'subject' => "[케빈랩] 비밀번호 인증번호입니다.",
+            'subject' => "비밀번호 인증번호입니다.",
             'content' => "요청하신 인증번호는 {$authNumber} 입니다. 감사합니다.",
         ];
         $mailDriver->mailTransmit($email, $mails['subject'], $mails['content']);
