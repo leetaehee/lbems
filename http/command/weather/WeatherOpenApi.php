@@ -144,8 +144,8 @@ class WeatherOpenApi extends Command
             $tempHour = substr($tempHour , 0, -1);
             $humiHour = substr($humiHour , 0, -1);
 
-            $sunRise = '0000-00-00 00:00:00';
-            $sunSet  = '0000-00-00 00:00:00';
+            //$sunRise = '0000-00-00 00:00:00';
+            //$sunSet  = '0000-00-00 00:00:00';
 
             $today = date('Ymd');
             if ($valDate == $today) {
@@ -154,7 +154,7 @@ class WeatherOpenApi extends Command
                 //$sunSet  = '0000-00-00 00:00:00';
             }
 
-            $query = $this->emsQuery->getQueryWeatherInfos($tempHour, $humiHour, $complex_pk, $name, $valDate, $temp_humi, $sunRise, $sunSet, $updateTempHumi);// query문을 받아오고
+            $query = $this->emsQuery->getQueryWeatherInfos($tempHour, $humiHour, $complex_pk, $name, $valDate, $temp_humi, $updateTempHumi);// query문을 받아오고
             $this->squery($query); // query안에 querys 가 있으므로 값을 받아올수 있음  + query 날리고
         }
     }

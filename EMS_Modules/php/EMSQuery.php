@@ -1888,15 +1888,13 @@ class EMSQuery
      * @param string $name
      * @param string $valDate
      * @param string $temp_humi
-     * @param string $sunRise
-     * @param string $sunSet
      * @param string $updateTempHumi
      *
      * @return string
      */
-    public function getQueryWeatherInfos(string $tempHour, string $humiHour, string $complex_pk, string $name, string $valDate, string $temp_humi, string $sunRise, string $sunSet, string $updateTempHumi) : string
+    public function getQueryWeatherInfos(string $tempHour, string $humiHour, string $complex_pk, string $name, string $valDate, string $temp_humi, string $updateTempHumi) : string
     {
-        $query = "INSERT INTO bems_weather (complex_code_pk, name, val_date, ${tempHour}, ${humiHour}, sunrise, sunset) VALUES ('${complex_pk}', '${name}', '${valDate}', ${temp_humi}, '${sunRise}', '${sunSet}') ON DUPLICATE KEY UPDATE sunrise = '${sunRise}', sunset = '${sunSet}', ${updateTempHumi}";
+        $query = "INSERT INTO bems_weather (complex_code_pk, name, val_date, ${tempHour}, ${humiHour}) VALUES ('${complex_pk}', '${name}', '${valDate}', ${temp_humi}) ON DUPLICATE KEY UPDATE  ${updateTempHumi}";
 
         return $query;
     }
