@@ -104,24 +104,6 @@ class SMSGabiaTest extends Command
 
         curl_close($curl);
 
-
-
-        /*
-        $response = curl_exec($curl);
-
-        print_r(json_decode($response, true));
-
-        $err = curl_error($curl);
-        curl_close($curl);
-
-        if ($err) {
-            $this->data = [
-                'message' => 'cURL Error #: ' . $err,
-            ];
-            return true;
-        }
-        */
-
         $this->data = $receiveData;
         return true;
     }
