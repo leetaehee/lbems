@@ -59,7 +59,7 @@ class WeatherMinistryFinedust extends Command
         $url = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty?';
 
         // 에어코리아 서비스 키 조회
-        $serviceKey = $this->devOptions['AIR_KOREA_SERVICE_KEY'];
+        $serviceKey = urlencode($this->devOptions['AIR_KOREA_SERVICE_KEY']);
 
         // parameter.
         $queryParam = 'serviceKey='.$serviceKey;
