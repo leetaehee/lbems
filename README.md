@@ -17,9 +17,17 @@
 
 [숨김파일]
 - 아래 파일들은 구글 드라이브에서 다운 받을 것 
-- libs/php/PHPExcel
-- libs/php/PHPMailer
-- libs/js
+- 그 외 파일은 추후 필요하면 받는다.
+
+libs/php
+    /PHPExcel
+    /php/PHPMailer
+libs/js
+    /sheetjs
+    /magnific-popup
+    /jquery
+    /filesaver
+    /chartjs
 
 [네임스페이스] 
 EMS_Module
@@ -34,10 +42,12 @@ Module
 [외부 API]
 - 날씨
 - 온,습도
-- 미세먼지 
-- SMS 
+- 미세먼지(공공데이터)
+- 공휴일 (공공데이터)
+- SMS (가비아/유료)
+- Google SMTP
 
 [데이터 수신]
 
 [설정파일]
-1. .env
+.env
