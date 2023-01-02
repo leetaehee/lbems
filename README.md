@@ -59,3 +59,54 @@
 [설정파일]
 1. .env 을 추가 한다.
 2. 항목 정리
+
+        IS_ENABLED_WATCHDOG=0
+        IS_DEV=0
+
+        DOMAIN=''
+
+        DB_HOST=''
+        DB_PORT=''
+        DB_ID=''
+        DB_PASSWORD=''
+        DB_SID=''
+
+        FEE_DB_TYPE=''
+        FEE_DB_HOST=''
+        FEE_DB_PORT=''
+        FEE_DB_ID=''
+        FEE_DB_PASSWORD=''
+        FEE_DB_SID=''
+
+        SMS_ID=''
+        SMS_KEY=''
+        SMS_SENDER_NUMBER=''
+
+        AIR_KOREA_SERVICE_KEY=''
+        API_HOLIDAY_SERVICE_KEY=''
+        OPEN_WEATHER_APP_ID=''
+
+        CONTROL_API_URL=''
+        CONTROL_SAMSUNG_API_URI=''
+        MQTT_FINEDUST_API_URL=''
+        TOC_URL=''
+        YJ_RND_API_URL=''
+
+        SITE_TYPE=''
+        LOG_PATH=''
+        CACHE_FILE_PATH=''
+
+        SMTP_SECURE=''
+        MAIL_HOST=''
+        MAIL_PORT=''
+        MAIL_USERNAME=''
+        MAIL_PASSWORD=''
+        MAIL_FROM_NAME=''
+
+        SECRET_KEY=''
+        IV_KEY=''
+        TOC_KEY=''
+
+        DEFAULT_PASSWORD=''
+
+        KEVIN_EMAIL=''
