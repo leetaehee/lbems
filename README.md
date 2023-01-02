@@ -46,7 +46,7 @@
 
 [업체별 분기처리 시 방법]
 
-[ API]
+[오픈 API]
 1. 날씨 (openWeatherMap)
 2. 온,습도 (openWeatherMap)
 3. 미세먼지(공공데이터)
@@ -87,7 +87,7 @@
         SMS_KEY=키
         SMS_SENDER_NUMBER=발신자 번호
 
-        # Open API 키 설정
+        # 오픈 API 키 설정
         AIR_KOREA_SERVICE_KEY=공공데이터 미세먼지 
         API_HOLIDAY_SERVICE_KEY=공공데이터 공휴일 
         OPEN_WEATHER_APP_ID=OpenWeaterMap 
