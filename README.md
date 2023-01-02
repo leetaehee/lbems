@@ -46,7 +46,7 @@
 
 [업체별 분기처리 시 방법]
 
-[외부 API]
+[ API]
 1. 날씨 (openWeatherMap)
 2. 온,습도 (openWeatherMap)
 3. 미세먼지(공공데이터)
@@ -58,55 +58,64 @@
 
 [설정파일]
 1. .env 을 추가 한다.
-2. 항목 정리
+2. 설정 정보는 구글 드라이브를 참고한다.
+3. 항목 설명
 
-        IS_ENABLED_WATCHDOG=0
-        IS_DEV=0
+        IS_ENABLED_WATCHDOG=watchdog 수동 실행 (1 = 활성화 | 0 = 비활성화)
+        IS_DEV=개발모드 (1 = 개발 | 0 = 운영)
 
-        DOMAIN=''
+        DOMAIN=도메인주소 
+        SITE_TYPE=사이트 타입(lbems, fems, bems)
 
-        DB_HOST=''
-        DB_PORT=''
-        DB_ID=''
-        DB_PASSWORD=''
-        DB_SID=''
+        # lbems_db 설정
+        DB_HOST=데이터베이스 주소
+        DB_PORT=데이터베이스 포트
+        DB_ID=데이버베이스 계정명
+        DB_PASSWORD=데이터베이스 패스워드
+        DB_SID=데이터베이스 이름
 
-        FEE_DB_TYPE=''
-        FEE_DB_HOST=''
-        FEE_DB_PORT=''
-        FEE_DB_ID=''
-        FEE_DB_PASSWORD=''
-        FEE_DB_SID=''
+        # 요금 데이터베이스 설정
+        FEE_DB_TYPE=데이터베이스 타입
+        FEE_DB_HOST=데이터베이스 주소
+        FEE_DB_PORT=데이터베이스 포트
+        FEE_DB_ID=데이터베이스 계정명
+        FEE_DB_PASSWORD=데이터베이스 패스워드
+        FEE_DB_SID=데이터베이스 이름
 
-        SMS_ID=''
-        SMS_KEY=''
-        SMS_SENDER_NUMBER=''
+        # SMS 설정
+        SMS_ID=아이디
+        SMS_KEY=키
+        SMS_SENDER_NUMBER=발신자 번호
 
-        AIR_KOREA_SERVICE_KEY=''
-        API_HOLIDAY_SERVICE_KEY=''
-        OPEN_WEATHER_APP_ID=''
+        # Open API 키 설정
+        AIR_KOREA_SERVICE_KEY=공공데이터 미세먼지 
+        API_HOLIDAY_SERVICE_KEY=공공데이터 공휴일 
+        OPEN_WEATHER_APP_ID=OpenWeaterMap 
 
-        CONTROL_API_URL=''
-        CONTROL_SAMSUNG_API_URI=''
-        MQTT_FINEDUST_API_URL=''
-        TOC_URL=''
-        YJ_RND_API_URL=''
+        # 데이터 연동 URL
+        CONTROL_API_URL=LG 에어컨 API
+        CONTROL_SAMSUNG_API_URI=삼성 에어컨 API
+        MQTT_FINEDUST_API_URL=MQTT 미세먼지 API
+        TOC_URL=TOC APO
+        YJ_RND_API_URL=데이터 연계 POST 방식 API
+        
+        # 경로 
+        LOG_PATH=로그 저장 경로
+        CACHE_FILE_PATH=캐시 저장 경로
 
-        SITE_TYPE=''
-        LOG_PATH=''
-        CACHE_FILE_PATH=''
+        # SMTP 설정 
+        SMTP_SECURE=SECURE타입
+        MAIL_HOST=호스트 정보
+        MAIL_PORT=포트
+        MAIL_USERNAME=계정명
+        MAIL_PASSWORD=비밀번호
+        MAIL_FROM_NAME=발신자 이름
+        KEVIN_EMAIL=발신자 이메일
 
-        SMTP_SECURE=''
-        MAIL_HOST=''
-        MAIL_PORT=''
-        MAIL_USERNAME=''
-        MAIL_PASSWORD=''
-        MAIL_FROM_NAME=''
+        # 키 값
+        SECRET_KEY=사이트 비밀키 
+        IV_KEY=IV 키
+        TOC_KEY=TOC API 키
 
-        SECRET_KEY=''
-        IV_KEY=''
-        TOC_KEY=''
-
-        DEFAULT_PASSWORD=''
-
-        KEVIN_EMAIL=''
+        # 기타
+        DEFAULT_PASSWORD=비밀번호 기본값
