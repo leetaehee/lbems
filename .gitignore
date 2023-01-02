@@ -11,7 +11,7 @@ libs/js/devextreme
 libs/js/magnific-popup
 libs/js/swiper-4.5.0
 libs/js/validation
-# libs/js/chart.js
+#libs/js/chart.js
 #libs/js/sheetjs
 #libs/js/filesaver
 #libs/js/jquery
