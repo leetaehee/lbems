@@ -1,13 +1,15 @@
-# 설정파일
+# setting files
 .env
 
-# 숨겨야되는 파일
+# hidden files
 .hidden
 
-# 기타
+# libaray
+libs/js
+libs/php/PHPExcel
+libs/php/PHPMailer
+
+# etc
 .git
 .idea
 .svn
-
-
-
