@@ -96,7 +96,7 @@
         CONTROL_API_URL=LG 에어컨 API
         CONTROL_SAMSUNG_API_URI=삼성 에어컨 API
         MQTT_FINEDUST_API_URL=MQTT 미세먼지 API
-        TOC_URL=TOC APO
+        TOC_URL=TOC API
         YJ_RND_API_URL=데이터 연계 POST 방식 API
         
         # 경로 
