@@ -18,12 +18,12 @@
 [숨김파일]
 - 아래 파일들은 구글 드라이브에서 다운 받을 것 
 
-- libs/php
-PHPExcel
-PHPMailer
-Fee
+libs/php
+    /PHPExcel
+    /PHPMailer
+    /Fee
 
-- libs/js
+libs/js
     /sheetjs
     /magnific-popup
     /jquery
@@ -38,9 +38,9 @@ Fee
 [네임스페이스] 
 EMS_Module
 Http
-/Parser 요청 그룹 
-/Command 요청 처리 
-/Sensor 업체 정보 요청 
+    /Parser 요청 그룹 
+    /Command 요청 처리 
+    /Sensor 업체 정보 요청 
 Module
 
 [업체별 분기처리 시 방법]
