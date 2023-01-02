@@ -5,7 +5,7 @@
 .hidden
 
 # libaray
-libs/js/
+libs/js/*/.js
 libs/php/PHPExcel
 libs/php/PHPMailer
 
