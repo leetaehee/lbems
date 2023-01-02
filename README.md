@@ -17,17 +17,22 @@
 
 [숨김파일]
 - 아래 파일들은 구글 드라이브에서 다운 받을 것 
-- 그 외 파일은 추후 필요하면 받는다.
 
 libs/php
     /PHPExcel
-    /php/PHPMailer
+    /PHPMailer
+    /Fee
 libs/js
     /sheetjs
     /magnific-popup
     /jquery
     /filesaver
     /chartjs
+    /billboard
+    /datatables
+    /devextreme
+    /swiper-4.5.0
+    /validation
 
 [네임스페이스] 
 EMS_Module
