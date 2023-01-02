@@ -24,24 +24,25 @@
             /Fee
 
         libs/js
-    /sheetjs
-    /magnific-popup
-    /jquery
-    /filesaver
-    /chartjs
-    /billboard
-    /datatables
-    /devextreme
-    /swiper-4.5.0
-    /validation
+            /sheetjs
+            /magnific-popup
+            /jquery
+            /filesaver
+            /chartjs
+            /billboard
+            /datatables
+            /devextreme
+            /swiper-4.5.0
+            /validation
 
 [네임스페이스] 
-EMS_Module
-Http
-    /Parser 요청 그룹 
-    /Command 요청 처리 
-    /Sensor 업체 정보 요청 
-Module
+
+        EMS_Module
+        Http
+            /Parser 요청 그룹 
+            /Command 요청 처리 
+            /Sensor 업체 정보 요청 
+        Module
 
 [업체별 분기처리 시 방법]
 
