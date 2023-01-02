@@ -19,9 +19,9 @@
 - 아래 파일들은 구글 드라이브에서 다운 받을 것 
 
 - libs/php
-    1. /PHPExcel
-    2. /PHPMailer
-    3. /Fee
+PHPExcel
+PHPMailer
+Fee
 
 - libs/js
     /sheetjs
