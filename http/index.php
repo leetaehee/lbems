@@ -2,6 +2,9 @@
 /** setting 정보 */
 include_once '../setting.php';
 
+// 브런치 작업
+// php storm  이용해서 할 것
+
 /** 쿼리 */
 include_once '../EMS_Modules/php/CommonQuery.php';
 include_once '../EMS_Modules/php/EMSQuery.php';
