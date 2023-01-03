@@ -2,8 +2,6 @@
 /** setting 정보 */
 include_once '../setting.php';
 
-//test
-
 /** 쿼리 */
 include_once '../EMS_Modules/php/CommonQuery.php';
 include_once '../EMS_Modules/php/EMSQuery.php';
