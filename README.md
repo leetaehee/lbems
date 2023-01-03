@@ -16,8 +16,11 @@
 2. env파일이 없는 경우 .env.example 파일을 복사해서 .env로 만들 것
 
 [버전관리]
-1. main
-2. develop (브런치)
+1. 작업은 main(master) 와 branch로 나누어서 한다.
+2. 추후 필요에 의해 branch를 여러개 이상 나눌 수 있다.
+
+         main (master)
+               develop (branch)
 
 [숨김파일]
 1. 아래 파일들은 구글 드라이브에서 다운 받을 것 
