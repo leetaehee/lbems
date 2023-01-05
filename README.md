@@ -74,7 +74,7 @@
 1. 데이터 연계는 외부 업체에서 우리 데이터를 제공하는 것을 의미한다.
 2. 연계 방식은 API와 POST 방식이 있다.
 3. API 방식을 사용 시 JWT(JSON Web Token) 방식을 이용한다.
-4. JSON 토큰은 주기는 아래와 같다.
+4. JWT 주기는 아래와 같다.
    * ACCESS TOKEN : 7일
    * REFRESH TOKEN : 14일 
 5. POST 데이터 연계 방식은 5분마다 전달한다. 
