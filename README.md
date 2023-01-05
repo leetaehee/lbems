@@ -169,7 +169,7 @@
 
 * Config 적용
          
-       /EMS_Modules/php/Config.php 에서 해당 되는 부분에 단치 추
+       /EMS_Modules/php/Config.php 에서 해당 되는 부분에 단지 추가
 
 3. 사이트 추가와 관련된 부분은 특정부분은 자동화 하는 방향으로 개발 예정
 
