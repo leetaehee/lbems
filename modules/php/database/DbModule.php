@@ -58,7 +58,7 @@ class DbModule
      */
 	private function createDatabase() : void
     {
-		if ($this->dbType == 'mariadb') {
+        if (in_array($this->dbType, ['mysql', 'maria']) === true) {
 			$this->database = new Mariadb($this->dbHost, $this->dbPort, $this->dbId, $this->dbPasswd, $this->dbSid);
 		} else {
 			throw new \Exception(ErrDbType);

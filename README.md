@@ -265,9 +265,11 @@
 2. 설정 정보는 구글 드라이브를 참고한다.
 3. 항목 설명
 
+        # 개발 환경 설정 
         IS_ENABLED_WATCHDOG=watchdog 수동 실행 (1 = 활성화 | 0 = 비활성화)
         IS_DEV=개발모드 (1 = 개발 | 0 = 운영)
 
+        # 사이트 설정
         DOMAIN=도메인주소 
         SITE_TYPE=사이트 타입(lbems, fems, bems)
 
@@ -314,7 +316,7 @@
         MAIL_USERNAME=계정명
         MAIL_PASSWORD=비밀번호
         MAIL_FROM_NAME=발신자 이름
-        KEVIN_EMAIL=발신자 이메일
+        MAIL_FROM_ADDRESS=발신자 이메일
 
         # 키 값
         SECRET_KEY=사이트 비밀키 

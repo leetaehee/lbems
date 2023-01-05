@@ -103,7 +103,7 @@ class Mail
         $obj->Username = $envOptions['MAIL_USERNAME'];
         $obj->Password = $envOptions['MAIL_PASSWORD'];
         $obj->SMTPAuth = $this->SMTPAuth;
-        $obj->From = $envOptions['KEVIN_EMAIL'];
+        $obj->From = $envOptions['MAIL_FROM_ADDRESS'];
         $obj->FromName = $envOptions['MAIL_FROM_NAME'];
         $obj->Subject = $mailData['subject'];
         $obj->msgHTML($mailData['content']);
