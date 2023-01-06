@@ -75,7 +75,6 @@ class ControlFactory
 
         $options = [
             'status_type' => $statusType,
-            'is_test' => (bool)$options['is_test'],
         ];
 
         switch ($type) {

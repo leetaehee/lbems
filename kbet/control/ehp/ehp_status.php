@@ -17,7 +17,6 @@ $responses['result'] = [
     'reason' => '-',
 ];
 
-$isTest = $api->getApiRuleData('is_test');
 $target = $tokenData['target'];
 
 $complexCodePk = $_GET['complex_code'];
@@ -90,7 +89,6 @@ if ($company === 'lg' && $ehpId === '') {
 $controlOptions = [
     'id' => $ehpId,
     'status_type' => $statusType,
-    'is_test' => $isTest,
 ];
 
 $controlFactory = new ControlFactory($company);

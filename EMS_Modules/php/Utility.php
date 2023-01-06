@@ -970,10 +970,11 @@ class Utility
      *
      * @param array $data
      * @param string $keyName
+     * @param string $searchColumn
      *
      * @return array
      */
-    public function makeSelectedDataByKey(array $data, string $keyName): array
+    public function makeSelectedDataByKey(array $data, string $keyName, string $searchColumn): array
     {
         $fcData = [];
 
@@ -987,7 +988,7 @@ class Utility
 
         if ($keyName !== '') {
             for ($i = 0; $i < count($data); $i++) {
-                if ($data[$i]['addr'] === $keyName) {
+                if ($data[$i][$searchColumn] === $keyName) {
                     $fcData = $data[$i];
                     break;
                 }

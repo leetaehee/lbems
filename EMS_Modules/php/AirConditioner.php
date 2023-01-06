@@ -8,14 +8,25 @@ use Http\SensorManager;
  */
 abstract class AirConditioner
 {
-    /** @var string|null API URL 정보 */
+    /** @var string|null $apiURL API URL 정보 */
     protected ?string $apiURL = null;
+
+    /** @var string|null $communicationMethod API 통신 방식 */
+    protected ?string $communicationMethod = null;
 
     /** @var SensorManager|null $sensorManager */
     protected ?SensorManager $sensorManager = null;
 
     /** @var array $controlInfo 층별 아이디 정보 */
     protected array $controlInfo = [];
+
+    /** @var array $httpHeaders HttpHeader 정보 */
+    protected array $httpHeaders = [];
+
+    /** @var array $httpOptions Http 선택 정보 */
+    protected array $httpOptions = [
+        'time_out' => 10000,
+    ];
 
     /** @var array $devOptions */
     protected array $devOptions = [];
@@ -29,6 +40,7 @@ abstract class AirConditioner
     {
         $this->sensorManager = new SensorManager();
         $this->devOptions = parse_ini_file(dirname(__FILE__) . '/../../.env');
+        $this->communicationMethod = Config::CONTROL_COMMUNICATION_METHOD;
 
         $this->setAssignDeviceInfo($complexCodePk);
     }
@@ -114,4 +126,17 @@ abstract class AirConditioner
      * @return array
      */
     abstract public function setStatus(string $complexCodePk, string $company, string $id, array $options) : array;
+
+    /**
+     * API 데이터 요청
+     *
+     * @param string $url
+     * @param string $method
+     * @param string $company
+     * @param array $parameter
+     * @param array $options
+     *
+     * @return array
+     */
+    abstract public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array;
 }

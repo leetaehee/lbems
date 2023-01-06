@@ -23,6 +23,7 @@ include_once $documentRoot . '/EMS_Modules/php/ControlFactory.php';
 include_once $documentRoot . '/EMS_Modules/php/AirConditioner.php';
 include_once $documentRoot . '/EMS_Modules/php/LgAirConditioner.php';
 include_once $documentRoot . '/EMS_Modules/php/SamsungAirConditioner.php';
+include_once $documentRoot . '/EMS_Modules/php/TestSampleMap.php';
 
 include_once $documentRoot . '/http/SensorManager.php';
 include_once $documentRoot . '/http/sensor_include.php';

@@ -41,24 +41,12 @@ class LgAirConditioner extends AirConditioner
         $apiURL = $this->apiURL;
         $controlInfo = $this->controlInfo;
 
-        $statusType = $options['status_type'];
-        $mode = $statusType === 'operation_etc' ? 'fc3' : 'fc1';
+        $mode = $options['status_type'] === 'operation_etc' ? 'fc3' : 'fc1';
 
         $controlInfo = array_values($controlInfo);
-
         if (in_array($id, $controlInfo) === false) {
             return [];
         }
-
-        // AirConditioner 에서 함수 하나 추가해서 API 에서 조회하는것과 직접 데이터 가져오는 방식(db, 테스트데이터) 할수있도록 할것
-
-        if ($options['is_test'] === true) {
-            return Config::AIR_CONDITIONER_SAMPLE_DATA[$company][$statusType];
-        }
-
-        $options = [
-            'time_out' => 10000,
-        ];
 
         $parameter = [
             'id' => $id,
@@ -67,18 +55,8 @@ class LgAirConditioner extends AirConditioner
 
         $apiURL .= $mode;
         $apiMethod = 'GET';
-        $httpHeaders = [];
 
-        $result = Utility::getInstance()->curlProcess($apiURL, $apiMethod, $httpHeaders, $parameter, $options);
-        if ($result['code'] != 200) {
-            return [];
-        }
-
-        if ($result['msg'] == 'None') {
-            return [];
-        }
-
-        return $this->toArray($result['msg']);
+        return $this->requestData($apiURL, $apiMethod, $company, $parameter, $options);
     }
 
     /**
@@ -100,4 +78,47 @@ class LgAirConditioner extends AirConditioner
         // [True, False]
         return [];
     }
+
+    /**
+     * API 데이터 요청
+     *
+     * @param string $url
+     * @param string $method
+     * @param string $company
+     * @param array $parameter
+     * @param array $options
+     *
+     * @return array
+     */
+     public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array
+     {
+         $fcData = [];
+         $statusType = $options['status_type'];
+
+         $communicationMethod = $this->communicationMethod;
+         switch ($communicationMethod) {
+             case 'API' :
+                 $httpHeaders = $this->httpHeaders;
+                 $options = $this->httpOptions;
+
+                 $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $options);
+                 if ($result['code'] != 200) {
+                     return $fcData;
+                 }
+
+                 if ($result['msg'] == 'None') {
+                     return $fcData;
+                 }
+
+                 $fcData = $this->toArray($result['msg']);
+                 break;
+             case 'DATABASE' :
+                 break;
+             case 'SAMPLE' :
+                 $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$company][$statusType];
+                 break;
+         }
+
+         return $fcData;
+     }
 }

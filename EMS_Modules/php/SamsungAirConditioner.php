@@ -38,44 +38,31 @@ class SamsungAirConditioner extends AirConditioner
      */
     public function getStatus(string $complexCodePk, string $company, string $id, array $options) : array
     {
+        $fcData = [];
+
         $apiURL = $this->apiURL . '/get/0';
         $controlInfo = $this->controlInfo;
 
+        $searchColumn = 'addr';
+
         if ($id !== '' && in_array($id, $controlInfo) === false) {
             // 삼성에어컨은 아이디를 받지않으나 옵션으로 처리할 생각임
-            return [];
+            return $fcData;
         }
-
-        // AirConditioner 에서 함수 하나 추가해서 API 에서 조회하는것과 직접 데이터 가져오는 방식(db, 테스트데이터) 할수있도록 할것
-
-        if ($options['is_test'] === true) {
-            return Config::AIR_CONDITIONER_SAMPLE_DATA[$company];
-        }
-
-        $options = [
-            'time_out' => 30000,
-        ];
 
         $parameter = [
             'complex_code' => $complexCodePk,
         ];
 
         $apiMethod = 'GET';
-        $httpHeaders = [];
 
-        $result = Utility::getInstance()->curlProcess($apiURL, $apiMethod, $httpHeaders, $parameter, $options);
-        if ($result['code'] != 200) {
-            return [];
-        }
+        $fcData = $this->requestData($apiURL, $apiMethod, $company, $parameter, $options);
 
-        $data = json_decode($result['msg'], true);
+        // 아이디가 주어진 경우 아이디에 해당한 것만 뽑기
+        $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
 
-        // 아이디가 주어진 경우 아이디에 해당되는것만 뽑기..
-        // 해당 함수에서 addr 라고 고정되어 있는 함수를 일반화 시키기
-        $fcData = Utility::getInstance()->makeSelectedDataByKey($data, $id);
-
-        // web에서 보여주고자 하는 경우 데이터 결과를 lg처럼 할 것 ..
-        // $options['web'] = true
+        // webB에서 보여주는 경우 lg처럼 결과 나오도록 하기. 파라미터는 검토
+        //$options['web'] = true
 
         return $fcData;
     }
@@ -94,5 +81,43 @@ class SamsungAirConditioner extends AirConditioner
     {
         // True, False
         return [];
+    }
+
+    /**
+     * API 데이터 요청
+     *
+     * @param string $url
+     * @param string $method
+     * @param string $company
+     * @param array $parameter
+     * @param array $options
+     *
+     * @return array
+     */
+    public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array
+    {
+        $fcData = [];
+
+        $communicationMethod = $this->communicationMethod;
+        switch ($communicationMethod) {
+            case 'API' :
+                $httpHeaders = $this->httpOptions;
+                $options = $this->httpOptions;
+
+                $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $options);
+                if ($result['code'] != 200) {
+                    return $fcData;
+                }
+
+                $fcData = json_decode($result['msg'], true);
+                break;
+            case 'DATABASE' :
+                break;
+            case 'SAMPLE' :
+                $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$company];
+                break;
+        }
+
+        return $fcData;
     }
 }
