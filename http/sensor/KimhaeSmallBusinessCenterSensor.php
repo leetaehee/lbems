@@ -184,6 +184,17 @@ class KimhaeSmallBusinessCenterSensor implements SensorInterface
     }
 
     /**
+     * 제어 정보
+     *
+     * @return mixed
+     */
+    public function getControlDeviceInfo() : array
+    {
+        return [
+        ];
+    }
+
+    /**
      * 계통도 키 정보
      *
      * @return array

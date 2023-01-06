@@ -70,6 +70,13 @@ interface SensorInterface
     public function getMobileMenuInfo() : array;
 
     /**
+     * 제어 정보
+     *
+     * @return mixed
+     */
+    public function getControlDeviceInfo() : array;
+
+    /**
      * 계통도 키 정보
      *
      * @return array

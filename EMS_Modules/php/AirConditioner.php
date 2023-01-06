@@ -95,21 +95,23 @@ abstract class AirConditioner
      * 제어 상태 조회
      *
      * @param string $complexCodePk
+     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    abstract public function getStatus(string $complexCodePk, string $id, array $options) : array;
+    abstract public function getStatus(string $complexCodePk, string $company, string $id, array $options) : array;
 
     /**
      * 제어 상태 처리
      *
      * @param string $complexCodePk
+     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    abstract public function setStatus(string $complexCodePk, string $id, array $options) : array;
+    abstract public function setStatus(string $complexCodePk, string $company, string $id, array $options) : array;
 }

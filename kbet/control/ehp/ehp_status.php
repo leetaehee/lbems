@@ -90,6 +90,7 @@ if ($company === 'lg' && $ehpId === '') {
 $controlOptions = [
     'id' => $ehpId,
     'status_type' => $statusType,
+    'is_test' => $isTest,
 ];
 
 $controlFactory = new ControlFactory($company);

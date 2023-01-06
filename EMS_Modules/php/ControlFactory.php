@@ -69,21 +69,23 @@ class ControlFactory
             return $result;
         }
 
+        $company = $this->company;
         $id = isset($options['id']) === true ? $options['id'] : '';
         $statusType = isset($options['status_type']) === true ? $options['status_type'] : '';
 
         $options = [
             'status_type' => $statusType,
+            'is_test' => (bool)$options['is_test'],
         ];
 
         switch ($type) {
             case 'read' :
                 // 제어 상태 조회
-                $result = $controlObj->getStatus($complexCodePk, $id, $options);
+                $result = $controlObj->getStatus($complexCodePk, $company, $id, $options);
                 break;
             case 'process' :
                 // 제어 상태 처리
-                //$result = $controlObj->setStatus($complexCodePk, $id, $options);
+                //$result = $controlObj->setStatus($complexCodePk, $company, $id, $options);
                 break;
         }
 

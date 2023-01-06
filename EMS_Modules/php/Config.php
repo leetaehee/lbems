@@ -934,18 +934,13 @@ class Config
         'edge' => 'edge'
     ];
 
-    /** @var string[] CONDITIONER_COMPANY 에어컨 제조사 정보 */
-    const CONDITIONER_COMPANY = [
-        'lg',
-        'samsung'
-    ];
-
     /** @var string[] COMPLEX_AIR_CONDITIONER_INFO 단지별 에어컨 제조사 정보 */
     const COMPLEX_AIR_CONDITIONER_INFO = [
         '2001' => 'lg',
         '2002' => 'lg',
         '2005' => 'samsung',
-        '2017' => 'lg'
+        '2014' => 'lg',
+        '2017' => 'lg',
     ];
 
     /** @var string[] NTEK_SOLAR_OUT_COMPLEX_INFO  엔텍 데이터 중에서 태양광 소비량을 전기에 포함시키기 위한 설정 */
@@ -981,5 +976,104 @@ class Config
                 'METHOD' => 'POST'
             ],
         ],
+    ];
+
+    /** @var array AIR_CONDITIONER_SAMPLE_DATA  EHP 테스트 위한 샘플 데이터 */
+    const AIR_CONDITIONER_SAMPLE_DATA = [
+        'lg' => [
+            'power_etc' => [
+                'True', 'False', 'False', 'False', 'False', 'False', 'False'
+            ],
+            'operation_etc' => [
+                1,1,21,21,16,29, 0, 0, 0, 0
+            ],
+        ],
+        'samsung' => [
+            [
+                "temperatureScale" => "Celsius",
+                "airSwing_UD" => "false",
+                "maxTempAuto" => "30.0",
+                "eev" =>  "35",
+                "useMdsOptDirect" => "false",
+                "useOaIntake" => "false",
+                "maxDischargeTempCool" => "18.0",
+                "useMode" => "none",
+                "dischargeTempControl" => "false",
+                "dischargeCoolSetTemp" => "-1000",
+                "autoHeatSetTemp" => "24.0",
+                "spi" => "false",
+                "upperTemperatureLimit" =>"false",
+                "minTempHeat" => "16.0",
+                "peakStatus" => "false",
+                "coolUpperTemperature" => "30.0",
+                "fanSpeed" =>"auto",
+                "useHeatMode" => "true",
+                "maxDischargeTempHeat" => "43.0",
+                "heatLowerTemperatureLimit" => "false",
+                "useHumanSensor" => "false",
+                "maxTempCool" => "30.0",
+                "coolUpperTemperatureLimit" => "false",
+                "evapOutTemp" => "27.0",
+                "addr" => "12.03.02",
+                "useHumidification" => "false",
+                "autoMode" => "none",
+                "useSetHumidity" => "false",
+                "minTempCool" => "18.0",
+                "useEHSForceMode" => "false",
+                "tempInterval" => "1",
+                "autoCoolSetTemp" => "24.0",
+                "useStillAir" => "true",
+                "minDischargeTempHeat" => "30.0",
+                "humanSensor" => "false",
+                "lowerTemperatureLimit" => "false",
+                "dischargeCurrentTemp" => "-1000",
+                "alternativeMode" => "0",
+                "accumPowerOnTime" => "8012",
+                "isScheduled" => "false",
+                "useDischargeSetTemp" => "false",
+                "useWaterTankCool" => "false",
+                "useOpModeLimit" => "true",
+                "absoluteCapaCode" => "3400",
+                "heatLowerTemperature" => "16.0",
+                "setTemp" => "24.0",
+                "power" => "off",
+                "filterWarning" => "false",
+                "useOutdoorCool" => "false",
+                "accumThermoOnTime" => "498",
+                "usePurity" => "false",
+                "minDischargeTempCool" => "8.0",
+                "useVacancyControl" => "true",
+                "opMode" => "cool",
+                "useSpi" => "false",
+                "dischargeHeatSetTemp" => "-1000",
+                "lowerTemperature" => "18.0",
+                "defrostOn" => "false",
+                "airSwing_LR" => "false",
+                "minTempDry" => "18.0",
+                "useDsp" => "false",
+                "maxTempDry" => "30.0",
+                "useEHSPowerMode" => "false",
+                "useAutoClean" =>  "false",
+                "useCoolMode" => "true",
+                "evapInTemp" => "27.3",
+                "minTempAuto" => "18.0",
+                "capaCode" => "0",
+                "controlMode" => "none",
+                "dischargeDrySetTemp" => "-1000",
+                "remoconEnable" => "true",
+                "upperTemperature" => "30.0",
+                "isTempLimited" => "false",
+                "fanSpeedAbleFunction" => "17",
+                "useAirFlow" => "false",
+                "dischargeCoolMinSetTemp" => "-1000",
+                "error" => "false",
+                "vacancyStatus" => "false",
+                "mcuInfo" => "M00.",
+                "useLRSwing" => "true",
+                "modelCode" => "0",
+                "maxTempHeat" => "30.0",
+                "roomTemp" => "26.7"
+            ],
+        ]
     ];
 }
