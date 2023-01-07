@@ -8,6 +8,9 @@ use Http\SensorManager;
  */
 abstract class AirConditioner
 {
+    /** @var string|null $company 에어컨 제조사 */
+    protected ?string $company = null;
+
     /** @var string|null $apiURL API URL 정보 */
     protected ?string $apiURL = null;
 
@@ -36,10 +39,11 @@ abstract class AirConditioner
      *
      * @oaram string $complexCodePk
      */
-    public function __construct(string $complexCodePk)
+    public function __construct(string $complexCodePk, string $company)
     {
         $this->sensorManager = new SensorManager();
         $this->devOptions = parse_ini_file(dirname(__FILE__) . '/../../.env');
+        $this->company = $company;
         $this->communicationMethod = Config::CONTROL_COMMUNICATION_METHOD;
 
         $this->setAssignDeviceInfo($complexCodePk);
@@ -107,36 +111,33 @@ abstract class AirConditioner
      * 제어 상태 조회
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    abstract public function getStatus(string $complexCodePk, string $company, string $id, array $options) : array;
+    abstract public function getStatus(string $complexCodePk, string $id, array $options) : array;
 
     /**
      * 제어 상태 처리
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    abstract public function setStatus(string $complexCodePk, string $company, string $id, array $options) : array;
+    abstract public function setStatus(string $complexCodePk, string $id, array $options) : array;
 
     /**
      * API 데이터 요청
      *
      * @param string $url
      * @param string $method
-     * @param string $company
      * @param array $parameter
      * @param array $options
      *
      * @return array
      */
-    abstract public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array;
+    abstract public function requestData(string $url, string $method, array $parameter, array $options) : array;
 }

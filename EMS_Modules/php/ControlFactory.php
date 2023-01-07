@@ -6,17 +6,11 @@ namespace EMS_Module;
  */
 class ControlFactory
 {
-    /** @var string|null $company 에어컨 제조사 */
-    private ?string $company = null;
-
     /**
      * ControlFactory Constructor.
-     *
-     * @param string $company
      */
-    public function __construct(string $company)
+    public function __construct()
     {
-        $this->company = $company;
     }
 
     /**
@@ -30,21 +24,22 @@ class ControlFactory
      * 에어컨 제조사에 따른 객체 생성
      *
      * @param string $complexCodePk
+     * @param string $company
      *
      * @return AirConditioner|null
      */
-    private function makeObj(string $complexCodePk) :? AirConditioner
+    private function makeObj(string $complexCodePk, string $company) :? AirConditioner
     {
         $obj = null;
 
-        switch ($this->company) {
+        switch ($company) {
             case 'lg' :
                 // Lg
-                $obj = new LgAirConditioner($complexCodePk);
+                $obj = new LgAirConditioner($complexCodePk, $company);
                 break;
             case 'samsung' :
                 // Samsung
-                $obj = new SamsungAirConditioner($complexCodePk);
+                $obj = new SamsungAirConditioner($complexCodePk, $company);
                 break;
         }
 
@@ -55,21 +50,21 @@ class ControlFactory
      * 제어 처리
      *
      * @param string $complexCodePk
+     * @param string $company
      * @param string $type
      * @param array $options
      *
      * @return array
      */
-    public function processControl(string $complexCodePk, string $type, array $options = []) : array
+    public function processControl(string $complexCodePk, string $company, string $type, array $options = []) : array
     {
         $result = '';
 
-        $controlObj = $this->makeObj($complexCodePk);
+        $controlObj = $this->makeObj($complexCodePk, $company);
         if (is_null($controlObj) === true) {
             return $result;
         }
 
-        $company = $this->company;
         $id = isset($options['id']) === true ? $options['id'] : '';
         $statusType = isset($options['status_type']) === true ? $options['status_type'] : '';
 
@@ -80,11 +75,11 @@ class ControlFactory
         switch ($type) {
             case 'read' :
                 // 제어 상태 조회
-                $result = $controlObj->getStatus($complexCodePk, $company, $id, $options);
+                $result = $controlObj->getStatus($complexCodePk, $id, $options);
                 break;
             case 'process' :
                 // 제어 상태 처리
-                //$result = $controlObj->setStatus($complexCodePk, $company, $id, $options);
+                //$result = $controlObj->setStatus($complexCodePk, $id, $options);
                 break;
         }
 

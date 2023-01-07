@@ -10,10 +10,11 @@ class LgAirConditioner extends AirConditioner
      * LgAirConditioner Construct.
      *
      * @param string $complexCodePk
+     * @param string $company
      */
-    public function __construct(string $complexCodePk)
+    public function __construct(string $complexCodePk, string $company)
     {
-        parent::__construct($complexCodePk);
+        parent::__construct($complexCodePk, $company);
 
         $this->apiURL = $this->devOptions['CONTROL_API_URL'];
     }
@@ -30,13 +31,12 @@ class LgAirConditioner extends AirConditioner
      * 제어 상태 조회
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    public function getStatus(string $complexCodePk, string $company, string $id, array $options) : array
+    public function getStatus(string $complexCodePk, string $id, array $options) : array
     {
         $apiURL = $this->apiURL;
         $controlInfo = $this->controlInfo;
@@ -56,20 +56,19 @@ class LgAirConditioner extends AirConditioner
         $apiURL .= $mode;
         $apiMethod = 'GET';
 
-        return $this->requestData($apiURL, $apiMethod, $company, $parameter, $options);
+        return $this->requestData($apiURL, $apiMethod, $parameter, $options);
     }
 
     /**
      * 제어 상태 처리
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    public function setStatus(string $complexCodePk, string $company, string $id, array $options = []) : array
+    public function setStatus(string $complexCodePk, string $id, array $options = []) : array
     {
         $apiURL = $this->apiURL;
         $controlInfo = $this->controlInfo;
@@ -84,13 +83,12 @@ class LgAirConditioner extends AirConditioner
      *
      * @param string $url
      * @param string $method
-     * @param string $company
      * @param array $parameter
      * @param array $options
      *
      * @return array
      */
-     public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array
+     public function requestData(string $url, string $method, array $parameter, array $options) : array
      {
          $fcData = [];
          $statusType = $options['status_type'];
@@ -115,7 +113,7 @@ class LgAirConditioner extends AirConditioner
              case 'DATABASE' :
                  break;
              case 'SAMPLE' :
-                 $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$company][$statusType];
+                 $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company][$statusType];
                  break;
          }
 

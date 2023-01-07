@@ -91,9 +91,9 @@ $controlOptions = [
     'status_type' => $statusType,
 ];
 
-$controlFactory = new ControlFactory($company);
+$controlFactory = new ControlFactory();
 
-$result = $controlFactory->processControl($complexCodePk, $controlType, $controlOptions);
+$result = $controlFactory->processControl($complexCodePk, $company, $controlType, $controlOptions);
 if ($result === '') {
     echo Utility::getInstance()->responseJSON([
         'result' => [

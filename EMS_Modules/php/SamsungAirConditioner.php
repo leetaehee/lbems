@@ -10,10 +10,11 @@ class SamsungAirConditioner extends AirConditioner
      * SamsungAirConditioner Construct.
      *
      * @param string $complexCodePk
+     * @param string $company
      */
-    public function __construct(string $complexCodePk)
+    public function __construct(string $complexCodePk, string $company)
     {
-        parent::__construct($complexCodePk);
+        parent::__construct($complexCodePk, $company);
 
         $this->apiURL = $this->devOptions['CONTROL_SAMSUNG_API_URI'];
     }
@@ -36,7 +37,7 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    public function getStatus(string $complexCodePk, string $company, string $id, array $options) : array
+    public function getStatus(string $complexCodePk, string $id, array $options) : array
     {
         $fcData = [];
 
@@ -56,7 +57,7 @@ class SamsungAirConditioner extends AirConditioner
 
         $apiMethod = 'GET';
 
-        $fcData = $this->requestData($apiURL, $apiMethod, $company, $parameter, $options);
+        $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
 
         // 아이디가 주어진 경우 아이디에 해당한 것만 뽑기
         $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
@@ -71,13 +72,12 @@ class SamsungAirConditioner extends AirConditioner
      * 제어 상태 처리
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
      * @return array
      */
-    public function setStatus(string $complexCodePk, string $company, string $id, array $options) : array
+    public function setStatus(string $complexCodePk, string $id, array $options) : array
     {
         // True, False
         return [];
@@ -88,13 +88,12 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @param string $url
      * @param string $method
-     * @param string $company
      * @param array $parameter
      * @param array $options
      *
      * @return array
      */
-    public function requestData(string $url, string $method, string $company, array $parameter, array $options) : array
+    public function requestData(string $url, string $method, array $parameter, array $options) : array
     {
         $fcData = [];
 
@@ -114,7 +113,7 @@ class SamsungAirConditioner extends AirConditioner
             case 'DATABASE' :
                 break;
             case 'SAMPLE' :
-                $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$company];
+                $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company];
                 break;
         }
 
