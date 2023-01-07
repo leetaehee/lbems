@@ -61,8 +61,10 @@ class SamsungAirConditioner extends AirConditioner
         // 아이디가 주어진 경우 아이디에 해당한 것만 뽑기
         $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
 
-        // webB에서 보여주는 경우 lg처럼 결과 나오도록 하기. 파라미터는 검토
-        //$options['web'] = true
+        if ($options['is_display'] === true && $id !== '') {
+            // 화면에 보여주는 경우에 포맷을 함.
+            $fcData = $this->makeFormatting($options['status_type'], $fcData);
+        }
 
         return $fcData;
     }

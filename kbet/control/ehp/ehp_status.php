@@ -89,6 +89,7 @@ if ($company === 'lg' && $ehpId === '') {
 $controlOptions = [
     'id' => $ehpId,
     'status_type' => $statusType,
+    'is_display' => true,
 ];
 
 $controlFactory = new ControlFactory();

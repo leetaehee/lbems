@@ -64,7 +64,7 @@ class TestSampleMap
                 "absoluteCapaCode" => "3400",
                 "heatLowerTemperature" => "16.0",
                 "setTemp" => "24.0",
-                "power" => "off",
+                "power" => "on",
                 "filterWarning" => "false",
                 "useOutdoorCool" => "false",
                 "accumThermoOnTime" => "498",

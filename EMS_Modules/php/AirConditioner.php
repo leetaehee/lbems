@@ -108,6 +108,60 @@ abstract class AirConditioner
     }
 
     /**
+     * EHP  상태 조회 시 기본 포맷 제공
+     * (참고. db 에서 조회 시 절대 배열로 받지말 것 - 받을 경우 함수 수정해야 함)
+     *
+     * @param string $statusType
+     * @param array $data
+     *
+     * @return array
+     */
+    protected function makeFormatting(string $statusType, array $data) : array
+    {
+        $fcData = [];
+
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
+
+        switch ($statusType) {
+            case 'power_etc' :
+                $power = $data['power'];
+
+                $fcData = [
+                    $airConditionerFormats['power'][$power],
+                    'False',
+                    'False',
+                    'False',
+                    'False',
+                    'False',
+                    'False',
+                ];
+                break;
+            case 'operation_etc' :
+                $opMode = $data['opMode'];
+                $fanSpeed = $data['fanSpeed'];
+                $setTemp = $data['setTemp'];
+                $upperTemperature = $data['upperTemperature'];
+                $lowerTemperature = $data['lowerTemperature'];
+                $roomTemp = $data['roomTemp'];
+
+                $fcData = [
+                    $airConditionerFormats['op_mode'][$opMode],
+                    $airConditionerFormats['fan_speed'][$fanSpeed],
+                    $setTemp,
+                    $upperTemperature,
+                    $lowerTemperature,
+                    $roomTemp,
+                    0,
+                    0,
+                    0,
+                ];
+                break;
+        }
+
+        return $fcData;
+    }
+
+    /**
      * 제어 상태 조회
      *
      * @param string $complexCodePk

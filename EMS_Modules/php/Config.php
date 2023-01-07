@@ -651,7 +651,27 @@ class Config
     /** @var string[]  UNIT_OVERRIDE_INFO 단위 재정의 하기 */
     const UNIT_OVERRIDE_INFO = [];
 
-    /** @var array CONTROL_AIR_CONDITION_COMMAND 에어컨 제어 명령어  정보 */
+    const AIR_CONDITIONER_FORMAT = [
+        'power' => [
+            'on' => 'True',
+            'off' => 'False',
+        ],
+        'op_mode' => [
+            'cool' => 1,
+            'dry' => 2,
+            'fan' => 3,
+            'auto' => 4,
+            'heat' => 5,
+        ],
+        'fan_speed' => [
+            'low' => 1,
+            'mid' => 2,
+            'high' => 3,
+            'auto' => 4,
+        ],
+    ];
+
+    /** @var array CONTROL_AIR_CONDITION_COMMAND (폐기) 에어컨 제어 명령어 정보 */
     const CONTROL_AIR_CONDITION_COMMAND = [
         'lg' => [
             'operation' => [

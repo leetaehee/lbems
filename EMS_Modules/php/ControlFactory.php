@@ -67,9 +67,11 @@ class ControlFactory
 
         $id = isset($options['id']) === true ? $options['id'] : '';
         $statusType = isset($options['status_type']) === true ? $options['status_type'] : '';
+        $isDisplay = isset($options['is_display']) === true ? $options['is_display'] : false;
 
         $options = [
             'status_type' => $statusType,
+            'is_display' => $isDisplay,
         ];
 
         switch ($type) {
