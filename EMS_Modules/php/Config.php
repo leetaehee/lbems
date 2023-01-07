@@ -979,5 +979,5 @@ class Config
     ];
 
     /** @var string COMMUNICATION_METHOD 통신 방식 - API, DATABASE, SAMPLE */
-    const CONTROL_COMMUNICATION_METHOD = 'SAMPLE';
+    const COMMUNICATION_METHOD = 'SAMPLE';
 }

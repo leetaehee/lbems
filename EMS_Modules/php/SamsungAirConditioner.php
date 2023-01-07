@@ -31,7 +31,6 @@ class SamsungAirConditioner extends AirConditioner
      * 제어 상태 조회
      *
      * @param string $complexCodePk
-     * @param string $company
      * @param string $id
      * @param array $options
      *
@@ -93,7 +92,7 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    public function requestData(string $url, string $method, array $parameter, array $options) : array
+    protected function requestData(string $url, string $method, array $parameter, array $options) : array
     {
         $fcData = [];
 

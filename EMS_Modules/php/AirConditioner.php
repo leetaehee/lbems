@@ -44,7 +44,7 @@ abstract class AirConditioner
         $this->sensorManager = new SensorManager();
         $this->devOptions = parse_ini_file(dirname(__FILE__) . '/../../.env');
         $this->company = $company;
-        $this->communicationMethod = Config::CONTROL_COMMUNICATION_METHOD;
+        $this->communicationMethod = Config::COMMUNICATION_METHOD;
 
         $this->setAssignDeviceInfo($complexCodePk);
     }
@@ -99,8 +99,8 @@ abstract class AirConditioner
         $fcData = [];
 
         // 시작과 종료부분에서 [, ]  제거하기
-        $jsonString = str_replace('[', '',$jsonString);
-        $jsonString = str_replace(']', '',$jsonString);
+        $jsonString = str_replace('[', '', $jsonString);
+        $jsonString = str_replace(']', '', $jsonString);
 
         $fcData = explode(',' , $jsonString);
 
@@ -139,5 +139,5 @@ abstract class AirConditioner
      *
      * @return array
      */
-    abstract public function requestData(string $url, string $method, array $parameter, array $options) : array;
+    abstract protected function requestData(string $url, string $method, array $parameter, array $options) : array;
 }

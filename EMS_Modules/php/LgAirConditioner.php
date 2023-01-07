@@ -88,7 +88,7 @@ class LgAirConditioner extends AirConditioner
      *
      * @return array
      */
-     public function requestData(string $url, string $method, array $parameter, array $options) : array
+     protected function requestData(string $url, string $method, array $parameter, array $options) : array
      {
          $fcData = [];
          $statusType = $options['status_type'];
