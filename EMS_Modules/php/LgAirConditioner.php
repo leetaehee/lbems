@@ -38,8 +38,12 @@ class LgAirConditioner extends AirConditioner
      */
     public function getStatus(string $complexCodePk, string $id, array $options) : array
     {
+        $fcData = [];
+
         $apiURL = $this->apiURL;
         $controlInfo = $this->controlInfo;
+
+        $statusType = $options['status_type'];
 
         /*
             상태 조회
@@ -53,7 +57,7 @@ class LgAirConditioner extends AirConditioner
             fc3 에어컨 온도, 팬,  등등 상태
         */
 
-        $mode = $options['status_type'] === 'operation_etc' ? 'fc3' : 'fc1';
+        $mode = $statusType === 'operation_etc' ? 'fc3' : 'fc1';
 
         $controlInfo = array_values($controlInfo);
         if (in_array($id, $controlInfo) === false) {
@@ -68,7 +72,16 @@ class LgAirConditioner extends AirConditioner
         $apiURL .= $mode;
         $apiMethod = 'GET';
 
-        return $this->requestData($apiURL, $apiMethod, $parameter, $options);
+        $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
+
+        $sampleOptions = [
+            'status_type' => $statusType,
+        ];
+
+        // 샘플데이터 생성
+        $fcData = $this->makeSampleData($fcData, $sampleOptions);
+
+        return $fcData;
     }
 
     /**
@@ -131,4 +144,48 @@ class LgAirConditioner extends AirConditioner
 
          return $fcData;
      }
+
+    /**
+     * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용
+     *
+     * @param array $data
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function makeSampleData(array $data, array $options): array
+    {
+        $fcData = $data;
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
+
+        $communicationMethod = $this->communicationMethod;
+        if ($communicationMethod !== 'SAMPLE') {
+            return $fcData;
+        }
+
+        switch ($options['status_type']) {
+            case 'power_etc' :
+                $powerValues = array_values($airConditionerFormats['power']);
+
+                $fcData[0] = $powerValues[array_rand($powerValues, 1)];
+                break;
+            case 'operation_etc' :
+                $fanSpeedValues = array_values($airConditionerFormats['fan_speed']);
+                $opModeValues = array_values($airConditionerFormats['op_mode']);
+                $temperatureValue = $airConditionerFormats['temperature'];
+
+                $temperature = $temperatureValue[array_rand($temperatureValue, 1)];
+
+                $fcData[0] = $opModeValues[array_rand($opModeValues, 1)];
+                $fcData[1] = $fanSpeedValues[array_rand($fanSpeedValues, 1)];
+                $fcData[2] = $temperature;
+                $fcData[3] = $temperature;
+                $fcData[4] = $temperature;
+                $fcData[5] = $temperature;
+
+                break;
+        }
+
+        return $fcData;
+    }
 }

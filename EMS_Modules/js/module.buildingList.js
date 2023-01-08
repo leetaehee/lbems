@@ -37,7 +37,7 @@ module.BuildingList = function($selector)
             let buildingData = self.data['building_data'];
 
             let i = 0;
-            let optionStr = "<option value=''>건물 선택</option>";
+            let optionStr = "<option value=''>단지 선택</option>";
 
             for(i = 0; i < buildingData.length; i++){
                 optionStr += "<option value='"+buildingData[i]['complex_code_pk']+"'>"+buildingData[i]['name']+"</option>";

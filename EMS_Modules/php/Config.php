@@ -665,10 +665,14 @@ class Config
         ],
         'fan_speed' => [
             'low' => 1,
-            'mid' => 2,
+            'med' => 2,
             'high' => 3,
             'auto' => 4,
         ],
+        'temperature' => [
+            20, 21, 19, 23, 24
+        ],
+
     ];
 
     /** @var array CONTROL_AIR_CONDITION_COMMAND (폐기) 에어컨 제어 명령어 정보 */

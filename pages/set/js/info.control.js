@@ -183,7 +183,7 @@ function createControl()
 			//let buildingArea = $formId.find("#building_area").val();
 
 			if (name.length < 1) {
-				return "건물명을 입력하세요.";
+				return "단지명을 입력하세요.";
 			}
 			if (name.length > 11) {
 				return '이름은 11자 이내로 입력하세요.';
@@ -298,7 +298,7 @@ function createControl()
 	});
 
 	$email.on("keyup", function() {
-		alert('건물 담당자 이메일 수정은 케빈랩에 문의 해주세요.');
+		alert('단지 담당자 이메일 수정은 케빈랩에 문의 해주세요.');
 
 		// 초기화..
 		$(this).val(control.selectedEmail);

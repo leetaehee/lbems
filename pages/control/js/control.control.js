@@ -81,12 +81,13 @@ function createControl()
         updateDeviceStatus: function()
         {
             let self = control;
+            const roomName = self.selectedRoomName;
 
-            let powerOnOffData = self.data['power_on_off'];
             let allPowerOnOffData = self.data['all_power_on_off'];
+            let roomOnOffData = allPowerOnOffData[roomName];
             let functionData = self.data['function_status'];
 
-            let powerOnOffStatus = self.getRealBoolean(powerOnOffData[0]); // 전원
+            let powerOnOffStatus = self.getRealBoolean(roomOnOffData); // 전원
             let fanSpeed = parseInt(functionData[1]); // 풍량
             let mode = parseInt(functionData[0]); // 모드
 

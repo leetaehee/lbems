@@ -411,7 +411,7 @@ function createControl()
 		let self = control;
 
 		if ($rorenType.val().length < 1) {
-			alert('건물을 선택하세요.');
+			alert('단지을 선택하세요.');
 			$rorenType.focus();
 			return;
 		}
@@ -456,7 +456,7 @@ function createControl()
 			let idFilter = /^[a-z0-9]{3,15}/g;
 
 			if(popupRorenType == ""){
-				alert("건물을 선택하세요.");
+				alert("단지를 선택하세요.");
 				return;
 			}
 

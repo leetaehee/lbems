@@ -36,7 +36,7 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    public function getStatus(string $complexCodePk, string $id, array $options) : array
+    public function getStatus(string $complexCodePk, string $id, array $options): array
     {
         $fcData = [];
 
@@ -58,6 +58,10 @@ class SamsungAirConditioner extends AirConditioner
 
         $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
 
+        // downloadSample - 삼성만 해당
+        // makeSampleData - 샘플 데이터 생성, rand 함수 이용
+        // 두 함수 모두 - SAMPLE 에만 해당 시킬 것, makeSampleData 는 추상메서드로 선언
+
         // 아이디가 주어진 경우 아이디에 해당한 것만 뽑기
         $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
 
@@ -78,7 +82,7 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    public function setStatus(string $complexCodePk, string $id, array $options) : array
+    public function setStatus(string $complexCodePk, string $id, array $options): array
     {
         // True, False
         return [];
@@ -94,7 +98,7 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    protected function requestData(string $url, string $method, array $parameter, array $options) : array
+    protected function requestData(string $url, string $method, array $parameter, array $options): array
     {
         $fcData = [];
 
@@ -112,11 +116,80 @@ class SamsungAirConditioner extends AirConditioner
                 $fcData = json_decode($result['msg'], true);
                 break;
             case 'DATABASE' :
+                $fcData = $this->downloadSampleFormat();
                 break;
             case 'SAMPLE' :
-                $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company];
+                $fcData = $this->downloadSampleFormat();
                 break;
         }
+
+        return $fcData;
+    }
+
+    /**
+     * 삼성에서 제공하는 API 샘플을 받는다.
+     *
+     * @return array
+     */
+    private function downloadSampleFormat(): array
+    {
+        $fcData = [];
+
+        $controlInfo = array_values($this->controlInfo);
+        $sampleFormat = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company];
+
+        //$powerKeys = array_keys($airConditionerFormats['power']);
+        //$fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
+        //$opModeKeys = array_keys($airConditionerFormats['op_mode']);
+        //$temperatureValues = $airConditionerFormats['temperature'];
+
+        $options = [];
+
+        for ($fcIndex = 0; $fcIndex < count($controlInfo); $fcIndex++) {
+            $id = $controlInfo[$fcIndex];
+            $temps = $sampleFormat;
+
+            $temps['addr'] = $id;
+            $temps = $this->makeSampleData($temps, $options);
+
+            array_push($fcData, $temps);
+        }
+
+        return $fcData;
+    }
+
+    /**
+     * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용
+     *
+     * @param array $data
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function makeSampleData(array $data, array $options): array
+    {
+        $fcData = $data;
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
+
+        $communicationMethod = $this->communicationMethod;
+        if ($communicationMethod !== 'SAMPLE') {
+            return $fcData;
+        }
+
+        $powerKeys = array_keys($airConditionerFormats['power']);
+        $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
+        $opModeKeys = array_keys($airConditionerFormats['op_mode']);
+
+        $temperatureValues = $airConditionerFormats['temperature'];
+        $temperature = $temperatureValues[array_rand($temperatureValues, 1)];
+
+        $fcData['power'] = $powerKeys[array_rand($powerKeys, 1)];
+        $fcData['opMode'] = $opModeKeys[array_rand($opModeKeys, 1)];
+        $fcData['fanSpeed'] = $fanSpeedKeys[array_rand($fanSpeedKeys, 1)];
+        $fcData['setTemp'] = $temperature;
+        $fcData['upperTemperature'] = $temperature;
+        $fcData['lowerTemperature'] = $temperature;
+        $fcData['roomTemp'] = $temperature;
 
         return $fcData;
     }

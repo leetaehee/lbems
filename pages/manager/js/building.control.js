@@ -378,7 +378,7 @@ function createControl()
 		popupOpen: function(type)
 		{
 			const TITLE_INDEX = type === 'modify' ? 1  : 0;
-			$labelPopupTitle.html(`건물 정보 ${POPUP_TITLES[TITLE_INDEX]}`);
+			$labelPopupTitle.html(`단지 정보 ${POPUP_TITLES[TITLE_INDEX]}`);
 			$labelPopupTitleWord.html(POPUP_TITLES[TITLE_INDEX]);
 
 			standardFormPopup.open();
@@ -440,16 +440,16 @@ function createControl()
 
 		let len = $(choiceChecked).length;
 		if(len < 1){
-			alert("건물 정보를 선택하세요");
+			alert("단지 정보를 선택하세요");
 			return;
 		}
 
 		if(len > 1){
-			alert("건물 정보는 1개만 삭제 가능합니다.");
+			alert("단지 정보는 1개만 삭제 가능합니다.");
 			return;
 		}
 
-		if(confirm("건물 정보를 정말 삭제하시겠습니까?")){
+		if(confirm("단지 정보를 정말 삭제하시겠습니까?")){
 			self.updateteRorenDelete(code);
 		}
 	});

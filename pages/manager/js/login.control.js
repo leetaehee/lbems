@@ -176,7 +176,7 @@ function createControl()
 		let self = control;
 
 		if (isDisabledBuildingSelectBox === true && $buildingType.val() === '') {
-			alert('건물을 선택하세요.');
+			alert('단지를 선택하세요.');
 			$buildingType.focus();
 			return;
 		}

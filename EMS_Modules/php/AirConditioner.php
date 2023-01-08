@@ -194,4 +194,14 @@ abstract class AirConditioner
      * @return array
      */
     abstract protected function requestData(string $url, string $method, array $parameter, array $options) : array;
+
+    /**
+     * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용
+     *
+     * @param array $data
+     * @param array $options
+     *
+     * @return array
+     */
+    abstract protected function makeSampleData(array $data, array $options) : array;
 }
