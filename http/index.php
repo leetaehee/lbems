@@ -27,6 +27,11 @@ include_once '../EMS_Modules/php/ElectricPriceQuery.php';
 include_once '../EMS_Modules/php/Config.php';
 include_once '../EMS_Modules/php/Efficiency.php';
 include_once '../EMS_Modules/php/MobileMenu.php';
+include_once '../EMS_Modules/php/ControlFactory.php';
+include_once '../EMS_Modules/php/AirConditioner.php';
+include_once '../EMS_Modules/php/LgAirConditioner.php';
+include_once '../EMS_Modules/php/SamsungAirConditioner.php';
+include_once '../EMS_Modules/php/TestSampleMap.php';
 
 /** 공용모듈 */
 include_once '../modules/php/CacheInterface.php';

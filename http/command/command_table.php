@@ -108,11 +108,8 @@ define('WeatherMinistryFinedust', 'weather_ministry_finedust');
 //-----------------------------------------------------------------------------------------------------------
 define('Control', 'control');
 define('ControlSet', 'control_set');
-define('SamsungControl', 'samsung_control');
 define('SamsungControlSet', 'samsung_control_set');
-define('MobileControl', 'm_control');
 define('MobileControlSet', 'm_control_set');
-define('MobileSamsungControl', 'm_samsung_control');
 define('MobileSamsungControlSet', 'm_samsung_control_set');
 
 //-----------------------------------------------------------------------------------------------------------

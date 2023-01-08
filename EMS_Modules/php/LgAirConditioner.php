@@ -41,6 +41,18 @@ class LgAirConditioner extends AirConditioner
         $apiURL = $this->apiURL;
         $controlInfo = $this->controlInfo;
 
+        /*
+            상태 조회
+
+            [파라미터]
+            id : 디바이스 고유번호
+            complex_code : 건물정보
+
+            http://ip:포트/lg/fc1?id=1&complex_code=[단지코드]
+            fc1 에어컨 전원 상태
+            fc3 에어컨 온도, 팬,  등등 상태
+        */
+
         $mode = $options['status_type'] === 'operation_etc' ? 'fc3' : 'fc1';
 
         $controlInfo = array_values($controlInfo);

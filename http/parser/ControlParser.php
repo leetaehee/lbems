@@ -2,13 +2,11 @@
 namespace Http\Parser;
 
 use Http\Command\Command;
+
 use Http\Command\Control;
 use Http\Command\ControlSet;
-use Http\Command\SamsungControl;
 use Http\Command\SamsungControlSet;
-use Http\Command\MobileControl;
 use Http\Command\MobileControlSet;
-use Http\Command\MobileSamsungControl;
 use Http\Command\MobileSamsungControlSet;
 
 /**
@@ -34,20 +32,11 @@ class ControlParser implements IParser
             case ControlSet :
                 $command = new ControlSet();
                 break;
-            case SamsungControl :
-                $command = new SamsungControl();
-                break;
             case SamsungControlSet :
                 $command = new SamsungControlSet();
                 break;
-            case MobileControl :
-                $command = new MobileControl();
-                break;
             case MobileControlSet :
                 $command = new MobileControlSet();
-                break;
-            case MobileSamsungControl :
-                $command = new MobileSamsungControl();
                 break;
             case MobileSamsungControlSet :
                 $command = new MobileSamsungControlSet();

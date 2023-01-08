@@ -6,7 +6,7 @@ const powerOnOFFs = ['on', 'off'];
 const FILE_TYPE = CONFIGS['control']['file_type'];
 const SET_MAX_TEMPERATURE = 30;
 const SET_MIN_TEMPERATURE = 18;
-const SET_CONTROL_TIME_OUT = 5000;
+const SET_CONTROL_TIME_OUT = CONFIGS['control']['timeout'];
 
 $(document).ready(function() {
     control = createControl();
@@ -14,10 +14,10 @@ $(document).ready(function() {
     if (gIsDevMode === 0 && isReady === true) {
         control.request();
 
-        setInterval(function(){
+        //setInterval(function(){
             // 제어 상태 체크 5초마다 주기적으로 실행..
-            control.setRequestControlStatus();
-        }, SET_CONTROL_TIME_OUT);
+            //control.setRequestControlStatus();
+        //}, SET_CONTROL_TIME_OUT);
     }
 });
 
@@ -34,6 +34,7 @@ function createControl()
         selectedFloor: currentFloor, // 현재 층
         selectedChangedLoading: false, // 로딩 진행여부
         selectedOnOffDisplayDisabled : onOffDisplay, // 사무시별 onOff 버튼 활성화
+        selectedCompany : company,
         request: function(showLoadingBar = true)
         {
             let self = control;
@@ -44,6 +45,7 @@ function createControl()
             data.push({ name: 'current_floor', value: self.selectedFloor });
             data.push({ name: 'is_ready', value: isReady });
             data.push({ name: 'on_off_display', value: self.selectedOnOffDisplayDisabled });
+            data.push({ name: 'company', value: self.selectedCompany });
 
             params.push(
                 {name: 'requester', value: requester},
@@ -303,6 +305,7 @@ function createControl()
             data.push({ name: 'power_on_off', value: self.selectedPowerOnOff });
             data.push({ name: 'function', value: self.selectedOperation });
             data.push({ name: 'is_ready', value: isReady });
+            data.push({ name: 'company', value: self.selectedCompany });
 
             params.push(
                 {name: 'requester', value: requester},
@@ -419,27 +422,27 @@ function createControl()
 
     $btnPower.on("click", function(){
         // 전원
-        control.updateStatus($(this),'power');
+        //control.updateStatus($(this),'power');
     });
 
     $btnFanGroup.on("click", function(){
        // 풍량
-       control.updateStatus($(this), 'fan_speed');
+       //control.updateStatus($(this), 'fan_speed');
     });
 
     $btnModeGroup.on("click", function(){
        // MODE
-       control.updateStatus($(this), 'mode');
+       //control.updateStatus($(this), 'mode');
     });
 
     $btnTemperatureDown.on("click", function() {
         // 온도 하락
-        control.updateStatus($(this), 'lower_temperature');
+        //control.updateStatus($(this), 'lower_temperature');
     });
 
     $btnTemperatureUp.on("click", function() {
         // 온도상승
-        control.updateStatus($(this), 'upper_temperature');
+        //control.updateStatus($(this), 'upper_temperature');
     });
 
     return control;

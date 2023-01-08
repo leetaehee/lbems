@@ -79,7 +79,7 @@ class Mariadb extends Database
 	}
 
     /**
-     * select 실행
+     * select 실행 (복수)
      *
      * @param string $query
      *

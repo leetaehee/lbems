@@ -290,7 +290,7 @@ class DadoseaMountainSensor implements SensorInterface
                 'diagram' => './diagram/diagram_ddmt.html', // 계통도
                 'prediction_energy' => './prediction/energy.html', // 예측-에너지원별
                 'prediction_solar' => './prediction/solar.html', // 예측-태양광발전
-                'control' => './control/control_samsung.html', // 제어
+                'control' => './control/control.html', // 제어
             ],
         ];
     }

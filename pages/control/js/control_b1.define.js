@@ -2,8 +2,9 @@
 // Ajax
 //----------------------------------------------------------------------------------------------
 const requester = 'control';
-const command = CONFIGS['control']['command']
+const command = 'control';
 const onOffDisplay = CONFIGS['control']['on_off_display'];
+const company = CONFIGS['control']['company'];
 const setCommand = command + '_set';
 const currentFloor = 'B1';
 

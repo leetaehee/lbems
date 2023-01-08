@@ -2,8 +2,9 @@
 // Ajax
 //----------------------------------------------------------------------------------------------
 const requester = 'control';
-const command = CONFIGS['mobile']['control']['command'];
+const command = 'control';
 const setCommand = command + '_set';
+const company = CONFIGS['control']['company'];
 
 const FLOOR_REQUESTER = 'building';
 const FLOOR_REQUEST = 'm_floor_info';
@@ -18,7 +19,7 @@ const DEFAULT_EMPTY_ARRAY = [];
 //----------------------------------------------------------------------------------------------
 const SET_MAX_TEMPERATURE = 30;
 const SET_MIN_TEMPERATURE = 18;
-const SET_CONTROL_TIME_OUT = 7000;
+const SET_CONTROL_TIME_OUT = CONFIGS['control']['timeout'];
 const isReady = CONFIGS['control']['is_ready'];
 
 //----------------------------------------------------------------------------------------------

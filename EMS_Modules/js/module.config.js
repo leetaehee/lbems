@@ -637,7 +637,8 @@ module.config = function()
                     is_use_manual: false,
                     control : {
                         file_type : 'mdmt',
-                        command: 'control',
+                        company: 'lg',
+                        timeout: 5000,
                         on_off_display: false,
                         is_ready: true, // 제어 준비여부 -  사용가능 true, 사용불가능 false
                         default_floor : { '1F' : '로비(대회의실앞)', '2F' : '체력단련실', '3F' : '영양사실' },
@@ -774,9 +775,6 @@ module.config = function()
                         },
                     },
                     mobile : {
-                        control : {
-                            'command' : 'm_control',
-                        },
                         usage : {
                             key : [
                                 '-',
@@ -867,7 +865,8 @@ module.config = function()
                     power_factor: false,
                     control : {
                         file_type : 'tbmt',
-                        command: 'control',
+                        company: 'lg',
+                        timeout: 5000,
                         on_off_display: true,
                         is_ready: true, // 제어 준비여부 -  사용가능 true, 사용불가능 false
                         default_floor : { '1F' : '화장실(남)', '2F' : '농산물판매장', '3F' : '주방/식당' },
@@ -988,9 +987,6 @@ module.config = function()
                         },
                     },
                     mobile : {
-                        control : {
-                            'command' : 'm_control',
-                        },
                         usage : {
                             key : [
                                 '-', KEYS_NAMES['ELECTRIC_LIGHT'], KEYS_NAMES['ELECTRIC_ELECHOT'], KEYS_NAMES['ELECTRIC_HOTWATER'],
@@ -1378,7 +1374,8 @@ module.config = function()
                     power_factor: false,
                     control : {
                         file_type : 'ddmt',
-                        command: 'samsung_control',
+                        company: 'samsung',
+                        timeout: 1000,
                         on_off_display: true,
                         is_ready: true, // 제어 준비여부 -  사용가능 true, 사용불가능 false
                         default_floor_key: {'1F' : 'lounge_room_1', '2F' : 'display_room_1'},
@@ -1508,9 +1505,6 @@ module.config = function()
                         },
                     },
                     mobile : {
-                        control : {
-                            'command' : 'm_samsung_control',
-                        },
                         usage : {
                             key : [
                                 '-', KEYS_NAMES['ELECTRIC_LIGHT'], KEYS_NAMES['ELECTRIC_COLD'], KEYS_NAMES['ELECTRIC_HOTWATER'],
@@ -2637,7 +2631,8 @@ module.config = function()
                     power_factor: false,
                     control : {
                         file_type : 'bhmt',
-                        command: 'control',
+                        company: 'lg',
+                        timeout: 5000,
                         on_off_display: false,
                         is_ready: true, // 제어 준비여부 -  사용가능 true, 사용불가능 false
                         default_floor : {'B1' : '시험장비창고', '1F' : '영선실', '2F' : '탐방시설(좌)'},
@@ -2782,9 +2777,6 @@ module.config = function()
                         },
                     },
                     mobile : {
-                        control : {
-                            'command' : 'm_control',
-                        },
                         usage : {
                             key : [
                                 '-',

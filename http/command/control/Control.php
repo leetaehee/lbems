@@ -1,6 +1,7 @@
 <?php
 namespace Http\Command;
 
+use EMS_Module\ControlFactory;
 use EMS_Module\Utility;
 
 /**
@@ -8,8 +9,14 @@ use EMS_Module\Utility;
  */
 class Control extends Command
 {
-    /** @var array $devices 디바이스 정보 */
+    /** @var array $devices 디바이스 정보 (삭제) */
     private array $devices = [];
+
+    /** ControlFactory $controlFactory 제어 팩토리 객채 */
+    private ?ControlFactory $controlFactory = null;
+
+    /** @var string $controlType 제어 타입  */
+    private string $controlType = 'read';
 
     /**
      * Control constructor.
@@ -39,7 +46,6 @@ class Control extends Command
     public function execute(array $params) :? bool
     {
         $data = [];
-        $complexCodePk = $_SESSION['ss_complex_pk'];
 
         $devOptions = $this->devOptions;
         if ($devOptions['IS_DEV'] == '1') {
@@ -48,25 +54,25 @@ class Control extends Command
             return true;
         }
 
-        // 정보조회를 위한 객체 값 할당.
-        $this->sensorObj = $this->getSensorManager($complexCodePk);
-        // 층 정보 건물별로 할당하기
-        $this->setFloor();
+        $prefix = Utility::getInstance()->getConnectionMethodPrefix();
 
+        $complexCodePk = $_SESSION[$prefix . 'ss_complex_pk'];
         $roomName = isset($params[0]['value']) === true ? Utility::getInstance()->removeXSS($params[0]['value']) : '';
         $currentFloor = isset($params[1]['value']) === true ? Utility::getInstance()->removeXSS($params[1]['value']) : '';
         $isReady = isset($params[2]['value']) === true ? $params[2]['value'] : false;
         $onOffDisplay = isset($params[3]['value']) === true ? $params[3]['value'] : false;
+        $company = isset($params[4]['value']) === true ? $params[4]['value'] : '';
 
-        // 제어 사용 중단 된경우..
-        if ($isReady === false) {
-            $data['control_error'] = 'Error';
-            $this->data = $data;
-            return true;
-        }
+        // 정보조회를 위한 객체 값 할당.
+        $this->sensorObj = $this->getSensorManager($complexCodePk);
+        $floorDevices = $this->sensorObj->getControlDeviceInfo();
+        $this->devices = $floorDevices[$currentFloor];
+
+        // 팩토리 객체 생성
+        $this->controlFactory = new ControlFactory();
 
         // 모든 기기에 대한 전원 상태 조회
-        $allPowerStatus = $this->getDeviceAllStatus($complexCodePk, $currentFloor, $onOffDisplay);
+        $allPowerStatus = $this->getDeviceAllStatus($complexCodePk, $company, $currentFloor, $onOffDisplay);
         if ($allPowerStatus === null) {
             $data['control_error'] = 'Error';
             $this->data = $data;
@@ -74,7 +80,7 @@ class Control extends Command
         }
 
         // 전원 상태
-        $powerStatus = $this->getDeviceStatus($complexCodePk, $roomName);
+        $powerStatus = $this->getDeviceStatus($complexCodePk, $company, $roomName);
         if ($powerStatus === null) {
             $data['control_error'] = 'Error';
             $this->data = $data;
@@ -82,7 +88,7 @@ class Control extends Command
         }
 
         // 세부 상태 조회
-        $functionStatus = $this->getDeviceStatus($complexCodePk, $roomName, 'fc3');
+        $functionStatus = $this->getDeviceStatus($complexCodePk, $company, $roomName, 'fc3');
         if ($functionStatus === null) {
             $data['control_error'] = 'Error';
             $this->data = $data;
@@ -101,33 +107,15 @@ class Control extends Command
     }
 
     /**
-     * 건물 고유 디바이스별 할당
-     */
-    private function setFloor() : void
-    {
-        $fcData = [];
-
-        $devices = $this->sensorObj->getControlDeviceInfo();
-
-        foreach ($devices as $key => $items) {
-            foreach ($items as $k => $v) {
-                $fcData[$k] = $v;
-            }
-        }
-
-        $this->devices = $fcData;
-    }
-
-    /**
      * 모든층에 대한 상세 정보 조회
      * 
      * @param string $complexCodePk
-     * @param string $floor
+     * @param string $company
      * @param bool $onOffDisplay
      * 
      * @return array|null
      */
-    public function getDeviceAllStatus(string $complexCodePk, string $floor, bool $onOffDisplay) :? array
+    public function getDeviceAllStatus(string $complexCodePk, string $company, bool $onOffDisplay) :? array
     {
         $fcData = [];
 
@@ -135,27 +123,30 @@ class Control extends Command
             return $fcData;
         }
 
-        $floorDevices = $this->sensorObj->getControlDeviceInfo();
-        $devices = $floorDevices[$floor];
+        $devices = $this->devices;
+
+        $controlType = $this->controlType;
+        $controlFactory = $this->controlFactory;
+
+        $options = [
+            'status_type' => $this->getStatusType('fc1'),
+            'is_display' => true,
+        ];
 
         foreach ($devices as $key => $id) {
+            $options['id'] = $id;
 
-            $cURL = $this->devOptions['CONTROL_API_URL'] . "fc1?id=" . $id . "&complex_code=" . $complexCodePk;
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, $cURL);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, MaxTimeout);
-
-            $result = curl_exec($ch);
-            if ($result === 'None') {
+            $result = $controlFactory->processControl($complexCodePk, $company, $controlType, $options);
+            if ($result === '') {
                 return null;
             }
 
-            $temp = $this->toArray($result);
+            if (count($result) === 0) {
+                return null;
+            }
 
             // 층별 디바이스 전원 여부 저장
-            $fcData[$key] = $temp[0];
+            $fcData[$key] = $result[0];
         }
 
         return $fcData;
@@ -165,72 +156,56 @@ class Control extends Command
      * 상태 조회
      *
      * @param string $complexCodePk
+     * @param string $company
      * @param string $roomName
      * @param string $mode
      *
      * @return array|null
      */
-    private function getDeviceStatus(string $complexCodePk, string $roomName, string $mode = 'fc1') :? array
+    private function getDeviceStatus(string $complexCodePk, string $company, string $roomName, string $mode = 'fc1') :? array
     {
-        /*
-            [파라미터]
-            id : 디바이스 고유번호
-            complex_code : 건물정보
-
-            http://211.43.14.10:5001/lg/fc1?id=1&complex_code=2001 상태 조회
-            fc1 에어컨 전원 상태
-            fc3 에어컨 온도, 팬,  등등 상태
-        */
-
         $fcData = [];
-        $devices = $this->devices;
-
-        if (array_key_exists($roomName, $devices) === false) {
-            return null;
-        }
 
         // 디바이스 번호
-        $id = $devices[$roomName];
+        $id = $this->devices[$roomName];
 
-        // 테스트
-        //$complexCodePk = '2001';
-        //$id = '25';
+        $controlType = $this->controlType;
 
-        // 상태 데이터 요청
-        $cURL = $this->devOptions['CONTROL_API_URL'] . $mode ."?id=" . $id . "&complex_code=" . $complexCodePk;
+        $options = [
+            'id' => $id,
+            'status_type' => $this->getStatusType($mode),
+            'is_display' => true,
+        ];
 
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $cURL);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, MaxTimeout);
-
-        $fcData = curl_exec($ch);
-        if ($fcData === 'None') {
+        $fcData = $this->controlFactory->processControl($complexCodePk, $company,$controlType, $options);
+        if ($fcData === '') {
             return null;
         }
 
-        $fcData = $this->toArray($fcData);
+        if (count($fcData) === 0) {
+            return null;
+        }
 
         return $fcData;
     }
 
     /**
-     * 문자열에서 배열로 변환
+     * status_type 반환
      *
-     * @param string $str
+     * @param string $mode
      *
-     * @return array
+     * @return string
      */
-    private function toArray(string $str) : array
+    private function getStatusType(string $mode) : string
     {
-        $fcData = [];
+        $statusType = 'power_etc';
 
-        // 시작과 종료부분에서 [, ]  제거하기
-        $str = str_replace('[', '',$str);
-        $str = str_replace(']', '',$str);
+        switch ($mode) {
+            case 'fc3'  :
+                $statusType = 'operation_etc';
+                break;
+        }
 
-        $fcData = explode(',' , $str);
-
-        return $fcData;
+        return $statusType;
     }
 }
