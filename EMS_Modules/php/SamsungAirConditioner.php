@@ -58,14 +58,10 @@ class SamsungAirConditioner extends AirConditioner
 
         $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
 
-        // downloadSample - 삼성만 해당
-        // makeSampleData - 샘플 데이터 생성, rand 함수 이용
-        // 두 함수 모두 - SAMPLE 에만 해당 시킬 것, makeSampleData 는 추상메서드로 선언
+        if ($options['is_display'] === true) {
+            // 해당한 것만 뽑기
+            $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
 
-        // 아이디가 주어진 경우 아이디에 해당한 것만 뽑기
-        $fcData = Utility::getInstance()->makeSelectedDataByKey($fcData, $id, $searchColumn);
-
-        if ($options['is_display'] === true && $id !== '') {
             // 화면에 보여주는 경우에 포맷을 함.
             $fcData = $this->makeFormatting($options['status_type'], $fcData);
         }
@@ -137,11 +133,6 @@ class SamsungAirConditioner extends AirConditioner
 
         $controlInfo = array_values($this->controlInfo);
         $sampleFormat = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company];
-
-        //$powerKeys = array_keys($airConditionerFormats['power']);
-        //$fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
-        //$opModeKeys = array_keys($airConditionerFormats['op_mode']);
-        //$temperatureValues = $airConditionerFormats['temperature'];
 
         $options = [];
 
