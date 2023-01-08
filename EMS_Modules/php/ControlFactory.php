@@ -34,7 +34,7 @@ class ControlFactory
 
         switch ($company) {
             case 'lg' :
-                // Lg
+                // LG
                 $obj = new LgAirConditioner($complexCodePk, $company);
                 break;
             case 'samsung' :

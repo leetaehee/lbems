@@ -5,12 +5,10 @@ $(document).ready(function(){
 
     if (gIsDevMode === 0 && isReady === true) {
         control.requestRoomInfo();
-        /*
         setInterval(function () {
             // 제어 상태 체크 5초마다 주기적으로 실행..
             control.setRequestControlStatus();
         }, SET_CONTROL_TIME_OUT);
-         */
     }
 });
 
@@ -203,9 +201,9 @@ function createControl()
                 return;
             }
 
-            const fLOOR_DATA = data['floor_data'];
+            const FLOOR_DATA = data['floor_data'];
             const floorKeyData = CONFIGS['floor_key_data'];
-            const floors = Object.keys(fLOOR_DATA);
+            const floors = Object.keys(FLOOR_DATA);
 
             const defaultFloor = floors[0];
 
@@ -217,7 +215,7 @@ function createControl()
                 $selectFloorType.append($option);
             });
 
-            self.selectedFloorData = fLOOR_DATA;
+            self.selectedFloorData = FLOOR_DATA;
 
             // 처음 로딩시에 룸 정보 보여주기
             self.updateFloorSelectBox(defaultFloor);
@@ -399,7 +397,7 @@ function createControl()
                     self.selectedChangedLoading = false;
                 }
                 self.request(); // 새로고침
-            }, SET_CONTROL_TIME_OUT);
+            }, 1000 * 7);
         },
         setRequestControlStatus: function()
         {

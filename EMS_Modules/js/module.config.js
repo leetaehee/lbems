@@ -1375,7 +1375,7 @@ module.config = function()
                     control : {
                         file_type : 'ddmt',
                         company: 'samsung',
-                        timeout: 1000,
+                        timeout: 1000 * 45,
                         on_off_display: true,
                         is_ready: true, // 제어 준비여부 -  사용가능 true, 사용불가능 false
                         default_floor_key: {'1F' : 'lounge_room_1', '2F' : 'display_room_1'},

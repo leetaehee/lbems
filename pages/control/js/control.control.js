@@ -14,10 +14,10 @@ $(document).ready(function() {
     if (gIsDevMode === 0 && isReady === true) {
         control.request();
 
-        //setInterval(function(){
+        setInterval(function(){
             // 제어 상태 체크 5초마다 주기적으로 실행..
-            //control.setRequestControlStatus();
-        //}, SET_CONTROL_TIME_OUT);
+            control.setRequestControlStatus();
+        }, SET_CONTROL_TIME_OUT);
     }
 });
 
@@ -364,7 +364,7 @@ function createControl()
                     self.selectedChangedLoading = false;
                 }
                 self.request(); // 새로고침
-            }, SET_CONTROL_TIME_OUT);
+            }, 1000 * 7);
         },
         getRealBoolean: function(boolean)
         {
