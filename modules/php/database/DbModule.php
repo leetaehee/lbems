@@ -112,6 +112,11 @@ class DbModule
 		}
 	}
 
+    public function query(string $query) : bool
+    {
+        return $this->database->query($query);
+    }
+
     /**
      * select 실행 (복수)
      *

@@ -72,7 +72,7 @@ class LgAirConditioner extends AirConditioner
         $apiURL .= $mode;
         $apiMethod = 'GET';
 
-        $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
+        $fcData = $this->getData($apiURL, $apiMethod, $parameter, $options);
 
         $sampleOptions = [
             'status_type' => $statusType,
@@ -104,7 +104,7 @@ class LgAirConditioner extends AirConditioner
     }
 
     /**
-     * API 데이터 요청
+     * 데이터 조회
      *
      * @param string $url
      * @param string $method
@@ -113,7 +113,7 @@ class LgAirConditioner extends AirConditioner
      *
      * @return array
      */
-     protected function requestData(string $url, string $method, array $parameter, array $options) : array
+     protected function getData(string $url, string $method, array $parameter, array $options) : array
      {
          $fcData = [];
          $statusType = $options['status_type'];
@@ -136,6 +136,17 @@ class LgAirConditioner extends AirConditioner
                  $fcData = $this->toArray($result['msg']);
                  break;
              case 'DATABASE' :
+                 $db = $this->db;
+
+                 $complexCodePk = $parameter['complex_code'];
+                 $id = $parameter['id'];
+                 
+                 $rControlQ = $this->emsQuery->getQuerySelectAirConditionerData($complexCodePk, $id);
+                 $db->query($rControlQ);
+
+                 $data = $this->db->getData();
+
+                 $fcData = $this->makeFormatting($options['status_type'], $data);
                  break;
              case 'SAMPLE' :
                  $fcData = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company][$statusType];
@@ -144,6 +155,24 @@ class LgAirConditioner extends AirConditioner
 
          return $fcData;
      }
+
+    /**
+     * 데이터 반영
+     *
+     * @param string $url
+     * @param string $method
+     * @param array $parameter
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function setData(string $url, string $method, array $parameter, array $options) : array
+    {
+        return [
+            'result' => 'True',
+            'data' => []
+        ];
+    }
 
     /**
      * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용

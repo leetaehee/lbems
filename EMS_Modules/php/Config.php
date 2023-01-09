@@ -665,7 +665,7 @@ class Config
         ],
         'fan_speed' => [
             'low' => 1,
-            'med' => 2,
+            'mid' => 2,
             'high' => 3,
             'auto' => 4,
         ],
@@ -1003,5 +1003,5 @@ class Config
     ];
 
     /** @var string COMMUNICATION_METHOD 통신 방식 - API, DATABASE, SAMPLE */
-    const COMMUNICATION_METHOD = 'SAMPLE';
+    const COMMUNICATION_METHOD = 'DATABASE';
 }

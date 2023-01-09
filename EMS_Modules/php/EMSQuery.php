@@ -7247,4 +7247,36 @@ class EMSQuery
 
         return $query;
     }
+
+
+    //------------------------------------------------------------------------------------------------------------
+    // 제어
+    //------------------------------------------------------------------------------------------------------------
+    /**
+     * 에어컨 상태 조회
+     *
+     * @param string $complexCodePk
+     * @param string $sensorNo
+     *
+     * @return string
+     */
+    public function getQuerySelectAirConditionerData(string $complexCodePk, string $sensorNo) : string
+    {
+        $query = "SELECT `air`.`power_on_off` AS `power`,
+                         `air`.`op_mode` AS `opMode`,
+                         `air`.`fan_speed` AS `fanSpeed`,
+                         `air`.`set_temp` AS `setTemp`,
+                         `air`.`set_temp` AS `upperTemperature`,
+                         `air`.`set_temp` AS `lowerTemperature`,
+                         `air`.`room_temp` AS `roomTemp`
+                  FROM `bems_complex` AS `complex`
+                     LEFT JOIN `bems_aircondition_status` AS `air`
+                        ON `complex`.`complex_code_pk` = `air`.`complex_code_pk`    
+                  WHERE `air`.`complex_code_pk` = '{$complexCodePk}'
+                  AND `air`.`sensor_sn` = '{$sensorNo}'
+                  AND `complex`.`fg_del` = 'n'
+                 ";
+
+        return $query;
+    }
 }

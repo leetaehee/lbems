@@ -1,6 +1,8 @@
 <?php
 namespace EMS_Module;
 
+use Database\DbModule;
+
 use Http\SensorManager;
 
 /**
@@ -8,6 +10,12 @@ use Http\SensorManager;
  */
 abstract class AirConditioner
 {
+    /** @var DbModule|null $db 데이터베이스 객체 */
+    protected ?DbModule $db = null;
+
+    /** @var EMSQuery|null $emsQuery 쿼리 객체 */
+    protected ?EMSQuery $emsQuery = null;
+
     /** @var string|null $company 에어컨 제조사 */
     protected ?string $company = null;
 
@@ -42,6 +50,8 @@ abstract class AirConditioner
     public function __construct(string $complexCodePk, string $company)
     {
         $this->sensorManager = new SensorManager();
+        $this->db = new DbModule();
+        $this->emsQuery = new EMSQuery();
         $this->devOptions = parse_ini_file(dirname(__FILE__) . '/../../.env');
         $this->company = $company;
         $this->communicationMethod = Config::COMMUNICATION_METHOD;
@@ -184,7 +194,7 @@ abstract class AirConditioner
     abstract public function setStatus(string $complexCodePk, string $id, array $options) : array;
 
     /**
-     * API 데이터 요청
+     * 데이터 조회
      *
      * @param string $url
      * @param string $method
@@ -193,7 +203,19 @@ abstract class AirConditioner
      *
      * @return array
      */
-    abstract protected function requestData(string $url, string $method, array $parameter, array $options) : array;
+    abstract protected function getData(string $url, string $method, array $parameter, array $options) : array;
+
+    /**
+     * 데이터 반영
+     *s
+     * @param string $url
+     * @param string $method
+     * @param array $parameter
+     * @param array $options
+     *
+     * @return array
+     */
+    abstract protected function setData(string $url, string $method, array $parameter, array $options) : array;
 
     /**
      * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용

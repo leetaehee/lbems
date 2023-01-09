@@ -81,6 +81,15 @@ abstract class Database
 	abstract public function isConnected() : bool;
 
     /**
+     * select 실행
+     *
+     * @param string $query
+     *
+     * @return bool
+     */
+    abstract public function query(string $query) : bool;
+
+    /**
      * select 실행 (복수)
      *
      * @param string $query

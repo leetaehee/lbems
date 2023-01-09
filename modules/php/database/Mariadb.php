@@ -79,6 +79,39 @@ class Mariadb extends Database
 	}
 
     /**
+     * select 실행
+     *
+     * @param string $query
+     *
+     * @return bool
+     */
+    public function query(string $query) : bool
+    {
+        if ($this->isConnected() == false) {
+            $this->message = ErrConnection;
+            return false;
+        }
+
+        $result = mysqli_query($this->db, $query);
+
+        if (!$result) {
+            $this->message = mysqli_error($this->db);
+            $this->message .= $this->dbHost;
+            return false;
+        }
+
+        $row = mysqli_fetch_assoc($result);
+
+        $this->data = $row;
+
+        if ($result != true) {
+            mysqli_free_result($result);
+        }
+
+        return true;
+    }
+
+    /**
      * select 실행 (복수)
      *
      * @param string $query

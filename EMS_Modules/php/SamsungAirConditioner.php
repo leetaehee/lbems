@@ -56,7 +56,7 @@ class SamsungAirConditioner extends AirConditioner
 
         $apiMethod = 'GET';
 
-        $fcData = $this->requestData($apiURL, $apiMethod, $parameter, $options);
+        $fcData = $this->getData($apiURL, $apiMethod, $parameter, $options);
 
         if ($options['is_display'] === true) {
             // 해당한 것만 뽑기
@@ -85,7 +85,7 @@ class SamsungAirConditioner extends AirConditioner
     }
 
     /**
-     * API 데이터 요청
+     * 데이터 조회
      *
      * @param string $url
      * @param string $method
@@ -94,9 +94,11 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    protected function requestData(string $url, string $method, array $parameter, array $options): array
+    protected function getData(string $url, string $method, array $parameter, array $options): array
     {
         $fcData = [];
+
+        $complexCodePk = $parameter['complex_code'];
 
         $communicationMethod = $this->communicationMethod;
         switch ($communicationMethod) {
@@ -112,10 +114,10 @@ class SamsungAirConditioner extends AirConditioner
                 $fcData = json_decode($result['msg'], true);
                 break;
             case 'DATABASE' :
-                $fcData = $this->downloadSampleFormat();
+                $fcData = $this->downloadSampleFormat($complexCodePk);
                 break;
             case 'SAMPLE' :
-                $fcData = $this->downloadSampleFormat();
+                $fcData = $this->downloadSampleFormat($complexCodePk);
                 break;
         }
 
@@ -123,18 +125,40 @@ class SamsungAirConditioner extends AirConditioner
     }
 
     /**
-     * 삼성에서 제공하는 API 샘플을 받는다.
+     * 데이터 반영
+     *
+     * @param string $url
+     * @param string $method
+     * @param array $parameter
+     * @param array $options
      *
      * @return array
      */
-    private function downloadSampleFormat(): array
+     protected function setData(string $url, string $method, array $parameter, array $options) : array
+     {
+        return [
+            'result' => 'True',
+            'data' => []
+        ];
+    }
+
+    /**
+     * 삼성에서 제공하는 API 샘플을 받는다.
+     *
+     * @param string $complexCodePk
+     *
+     * @return array
+     */
+    private function downloadSampleFormat(string $complexCodePk) : array
     {
         $fcData = [];
 
         $controlInfo = array_values($this->controlInfo);
         $sampleFormat = TestSampleMap::AIR_CONDITIONER_SAMPLE_DATA[$this->company];
 
-        $options = [];
+        $options = [
+            'complex_code_pk' => $complexCodePk,
+        ];
 
         for ($fcIndex = 0; $fcIndex < count($controlInfo); $fcIndex++) {
             $id = $controlInfo[$fcIndex];
@@ -150,7 +174,7 @@ class SamsungAirConditioner extends AirConditioner
     }
 
     /**
-     * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE  인 경우에만 적용
+     * 샘플 데이터 생성 - Config::COMMUNICATION_METHOD = SAMPLE | DATABASE 인 경우에만 적용
      *
      * @param array $data
      * @param array $options
@@ -160,27 +184,53 @@ class SamsungAirConditioner extends AirConditioner
     protected function makeSampleData(array $data, array $options): array
     {
         $fcData = $data;
-        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
 
         $communicationMethod = $this->communicationMethod;
-        if ($communicationMethod !== 'SAMPLE') {
+        if (in_array($communicationMethod, ['SAMPLE', 'DATABASE']) === false) {
             return $fcData;
         }
 
-        $powerKeys = array_keys($airConditionerFormats['power']);
-        $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
-        $opModeKeys = array_keys($airConditionerFormats['op_mode']);
+        switch ($communicationMethod) {
+            case 'SAMPLE' :
+                $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
 
-        $temperatureValues = $airConditionerFormats['temperature'];
-        $temperature = $temperatureValues[array_rand($temperatureValues, 1)];
+                $powerKeys = array_keys($airConditionerFormats['power']);
+                $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
+                $opModeKeys = array_keys($airConditionerFormats['op_mode']);
 
-        $fcData['power'] = $powerKeys[array_rand($powerKeys, 1)];
-        $fcData['opMode'] = $opModeKeys[array_rand($opModeKeys, 1)];
-        $fcData['fanSpeed'] = $fanSpeedKeys[array_rand($fanSpeedKeys, 1)];
-        $fcData['setTemp'] = $temperature;
-        $fcData['upperTemperature'] = $temperature;
-        $fcData['lowerTemperature'] = $temperature;
-        $fcData['roomTemp'] = $temperature;
+                $temperatureValues = $airConditionerFormats['temperature'];
+                $temperature = $temperatureValues[array_rand($temperatureValues, 1)];
+
+                $fcData['power'] = $powerKeys[array_rand($powerKeys, 1)];
+                $fcData['opMode'] = $opModeKeys[array_rand($opModeKeys, 1)];
+                $fcData['fanSpeed'] = $fanSpeedKeys[array_rand($fanSpeedKeys, 1)];
+                $fcData['setTemp'] = $temperature;
+                $fcData['upperTemperature'] = $temperature;
+                $fcData['lowerTemperature'] = $temperature;
+                $fcData['roomTemp'] = $temperature;
+
+                break;
+            case 'DATABASE' :
+                $db = $this->db;
+
+                $id = $data['addr'];
+                $complexCodePk = $options['complex_code_pk'];
+
+                $rControlQ = $this->emsQuery->getQuerySelectAirConditionerData($complexCodePk, $id);
+                $db->query($rControlQ);
+
+                $data = $this->db->getData();
+
+                $fcData['power'] = $data['power'];
+                $fcData['opMode'] = $data['opMode'];
+                $fcData['fanSpeed'] = $data['fanSpeed'];
+                $fcData['setTemp'] = $data['setTemp'];
+                $fcData['upperTemperature'] = $data['upperTemperature'];
+                $fcData['lowerTemperature'] = $data['lowerTemperature'];
+                $fcData['roomTemp'] = $data['roomTemp'];
+
+                break;
+        }
 
         return $fcData;
     }
