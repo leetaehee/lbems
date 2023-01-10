@@ -9,7 +9,7 @@ use EMS_Module\Utility;
  */
 class Control extends Command
 {
-    /** @var array $devices 디바이스 정보 (삭제) */
+    /** @var array $devices 디바이스 정보 */
     private array $devices = [];
 
     /** ControlFactory $controlFactory 제어 팩토리 객채 */
@@ -59,9 +59,15 @@ class Control extends Command
         $complexCodePk = $_SESSION[$prefix . 'ss_complex_pk'];
         $roomName = isset($params[0]['value']) === true ? Utility::getInstance()->removeXSS($params[0]['value']) : '';
         $currentFloor = isset($params[1]['value']) === true ? Utility::getInstance()->removeXSS($params[1]['value']) : '';
-        $isReady = isset($params[2]['value']) === true ? $params[2]['value'] : false;
-        $onOffDisplay = isset($params[3]['value']) === true ? $params[3]['value'] : false;
-        $company = isset($params[4]['value']) === true ? $params[4]['value'] : '';
+        $isReady = isset($params[2]['value']) === true ? Utility::getInstance()->removeXSS($params[2]['value']) : false;
+        $onOffDisplay = isset($params[3]['value']) === true ? Utility::getInstance()->removeXSS($params[3]['value']) : false;
+        $company = isset($params[4]['value']) === true ? Utility::getInstance()->removeXSS($params[4]['value']) : '';
+
+        if ($isReady === false) {
+            $data['control_error'] = 'Error';
+            $this->data = $data;
+            return true;
+        }
 
         // 정보조회를 위한 객체 값 할당.
         $this->sensorObj = $this->getSensorManager($complexCodePk);
@@ -177,7 +183,7 @@ class Control extends Command
             'is_display' => true,
         ];
 
-        $fcData = $this->controlFactory->processControl($complexCodePk, $company,$controlType, $options);
+        $fcData = $this->controlFactory->processControl($complexCodePk, $company, $controlType, $options);
         if ($fcData === '') {
             return null;
         }
@@ -187,25 +193,5 @@ class Control extends Command
         }
 
         return $fcData;
-    }
-
-    /**
-     * status_type 반환
-     *
-     * @param string $mode
-     *
-     * @return string
-     */
-    private function getStatusType(string $mode) : string
-    {
-        $statusType = 'power_etc';
-
-        switch ($mode) {
-            case 'fc3'  :
-                $statusType = 'operation_etc';
-                break;
-        }
-
-        return $statusType;
     }
 }

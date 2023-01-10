@@ -265,7 +265,7 @@ function createControl()
                     // 풍량 조절
                     self.selectedStatus = parseInt($this.data('fan'));
                     break;
-                case 'mode':
+                case 'op_mode':
                     // 모드
                     self.selectedStatus = parseInt($this.data('mode'));
                     break;
@@ -307,6 +307,7 @@ function createControl()
             data.push({ name: 'function', value: self.selectedOperation });
             data.push({ name: 'is_ready', value: isReady });
             data.push({ name: 'company', value: self.selectedCompany });
+            data.push({ name: 'current_floor', value: self.selectedFloor });
 
             params.push(
                 {name: 'requester', value: requester},
@@ -423,27 +424,27 @@ function createControl()
 
     $btnPower.on("click", function(){
         // 전원
-        //control.updateStatus($(this),'power');
+        control.updateStatus($(this),'power');
     });
 
     $btnFanGroup.on("click", function(){
        // 풍량
-       //control.updateStatus($(this), 'fan_speed');
+       control.updateStatus($(this), 'fan_speed');
     });
 
     $btnModeGroup.on("click", function(){
        // MODE
-       //control.updateStatus($(this), 'mode');
+       control.updateStatus($(this), 'op_mode');
     });
 
     $btnTemperatureDown.on("click", function() {
         // 온도 하락
-        //control.updateStatus($(this), 'lower_temperature');
+        control.updateStatus($(this), 'lower_temperature');
     });
 
     $btnTemperatureUp.on("click", function() {
         // 온도상승
-        //control.updateStatus($(this), 'upper_temperature');
+        control.updateStatus($(this), 'upper_temperature');
     });
 
     return control;

@@ -95,12 +95,53 @@ class LgAirConditioner extends AirConditioner
      */
     public function setStatus(string $complexCodePk, string $id, array $options = []) : array
     {
-        $apiURL = $this->apiURL;
-        $controlInfo = $this->controlInfo;
-        $mode = $options['operation'] === 'power' ? 'fc5' : 'fc6';
+        $fcData = [
+            'result' => 'True',
+            'options' => '',
+            'status' => '',
+        ];
 
-        // [True, False]
-        return [];
+        /*
+            [파라미터]
+            id: 디바이스 고유번호
+            complex_code : 단지 정보
+            operation : 기능 명칭
+            cmd : 상태값
+            http://ip:포트/lg/fc5?id=[EHP 아이디&complex_code=[단지코드]&operation=명령어&cmd=상태
+            fc5 에어컨 전원 제어
+            fc6 에어컨 온도, 팬,  등등 제어
+        */
+
+        $statusType = $options['status_type'];
+
+        $mode = $statusType === 'power_etc' ? 'fc5' : 'fc6';
+        $apiURL = $this->apiURL;
+
+        $parameter = $options['parameter'];
+        $operation = $parameter['operation'];
+        $status = $parameter['status'];
+
+        $validateResult = $this->validateDeviceValue($id, $operation, $status);
+        if ($validateResult === false) {
+            $fcData['result'] = 'False';
+            return $fcData;
+        }
+
+        $tempParameter = $this->makeParameter($statusType, $parameter);
+
+        $apiURL .= $mode;
+        $apiMethod = 'POST';
+
+        $parameter = [
+            'id' => $id,
+            'complex_code' => $complexCodePk,
+            'operation' => $mode,
+            'cmd' => $tempParameter['status'],
+        ];
+
+        $fcData = $this->setData($apiURL, $apiMethod, $parameter, $options);
+
+        return $fcData;
     }
 
     /**
@@ -122,9 +163,9 @@ class LgAirConditioner extends AirConditioner
          switch ($communicationMethod) {
              case 'API' :
                  $httpHeaders = $this->httpHeaders;
-                 $options = $this->httpOptions;
+                 $httpOptions = $this->httpOptions;
 
-                 $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $options);
+                 $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $httpOptions);
                  if ($result['code'] != 200) {
                      return $fcData;
                  }
@@ -168,10 +209,33 @@ class LgAirConditioner extends AirConditioner
      */
     protected function setData(string $url, string $method, array $parameter, array $options) : array
     {
-        return [
+        $fcData = [
             'result' => 'True',
-            'data' => []
+            'data' => [],
         ];
+
+        $communicationMethod = $this->communicationMethod;
+        switch ($communicationMethod) {
+            case 'API' :
+                $httpHeaders = $this->httpOptions;
+                $httpOptions = $this->httpOptions;
+
+                $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $httpOptions);
+                if ($result['code'] != 200) {
+                    $fcData['result'] = 'False';
+                    return $fcData;
+                }
+
+                $fcData['data'] = $options['parameter'];
+
+                break;
+            case 'DATABASE' :
+                break;
+            case 'SAMPLE' :
+                break;
+        }
+
+        return $fcData;
     }
 
     /**
@@ -213,6 +277,36 @@ class LgAirConditioner extends AirConditioner
                 $fcData[5] = $temperature;
 
                 break;
+        }
+
+        return $fcData;
+    }
+
+    /**
+     * 하위 클래스 특성에 맞게 파라미터를 반환.
+     *
+     * @param string $statusType
+     * @param array $parameter
+     *
+     * @return array
+     */
+    protected function makeParameter(string $statusType, array $parameter) : array
+    {
+        $fcData = $parameter;
+        $status = $fcData['status'];
+
+        $communicationMethod = $this->communicationMethod;
+        if ($communicationMethod === 'API') {
+            if ($status === 'power_etc') {
+                $status = (boolean)!$status;
+                if ($status === false) {
+                    $status = (int)0;
+                }
+
+                $fcData['status'] = $status;
+            }
+
+            return $fcData;
         }
 
         return $fcData;

@@ -60,28 +60,32 @@ class ControlFactory
     {
         $result = '';
 
+        $temps = $options;
+
         $controlObj = $this->makeObj($complexCodePk, $company);
         if (is_null($controlObj) === true) {
             return $result;
         }
 
-        $id = isset($options['id']) === true ? $options['id'] : '';
-        $statusType = isset($options['status_type']) === true ? $options['status_type'] : '';
-        $isDisplay = isset($options['is_display']) === true ? $options['is_display'] : false;
+        $id = isset($temps['id']) === true ? $temps['id'] : '';
+        $statusType = isset($temps['status_type']) === true ? $temps['status_type'] : '';
+        $isDisplay = isset($temps['is_display']) === true ? $temps['is_display'] : false;
 
         $options = [
             'status_type' => $statusType,
-            'is_display' => $isDisplay,
         ];
 
         switch ($type) {
             case 'read' :
                 // 제어 상태 조회
+                $options['is_display'] = $isDisplay;
+
                 $result = $controlObj->getStatus($complexCodePk, $id, $options);
                 break;
             case 'process' :
                 // 제어 상태 처리
-                //$result = $controlObj->setStatus($complexCodePk, $id, $options);
+                $options['parameter'] = $temps['parameter'];
+                $result = $controlObj->setStatus($complexCodePk, $id, $options);
                 break;
         }
 

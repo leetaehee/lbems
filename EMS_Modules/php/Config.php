@@ -669,69 +669,10 @@ class Config
             'high' => 3,
             'auto' => 4,
         ],
+        'lower_temperature' => 18,
+        'upper_temperature' => 30,
         'temperature' => [
             20, 21, 19, 23, 24
-        ],
-
-    ];
-
-    /** @var array CONTROL_AIR_CONDITION_COMMAND (폐기) 에어컨 제어 명령어 정보 */
-    const CONTROL_AIR_CONDITION_COMMAND = [
-        'lg' => [
-            'operation' => [
-                'fc5' => [
-                    'power' => 0, // 전원
-                ],
-                'fc6' => [
-                    'mode' => 0, // 모드
-                    'fan_speed' => 1, // 풍량
-                    'set_temperature' => 2, //  희망온도 설정
-                    'upper_temperature' => 3, // 온도 상승
-                    'lower_temperature' => 4, // 온도 하락
-                ]
-            ],
-            'fan' => [
-                1 => 'Low', // 낮음
-                2 => 'Med', // 중간
-                3 => 'High', // 높음
-                4 => 'Auto' // 자동
-            ],
-            'mode' => [
-                1 => 'Cool', // 냉방
-                2 => 'Dry', // 제습
-                3 => 'Fan', // 풍량
-                4 => 'Auto', // 자동
-                5 => 'Heat', // 난방
-            ],
-        ],
-        'samsung' => [
-            'operation' => [
-                'power' => 'power', // 전원
-                'mode' => 'operationMode', // 모드
-                'fan_speed' => 'fanSpeed', // 풍량
-                'upper_temperature' => 'setTemp', // 온도 상승
-                'lower_temperature' => 'setTemp', // 온도 하락
-            ],
-            'fan' => [
-                1 => 'low', // 낮음
-                2 => 'mid', // 중간
-                3 => 'high', // 높음
-                4 => 'auto' // 자동
-            ],
-            'mode_v' => [
-                'cool' => 1, // 냉방
-                'dry' => 2, // 제습
-                'fan' => 3, // 풍량
-                'auto' => 4, // 자동
-                'heat' => 5, // 난방
-            ],
-            'mode_k' => [
-                1 => 'cool', // 냉방
-                2 => 'dry', // 제습
-                3 => 'fan', // 풍량
-                4 => 'auto', // 자동
-                5 => 'heat', // 난방
-            ],
         ],
     ];
 

@@ -136,10 +136,24 @@ class SamsungAirConditioner extends AirConditioner
      */
      protected function setData(string $url, string $method, array $parameter, array $options) : array
      {
-        return [
-            'result' => 'True',
-            'data' => []
-        ];
+         $fcData = [
+             'result' => 'True',
+             'data' => [],
+         ];
+
+         $communicationMethod = $this->communicationMethod;
+         switch ($communicationMethod) {
+             case 'API' :
+                 $httpHeaders = $this->httpOptions;
+                 $options = $this->httpOptions;
+                 break;
+             case 'DATABASE' :
+                 break;
+             case 'SAMPLE' :
+                 break;
+         }
+
+         return $fcData;
     }
 
     /**
@@ -233,5 +247,18 @@ class SamsungAirConditioner extends AirConditioner
         }
 
         return $fcData;
+    }
+
+    /**
+     * 하위 클래스 특성에 맞게 파라미터를 반환.
+     *
+     * @param string $statusType
+     * @param array $parameter
+     *
+     * @return array
+     */
+    protected function makeParameter(string $statusType, array $parameter) : array
+    {
+        return [];
     }
 }

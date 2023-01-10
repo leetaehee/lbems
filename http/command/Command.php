@@ -153,7 +153,7 @@ abstract class Command
      *
      * @return SensorInterface
      */
-	public function getSensorManager(string $complexCodePk) :SensorInterface
+	protected function getSensorManager(string $complexCodePk) :SensorInterface
     {
         return $this->sensorManager->getSensorObject($complexCodePk);
     }
@@ -165,7 +165,7 @@ abstract class Command
      *
      * @return string
      */
-    public function getSettingComplexCodePk(string $complexCodePk) : string
+    protected function getSettingComplexCodePk(string $complexCodePk) : string
     {
         $fcComplexCodePk = $complexCodePk;
 
@@ -187,7 +187,7 @@ abstract class Command
     /**
      * 사이트 타입 설정
      */
-    public function setSiteType() : void
+    protected function setSiteType() : void
     {
         $devOptions = $this->devOptions;
         $siteType = $devOptions['SITE_TYPE'];
@@ -200,7 +200,7 @@ abstract class Command
      *
      * @return bool
      */
-    public function isDevMode() : bool
+    protected function isDevMode() : bool
     {
         $isDevMode = true;
         $devOptions = $this->devOptions;
@@ -210,5 +210,26 @@ abstract class Command
         }
 
         return $isDevMode;
+    }
+
+    /**
+     * status_type 반환
+     *
+     * @param string $mode
+     *
+     * @return string
+     */
+    protected function getStatusType(string $mode) : string
+    {
+        $statusType = 'power_etc';
+
+        switch ($mode) {
+            case 'fc3'  :
+            case 'fc6' :
+                $statusType = 'operation_etc';
+                break;
+        }
+
+        return $statusType;
     }
 }

@@ -3,6 +3,7 @@ namespace EMS_Module;
 
 use Database\DbModule;
 
+use Http\Command\Paper;
 use Http\SensorManager;
 
 /**
@@ -119,7 +120,6 @@ abstract class AirConditioner
 
     /**
      * EHP  상태 조회 시 기본 포맷 제공
-     * (참고. db 에서 조회 시 절대 배열로 받지말 것 - 받을 경우 함수 수정해야 함)
      *
      * @param string $statusType
      * @param array $data
@@ -169,6 +169,67 @@ abstract class AirConditioner
         }
 
         return $fcData;
+    }
+
+    /**
+     * 명령어에 대해 변경해야 할 데이터베이스 컬럼 조회
+     *
+     * @param string $operation
+     *
+     * @return array
+     */
+    protected function getDataBaseColumn(string $operation) : array
+    {
+        return [
+        ];
+    }
+
+    /**
+     * 장비의 값을 검증
+     *
+     * @param string $id
+     * @param string $operation
+     * @param string $value
+     *
+     * @return bool
+     */
+    protected function validateDeviceValue(string $id, string $operation, string $value) : bool
+    {
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
+
+        $controlInfo = array_values($this->controlInfo);
+        if (in_array($id, $controlInfo) === false) {
+            return false;
+        }
+
+        if (array_key_exists($operation, $airConditionerFormats) == false) {
+            return false;
+        }
+
+        if ($operation === 'power' &&
+            (is_string($value) === true && in_array($value, ['1', '0', '']) === false)) {
+            return false;
+        }
+
+        $fanSpeedValues = array_values($airConditionerFormats['fan_speed']);
+        if ($operation === 'fan_speed' && in_array($value, $fanSpeedValues) === false) {
+            return false;
+        }
+
+        $opModeValues = array_values($airConditionerFormats['op_mode']);
+        if ($operation === 'op_mode' && in_array($value, $opModeValues) === false) {
+            return false;
+        }
+
+        if ($operation === 'upper_temperature' && $value > $airConditionerFormats[$operation]) {
+            return false;
+        }
+
+        if ($operation === 'lower_temperature' && $value < $airConditionerFormats[$operation]) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -226,4 +287,14 @@ abstract class AirConditioner
      * @return array
      */
     abstract protected function makeSampleData(array $data, array $options) : array;
+
+    /**
+     * 하위 클래스 특성에 맞게 파라미터를 반환.
+     *
+     * @param string $statusType
+     * @param array $parameter
+     *
+     * @return array
+     */
+    abstract protected function makeParameter(string $statusType, array $parameter) : array;
 }
