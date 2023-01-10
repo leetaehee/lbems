@@ -7279,4 +7279,25 @@ class EMSQuery
 
         return $query;
     }
+
+    /**
+     * 에어컨 상태 변경
+     *
+     * @param string $complexCodePk
+     * @param string $sensorNo
+     * @param string $column
+     * @param string $value
+     *
+     * @return string
+     */
+    public function getQueryUpdateAirConditionerData(string $complexCodePk, string $sensorNo, string $column, string $value) : string
+    {
+        $query = "UPDATE `bems_aircondition_status`
+                  SET `{$column}` = '{$value}'
+                  WHERE `complex_code_pk` = '{$complexCodePk}'
+                  AND `sensor_sn` = '{$sensorNo}'
+                 ";
+
+        return $query;
+    }
 }

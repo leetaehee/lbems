@@ -674,6 +674,12 @@ class Config
         'temperature' => [
             20, 21, 19, 23, 24
         ],
+        'database_column' => [
+            'power' => 'power_on_off',
+            'fan_speed' => 'fan_speed',
+            'op_mode' => 'op_mode',
+            'set_temperature' => 'set_temp',
+        ]
     ];
 
     /** @var string[]  MONTH_SEASON_TYPES 월별 계절별 분류  */

@@ -172,19 +172,6 @@ abstract class AirConditioner
     }
 
     /**
-     * 명령어에 대해 변경해야 할 데이터베이스 컬럼 조회
-     *
-     * @param string $operation
-     *
-     * @return array
-     */
-    protected function getDataBaseColumn(string $operation) : array
-    {
-        return [
-        ];
-    }
-
-    /**
      * 장비의 값을 검증
      *
      * @param string $id

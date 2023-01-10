@@ -107,7 +107,7 @@ class LgAirConditioner extends AirConditioner
             complex_code : 단지 정보
             operation : 기능 명칭
             cmd : 상태값
-            http://ip:포트/lg/fc5?id=[EHP 아이디&complex_code=[단지코드]&operation=명령어&cmd=상태
+            http://ip:포트/lg/fc5?id=[EHP 아이디]&complex_code=[단지코드]&operation=명령어&cmd=상태
             fc5 에어컨 전원 제어
             fc6 에어컨 온도, 팬,  등등 제어
         */
@@ -138,6 +138,10 @@ class LgAirConditioner extends AirConditioner
             'operation' => $mode,
             'cmd' => $tempParameter['status'],
         ];
+
+        if ($operation === 'lower_temperature' || $operation === 'upper_temperature') {
+            $options['parameter']['operation'] = 'set_temperature';
+        }
 
         $fcData = $this->setData($apiURL, $apiMethod, $parameter, $options);
 
@@ -214,6 +218,8 @@ class LgAirConditioner extends AirConditioner
             'data' => [],
         ];
 
+        $dataBaseColumns = Config::AIR_CONDITIONER_FORMAT['database_column'];
+
         $communicationMethod = $this->communicationMethod;
         switch ($communicationMethod) {
             case 'API' :
@@ -225,15 +231,31 @@ class LgAirConditioner extends AirConditioner
                     $fcData['result'] = 'False';
                     return $fcData;
                 }
-
-                $fcData['data'] = $options['parameter'];
-
                 break;
             case 'DATABASE' :
+                $db = $this->db;
+
+                $complexCodePk = $parameter['complex_code'];
+                $id = $parameter['id'];
+                $status = $parameter['cmd'];
+
+                $operation = $options['parameter']['operation'];
+
+                $column = $dataBaseColumns[$operation];
+
+                $uControlQ = $this->emsQuery->getQueryUpdateAirConditionerData($complexCodePk, $id, $column, $status);
+                $result = $db->squery($uControlQ);
+
+                if ($result === false) {
+                    $fcData['result'] = 'False';
+                    return $fcData;
+                 }
                 break;
             case 'SAMPLE' :
                 break;
         }
+
+        $fcData['data'] = $options['parameter'];
 
         return $fcData;
     }
@@ -293,20 +315,43 @@ class LgAirConditioner extends AirConditioner
     protected function makeParameter(string $statusType, array $parameter) : array
     {
         $fcData = $parameter;
+
+        $operation = $fcData['operation'];
         $status = $fcData['status'];
 
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
         $communicationMethod = $this->communicationMethod;
-        if ($communicationMethod === 'API') {
-            if ($status === 'power_etc') {
-                $status = (boolean)!$status;
-                if ($status === false) {
-                    $status = (int)0;
-                }
 
-                $fcData['status'] = $status;
+        if ($statusType === 'power_etc') {
+            $status = (boolean)!$status;
+            if ($status === false) {
+                $status = (int)0;
             }
+        }
 
+        if ($communicationMethod === 'API') {
+            $fcData['status'] = $status;
             return $fcData;
+        }
+
+        $powerKeys = array_keys($airConditionerFormats['power']);
+        $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
+        $opModeKeys = array_keys($airConditionerFormats['op_mode']);
+
+        switch ($operation) {
+            case 'power' :
+                $fcData['status'] = $powerKeys[0];
+
+                if ($status === 0) {
+                    $fcData['status'] = $powerKeys[1];
+                }
+                break;
+            case 'fan_speed' :
+                $fcData['status'] = $fanSpeedKeys[$status-1];
+                break;
+            case 'op_mode' :
+                $fcData['status'] = $opModeKeys[$status-1];
+                break;
         }
 
         return $fcData;
