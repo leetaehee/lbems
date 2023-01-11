@@ -5,9 +5,6 @@ use Http\Command\Command;
 
 use Http\Command\Control;
 use Http\Command\ControlSet;
-use Http\Command\SamsungControlSet;
-use Http\Command\MobileControlSet;
-use Http\Command\MobileSamsungControlSet;
 
 /**
  * Class ControlParser
@@ -31,15 +28,6 @@ class ControlParser implements IParser
                 break;
             case ControlSet :
                 $command = new ControlSet();
-                break;
-            case SamsungControlSet :
-                $command = new SamsungControlSet();
-                break;
-            case MobileControlSet :
-                $command = new MobileControlSet();
-                break;
-            case MobileSamsungControlSet :
-                $command = new MobileSamsungControlSet();
                 break;
         }
 

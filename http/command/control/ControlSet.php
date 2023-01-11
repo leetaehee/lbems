@@ -95,7 +95,12 @@ class ControlSet extends Command
             return true;
         }
 
-        $data['result'] = $result;
+        if ($result['result'] === 'False') {
+            $this->data['control_error'] = 'Error';
+            return true;
+        }
+
+        $data['result'] = $result['data'];
 
         // 뷰에 데이터 바인딩
         $this->data = $data;
@@ -132,7 +137,7 @@ class ControlSet extends Command
             return null;
         }
 
-        $fcData = $result['data'];
+        $fcData = $result;
 
         return $fcData;
     }
