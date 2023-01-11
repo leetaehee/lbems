@@ -72,6 +72,9 @@ class LgAirConditioner extends AirConditioner
         $apiURL .= $mode;
         $apiMethod = 'GET';
 
+        // EHP 로그 남기기 - GET/ 은 제외하고 POST/ 만 실행
+        //$this->createAirConditionerLog($complexCodePk, $id, $parameter, $apiMethod);
+
         $fcData = $this->getData($apiURL, $apiMethod, $parameter, $options);
 
         $sampleOptions = [
@@ -141,6 +144,9 @@ class LgAirConditioner extends AirConditioner
         if ($operation === 'lower_temperature' || $operation === 'upper_temperature') {
             $options['parameter']['operation'] = 'set_temperature';
         }
+
+        // EHP 로그 남기기 - GET/ 은 제외하고 POST/ 만 실행
+        $this->createAirConditionerLog($complexCodePk, $id, $parameter, $apiMethod);
 
         $fcData = $this->setData($apiURL, $apiMethod, $parameter, $options);
 

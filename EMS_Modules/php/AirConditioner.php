@@ -273,6 +273,27 @@ abstract class AirConditioner
     }
 
     /**
+     * @param string $complexCodePk
+     * @param string $sensorNo
+     * @param array $parameter
+     * @param string $method
+     * @return void
+     */
+    protected function createAirConditionerLog(string $complexCodePk, string $sensorNo, array $parameter, string $method) : void
+    {
+        $db = $this->db;
+
+        $valDate = date('YmdHis');
+        $urlString = json_encode($parameter);
+
+        // 로그 포맷 만들기
+        $logMessage = "{$method}/ {$urlString}";
+
+        $cLogQ = $this->emsQuery->getQueryInsertAirConditionerLog($complexCodePk, $sensorNo, $valDate, $logMessage);
+        $db->squery($cLogQ);
+    }
+
+    /**
      * 제어 상태 조회
      *
      * @param string $complexCodePk

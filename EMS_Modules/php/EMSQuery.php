@@ -7302,4 +7302,27 @@ class EMSQuery
 
         return $query;
     }
+
+    /**
+     * EHP 로그 생성
+     *
+     * @param string $complexCodePk
+     * @param string $sensorNo
+     * @param string $valDate
+     * @param string $execCmd
+     *
+     * @return string
+     */
+    public function getQueryInsertAirConditionerLog(string $complexCodePk, string $sensorNo, string $valDate, string $execCmd) : string
+    {
+        $query = "INSERT INTO `bems_aircondition_control_log`
+                  SET `complex_code_pk` = '{$complexCodePk}',
+                      `sensor_sn` = '{$sensorNo}',
+                      `val_date` = '{$valDate}',
+                      `exec_cmd` = '{$execCmd}',
+                      `updator` = 'system'
+                 ";
+
+        return $query;
+    }
 }

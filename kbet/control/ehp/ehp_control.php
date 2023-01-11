@@ -101,6 +101,17 @@ if (empty($value) === true) {
     exit;
 }
 
+if (empty($airConditionerFormats['power'][$value]) === true) {
+    // value 빈 값 체크
+    echo Utility::getInstance()->responseJSON([
+        'result' => [
+            'result' => 'nok',
+            'reason' => ErrNoData,
+        ]
+    ]);
+    exit;
+}
+
 $statusType = $mode === 'power' ? 'power_etc' : 'operation_etc';
 
 // 디바이스 정보로 변경

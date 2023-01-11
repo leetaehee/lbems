@@ -30,6 +30,9 @@ define('ErrApiSyncDataType', '전송 데이터가 존재하지 않습니다.');
 define('ErrAirConditionerCompany', '에어컨 제조사 정보를 확인하세요.');
 define('ErrApiControlStatusType', 'status_type 정보를 확인하세요.');
 define('ErrApiAirConditionalId', 'EHP ID 정보를 확인하세요.');
+define('ErrApiControlModeEmpty', 'mode 를 입력하세요');
+define('ErrApiControlValueEmpty', 'value 를 입력하세요');
+define('ErrApiControlChange', '제어 상태를 변경 할 수 없습니다. KevinLAB에 문의하세요.');
 
 define('loginSuccessMessage', '로그인에 성공하였습니다.');
 
@@ -47,10 +50,3 @@ define('ErrConnection', '데이터베이스 연결에 실패하였습니다.');
 define('ErrEnvFilePathExist', '환경설정 파일이 존재 하지 않습니다. KevinLAB에 문의하세요.');
 define('ErrEnvFileItemEmpty', '실행파일에 항목이 존재하지 않습니다. KevinLAB에 문의하세요.');
 define('ErrEnvFileItemDefine', '설정파일에 정의되어 있지 않습니다. KevinLab에 문의하세요.');
-
-//----------------------------------------------------------------------------------------------------------
-// 데이터 연계 API
-//----------------------------------------------------------------------------------------------------------
-define('ErrApiControlModeEmpty', 'mode 를 입력하세요');
-define('ErrApiControlValueEmpty', 'value 를 입력하세요');
-define('ErrApiControlChange', '제어 상태를 변경 할 수 없습니다. KevinLAB에 문의하세요.');

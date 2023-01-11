@@ -56,6 +56,9 @@ class SamsungAirConditioner extends AirConditioner
 
         $apiMethod = 'GET';
 
+        // EHP 로그 남기기 - GET/ 은 제외하고 POST/ 만 실행
+        //$this->createAirConditionerLog($complexCodePk, $id, $parameter, $apiMethod);
+
         $fcData = $this->getData($apiURL, $apiMethod, $parameter, $options);
 
         if ($options['is_display'] === true) {
@@ -117,7 +120,7 @@ class SamsungAirConditioner extends AirConditioner
         $cmdStatus = $this->makeCommandStatus($operation, $temps['status']);
 
         $apiURL .= "/{$id}/{$cmdStatus}";
-        $method = 'GET';
+        $apiMethod = 'GET';
 
         $parameter = [
             'complex_code' => $complexCodePk,
@@ -130,7 +133,15 @@ class SamsungAirConditioner extends AirConditioner
         $options['parameter']['id'] = $id;
         $options['parameter']['cmd_status'] = $cmdStatus;
 
-        $fcData = $this->setData($apiURL, $method, $parameter, $options);
+        // EHP 로그 남기기 - GET/ 은 제외하고 POST/ 만 실행
+        $logParameter = $parameter;
+
+        $logParameter['id'] = $id;
+        $logParameter['cmd_status'] = $cmdStatus;
+
+        $this->createAirConditionerLog($complexCodePk, $id, $logParameter, $apiMethod);
+
+        $fcData = $this->setData($apiURL, $apiMethod, $parameter, $options);
 
         return $fcData;
     }
