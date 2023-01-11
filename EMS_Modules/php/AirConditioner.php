@@ -220,6 +220,59 @@ abstract class AirConditioner
     }
 
     /**
+     * 하위 클래스 특성에 맞게 파라미터를 반환.
+     *
+     * @param string $statusType
+     * @param array $parameter
+     *
+     * @return array
+     */
+    protected function makeParameter(string $statusType, array $parameter) : array
+    {
+        $fcData = $parameter;
+
+        $operation = $fcData['operation'];
+        $status = $fcData['status'];
+
+        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
+        $communicationMethod = $this->communicationMethod;
+
+        if ($statusType === 'power_etc') {
+            $status = (boolean)!$status;
+            if ($status === false) {
+                $status = (int)0;
+            }
+        }
+
+        if ($communicationMethod === 'API') {
+            $fcData['status'] = $status;
+            return $fcData;
+        }
+
+        $powerKeys = array_keys($airConditionerFormats['power']);
+        $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
+        $opModeKeys = array_keys($airConditionerFormats['op_mode']);
+
+        switch ($operation) {
+            case 'power' :
+                $fcData['status'] = $powerKeys[0];
+
+                if ($status === 0) {
+                    $fcData['status'] = $powerKeys[1];
+                }
+                break;
+            case 'fan_speed' :
+                $fcData['status'] = $fanSpeedKeys[$status-1];
+                break;
+            case 'op_mode' :
+                $fcData['status'] = $opModeKeys[$status-1];
+                break;
+        }
+
+        return $fcData;
+    }
+
+    /**
      * 제어 상태 조회
      *
      * @param string $complexCodePk
@@ -274,14 +327,4 @@ abstract class AirConditioner
      * @return array
      */
     abstract protected function makeSampleData(array $data, array $options) : array;
-
-    /**
-     * 하위 클래스 특성에 맞게 파라미터를 반환.
-     *
-     * @param string $statusType
-     * @param array $parameter
-     *
-     * @return array
-     */
-    abstract protected function makeParameter(string $statusType, array $parameter) : array;
 }

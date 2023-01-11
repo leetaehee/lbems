@@ -46,7 +46,6 @@ class ControlSet extends Command
      */
     public function execute(array $params) :? bool
     {
-        error_reporting(E_ALL); ini_set('display_errors', '1');
         $data = [];
         $result = [];
 

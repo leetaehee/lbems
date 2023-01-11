@@ -78,10 +78,61 @@ class SamsungAirConditioner extends AirConditioner
      *
      * @return array
      */
-    public function setStatus(string $complexCodePk, string $id, array $options): array
+    public function setStatus(string $complexCodePk, string $id, array $options = []): array
     {
-        // True, False
-        return [];
+        $fcData = [
+            'result' => 'True',
+            'data' => [],
+        ];
+
+        /*
+            [파라미터]
+            id : 디바이스 고유번호
+            complex_code : 단지코드
+            ctOperation : 기능과 상태
+            http://ip:포트/set/0/[EHP 아이디]/기능_상태?complex_code=[단지코드]
+            fanSpeed 풍량
+            setTemp 온도 상승, 하락
+            power 전원
+            operationMode mode
+         */
+
+        $statusType = $options['status_type'];
+
+        $apiURL = $this->apiURL . '/set/0';
+
+        $parameter = $options['parameter'];
+        $operation = $parameter['operation'];
+        $status = $parameter['status'];
+
+        $validateResult = $this->validateDeviceValue($id, $operation, $status);
+        if ($validateResult === false) {
+            $fcData['result'] = 'False';
+            return $fcData;
+        }
+
+        $temps = $this->makeParameter($statusType, $parameter);
+
+        // api에서 사용할 상태 만들기, 파라미터는 단지만 보내면 됨
+        $cmdStatus = $this->makeCommandStatus($operation, $temps['status']);
+
+        $apiURL .= "/{$id}/{$cmdStatus}";
+        $method = 'GET';
+
+        $parameter = [
+            'complex_code' => $complexCodePk,
+        ];
+
+        if ($operation === 'lower_temperature' || $operation === 'upper_temperature') {
+            $options['parameter']['operation'] = 'set_temperature';
+        }
+
+        $options['parameter']['id'] = $id;
+        $options['parameter']['cmd_status'] = $cmdStatus;
+
+        $fcData = $this->setData($apiURL, $method, $parameter, $options);
+
+        return $fcData;
     }
 
     /**
@@ -104,9 +155,9 @@ class SamsungAirConditioner extends AirConditioner
         switch ($communicationMethod) {
             case 'API' :
                 $httpHeaders = $this->httpOptions;
-                $options = $this->httpOptions;
+                $httpOptions = $this->httpOptions;
 
-                $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $options);
+                $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $httpOptions);
                 if ($result['code'] != 200) {
                     return $fcData;
                 }
@@ -141,13 +192,44 @@ class SamsungAirConditioner extends AirConditioner
              'data' => [],
          ];
 
+         $dataBaseColumns = Config::AIR_CONDITIONER_FORMAT['database_column'];
+
          $communicationMethod = $this->communicationMethod;
          switch ($communicationMethod) {
              case 'API' :
                  $httpHeaders = $this->httpOptions;
-                 $options = $this->httpOptions;
+                 $httpOptions = $this->httpOptions;
+
+                 $result = Utility::getInstance()->curlProcess($url, $method, $httpHeaders, $parameter, $httpOptions);
+                 if ($result['code'] != 200) {
+                     $fcData['result'] = 'False';
+                     return $fcData;
+                 }
                  break;
              case 'DATABASE' :
+                 $db = $this->db;
+
+                 $complexCodePk = $parameter['complex_code'];
+                 $temps = $options['parameter'];
+
+                 $cmdStatus = $temps['cmd_status'];
+                 $cmdStatusData = Utility::getInstance()->getExplodeData($cmdStatus,'_');
+
+                 $id = $temps['id'];
+
+                 $operation = $temps['operation'];
+                 $status = $cmdStatusData[1];
+
+                 $column = $dataBaseColumns[$operation];
+
+                 $uControlQ = $this->emsQuery->getQueryUpdateAirConditionerData($complexCodePk, $id, $column, $status);
+                 $result = $db->squery($uControlQ);
+
+                 if ($result === false) {
+                     $fcData['result'] = 'False';
+                     return $fcData;
+                 }
+
                  break;
              case 'SAMPLE' :
                  break;
@@ -250,15 +332,45 @@ class SamsungAirConditioner extends AirConditioner
     }
 
     /**
-     * 하위 클래스 특성에 맞게 파라미터를 반환.
+     * 삼성 EHP 를 제어하기 위해 명령어와 상태 조합
      *
-     * @param string $statusType
-     * @param array $parameter
+     * @param string $command
+     * @param string $value
      *
-     * @return array
+     * @return string
      */
-    protected function makeParameter(string $statusType, array $parameter) : array
+    private function makeCommandStatus(string $command, string $value) : string
     {
-        return [];
+        $fcCommand = $command;
+
+        /*
+         * [명령어와 상태 조합]
+         * fan_speed -> fanSpeed
+         * set_temp , upper_temperature, lower_temperature -> setTemp
+         * power
+         * op_mode -> operationMode
+         * [형식]
+         * 명령어_상태
+         * [예시]
+         * power_off
+         */
+
+        switch ($fcCommand) {
+            case 'fan_speed' :
+                $fcCommand = 'fanSpeed';
+                break;
+            case 'set_temp' :
+            case 'upper_temperature' :
+            case 'lower_temperature' :
+                $fcCommand = 'setTemp';
+                break;
+            case 'op_mode' :
+                $fcCommand = 'operationMode';
+                break;
+        }
+
+        $fcCommand .= "_{$value}";
+
+        return $fcCommand;
     }
 }

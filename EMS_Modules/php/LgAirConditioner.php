@@ -97,8 +97,7 @@ class LgAirConditioner extends AirConditioner
     {
         $fcData = [
             'result' => 'True',
-            'options' => '',
-            'status' => '',
+            'data' => [],
         ];
 
         /*
@@ -130,7 +129,7 @@ class LgAirConditioner extends AirConditioner
         $tempParameter = $this->makeParameter($statusType, $parameter);
 
         $apiURL .= $mode;
-        $apiMethod = 'POST';
+        $apiMethod = 'GET';
 
         $parameter = [
             'id' => $id,
@@ -298,59 +297,6 @@ class LgAirConditioner extends AirConditioner
                 $fcData[4] = $temperature;
                 $fcData[5] = $temperature;
 
-                break;
-        }
-
-        return $fcData;
-    }
-
-    /**
-     * 하위 클래스 특성에 맞게 파라미터를 반환.
-     *
-     * @param string $statusType
-     * @param array $parameter
-     *
-     * @return array
-     */
-    protected function makeParameter(string $statusType, array $parameter) : array
-    {
-        $fcData = $parameter;
-
-        $operation = $fcData['operation'];
-        $status = $fcData['status'];
-
-        $airConditionerFormats = Config::AIR_CONDITIONER_FORMAT;
-        $communicationMethod = $this->communicationMethod;
-
-        if ($statusType === 'power_etc') {
-            $status = (boolean)!$status;
-            if ($status === false) {
-                $status = (int)0;
-            }
-        }
-
-        if ($communicationMethod === 'API') {
-            $fcData['status'] = $status;
-            return $fcData;
-        }
-
-        $powerKeys = array_keys($airConditionerFormats['power']);
-        $fanSpeedKeys = array_keys($airConditionerFormats['fan_speed']);
-        $opModeKeys = array_keys($airConditionerFormats['op_mode']);
-
-        switch ($operation) {
-            case 'power' :
-                $fcData['status'] = $powerKeys[0];
-
-                if ($status === 0) {
-                    $fcData['status'] = $powerKeys[1];
-                }
-                break;
-            case 'fan_speed' :
-                $fcData['status'] = $fanSpeedKeys[$status-1];
-                break;
-            case 'op_mode' :
-                $fcData['status'] = $opModeKeys[$status-1];
                 break;
         }
 
