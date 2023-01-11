@@ -101,7 +101,8 @@ if (empty($value) === true) {
     exit;
 }
 
-if (empty($airConditionerFormats['power'][$value]) === true) {
+if ($mode === 'power'
+    && empty($airConditionerFormats['power'][$value]) === true) {
     // value 빈 값 체크
     echo Utility::getInstance()->responseJSON([
         'result' => [
