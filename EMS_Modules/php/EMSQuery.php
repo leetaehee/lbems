@@ -7287,13 +7287,15 @@ class EMSQuery
      * @param string $sensorNo
      * @param string $column
      * @param string $value
+     * @param string $valDate
      *
      * @return string
      */
-    public function getQueryUpdateAirConditionerData(string $complexCodePk, string $sensorNo, string $column, string $value) : string
+    public function getQueryUpdateAirConditionerData(string $complexCodePk, string $sensorNo, string $column, string $value, string $valDate) : string
     {
         $query = "UPDATE `bems_aircondition_status`
-                  SET `{$column}` = '{$value}'
+                  SET `{$column}` = '{$value}',
+                      `val_date` = '{$valDate}'
                   WHERE `complex_code_pk` = '{$complexCodePk}'
                   AND `sensor_sn` = '{$sensorNo}'
                  ";

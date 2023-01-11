@@ -209,6 +209,8 @@ class SamsungAirConditioner extends AirConditioner
              case 'DATABASE' :
                  $db = $this->db;
 
+                 $valDate = date('YmdHis');
+
                  $complexCodePk = $parameter['complex_code'];
                  $temps = $options['parameter'];
 
@@ -222,7 +224,7 @@ class SamsungAirConditioner extends AirConditioner
 
                  $column = $dataBaseColumns[$operation];
 
-                 $uControlQ = $this->emsQuery->getQueryUpdateAirConditionerData($complexCodePk, $id, $column, $status);
+                 $uControlQ = $this->emsQuery->getQueryUpdateAirConditionerData($complexCodePk, $id, $column, $status, $valDate);
                  $result = $db->squery($uControlQ);
 
                  if ($result === false) {
