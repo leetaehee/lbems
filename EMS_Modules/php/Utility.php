@@ -1310,7 +1310,7 @@ class Utility
      */
     public function getBaseDate() : array
     {
-        $dateTime = date('YmdHis', strtotime('20221220211500'));
+        $dateTime = date('YmdHis', strtotime('20221202211500'));
         //$dateTime = date('YmdHis');
 
         return [

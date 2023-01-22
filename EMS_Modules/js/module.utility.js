@@ -414,6 +414,6 @@ module.utility = {
         /*
          * 월은 0부터 시작
          */
-        return new Date(2022,11, 20);
+        return new Date(2022,11, 2);
     }
 };
