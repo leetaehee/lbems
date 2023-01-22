@@ -1,4 +1,8 @@
 <?php
+header('X-Frame-Options: DENY');
+header('X-XSS-Protection: 1; mode=block');
+setcookie('samesite-test', '1', 0, '/; samesite=strict');
+
 /** setting 정보 */
 include_once '../setting.php';
 
